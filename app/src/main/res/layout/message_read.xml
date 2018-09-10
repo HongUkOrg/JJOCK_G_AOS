@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
+    android:background="#fff"
+    android:layout_height="400dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_weight="0.1"
+        android:background="#eee"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="Seal Seek See Letter"
+        android:textColor="#777"
+        android:gravity="center"
+        android:layout_margin="5dp"/>
+
+    <LinearLayout
+
+
+        android:layout_weight="0.05"
+        android:layout_width="match_parent"
+
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+
+        >
+
+        <TextView
+            android:id="@+id/read_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="010-2043-9851"
+            android:textColor="#777"
+            android:textSize="15sp"/>
+
+
+
+
+    </LinearLayout>
+
+
+
+    <TextView
+        android:layout_weight="0.6"
+        android:id="@+id/read_message"
+        android:layout_marginTop="20dp"
+        android:text="message"
+
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:gravity="center"
+        android:background="@drawable/back2"
+        android:textColor="#777"
+
+        />
+
+
+
+    <Button
+
+        android:layout_marginTop="20dp"
+            android:layout_weight="0.1"
+            android:id="@+id/back_home"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:background="#fcf"
+            android:layout_marginRight="5dp"
+
+            android:layout_marginLeft="5dp"
+            android:text=" 돌아가기 "
+            android:layout_marginBottom="10dp"
+
+            />
+
+
+
+
+
+
+</LinearLayout>

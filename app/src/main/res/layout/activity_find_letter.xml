@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#fee"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".FindLetterActivity">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text = " Receiver Phone Number"
+        android:textColor="#777"
+        android:textSize="20sp"
+        android:layout_marginTop="150dp"
+
+
+        />
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+
+
+        android:id="@+id/receiver_phone"
+        android:layout_width="match_parent"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/back"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+
+
+        >
+
+        <EditText
+            android:id="@+id/phone1"
+            android:gravity="center_horizontal"
+
+            android:layout_weight="0.1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="010"
+            android:textColor="#777"
+            />
+
+        <TextView
+            android:layout_weight="0.1"
+            android:gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:text=" - "
+            android:textColor="#777"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/phone2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:gravity="center_horizontal"
+            android:text="2043"
+
+            android:textColor="#777" />
+
+        <TextView
+            android:layout_weight="0.1"
+            android:gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:text=" - "
+            android:textColor="#777"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/phone3"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:gravity="center_horizontal"
+            android:text="8751"
+
+            android:textColor="#777" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text = "   What3Words"
+        android:textColor="#777"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+
+
+        />
+
+    <LinearLayout
+
+        android:id="@+id/wtat3words_find"
+        android:layout_width="match_parent"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/back"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal"
+
+        >
+
+        <EditText
+            android:id="@+id/first_word"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:text="foiled"
+            android:gravity="center"
+            android:textColor="#777" />
+
+        <TextView
+            android:layout_weight="0.1"
+            android:layout_width="wrap_content"
+            android:text=" - "
+            android:gravity="center"
+            android:textColor="#777"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/second_word"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:text="thank"
+            android:gravity="center"
+            android:textColor="#777" />
+
+        <TextView
+            android:layout_weight="0.1"
+            android:layout_width="wrap_content"
+            android:text=" - "
+            android:gravity="center"
+            android:textColor="#777"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/third_word"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:text="seats"
+            android:gravity="center"
+            android:textColor="#777" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/letter_find_btn2"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_height="50dp"
+        android:text="편지 찾기"
+        android:background="#ffd200"
+
+        android:layout_marginTop="60dp"
+
+        />
+
+</LinearLayout>

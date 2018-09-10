@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffeeee"
+    tools:context=".LoginActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="40dp"
+        android:layout_marginTop="40dp"
+        android:textColor="#ff69b4"
+
+        android:text="Seal Seek See"
+        android:layout_centerHorizontal="true"
+
+        />
+
+    <ImageView
+        android:id="@+id/letter_image"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:text="Button"
+        android:src="@drawable/letter_image"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
+        android:textColor="#ff69b4"
+
+        android:text="소중한 당신의 마음을 전하세요"
+        android:layout_centerHorizontal="true"
+
+        />
+</RelativeLayout>

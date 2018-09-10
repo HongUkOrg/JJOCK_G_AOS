@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fee"
+    android:orientation="vertical"
+    tools:context=".TrackingLetter">
+    <RelativeLayout
+        android:id="@+id/Top"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:padding="1dp"
+        android:layout_marginTop="10dp"
+
+
+        android:background="#ffdee9"
+        android:orientation="horizontal"
+
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Seal Seek See"
+            android:textSize="20sp"
+
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="response"
+
+        android:id="@+id/letter_msseage"
+        android:visibility="gone"
+        android:textColor="#000"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:weightSum="1"
+        android:gravity="center"
+        >
+    <TextView
+        android:layout_weight="0.7"
+        android:id="@+id/distance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+
+        android:text="distacne !"
+        android:textSize="20sp"
+        android:textColor="#666"
+        />
+
+        <Button
+            android:id="@+id/refresh_location"
+            android:gravity="center"
+            android:layout_weight="0.3"
+            android:layout_width="50dp"
+            android:layout_marginRight="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/location"
+
+
+            />
+
+    </LinearLayout>
+
+    <fragment
+
+
+
+        android:layout_marginTop="30dp"
+        android:id="@+id/map2"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_height="350dp"
+        android:layout_alignParentBottom="true"
+
+        android:layout_centerHorizontal="true"
+        class="com.google.android.gms.maps.MapFragment"
+
+
+        />
+
+    <Button
+
+
+        android:id="@+id/letter_read_btn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text = "편지 읽기"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="#eee"
+        android:layout_marginTop="20dp"
+        android:clickable="false"
+
+
+
+        />
+
+</LinearLayout>

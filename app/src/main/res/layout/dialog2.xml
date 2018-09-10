@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
+    android:background="#fff"
+    android:layout_height="300dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="편지 작성이 완료되었습니다"
+        android:textColor="#777"
+        android:gravity="center"/>
+
+    <LinearLayout
+
+
+        android:layout_width="match_parent"
+
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+
+        >
+
+        <TextView
+            android:id="@+id/success_phone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="010-2043-9851"
+            android:textColor="#777"
+            android:textSize="15sp"/>
+
+
+
+
+    </LinearLayout>
+
+
+
+    <EditText
+        android:id="@+id/success_w3w"
+        android:layout_marginTop="20dp"
+        android:text="What3Words"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:gravity="center"
+
+        android:textColor="#777"
+
+        />
+
+    <TextView
+
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:id="@+id/content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:text="결과를 SMS 로 전송하시겠습니까?"
+
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:textColor="#777"
+        />
+
+    />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        >
+
+
+
+        <Button
+            android:layout_weight="0.5"
+            android:id="@+id/success_dialogButtonCancel"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="5dp"
+
+            android:layout_height="wrap_content"
+            android:background="#5ec75e"
+            android:text=" 취소 "
+
+            />
+
+        <Button
+
+            android:id="@+id/success_dialogButtonOK"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#fcf"
+            android:layout_marginRight="5dp"
+            android:layout_weight="0.5"
+            android:layout_marginLeft="5dp"
+            android:text=" 전송 "
+
+            />
+
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
