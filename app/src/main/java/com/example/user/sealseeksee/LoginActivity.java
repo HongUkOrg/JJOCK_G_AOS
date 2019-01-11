@@ -14,8 +14,8 @@ public class LoginActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         ImageView main_image = (ImageView)findViewById(R.id.letter_image);
+        HongController.getInstance().setMyContext(getApplicationContext());
 
         main_image.setOnClickListener(new View.OnClickListener()
         {

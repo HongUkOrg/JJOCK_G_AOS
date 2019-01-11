@@ -19,7 +19,6 @@
         />
 
 
-
     <Button
         android:id="@+id/letter_send_btn"
         android:layout_width="match_parent"
@@ -29,7 +28,6 @@
         android:layout_height="50dp"
         android:text="편지 남기기"
         android:background="#fcf"
-
         android:layout_marginBottom="166dp"
         android:layout_alignParentBottom="true"
 
@@ -50,7 +48,7 @@
         />
 
     <Button
-        android:id="@+id/my_location"
+        android:id="@+id/service_introduce"
         android:layout_width="match_parent"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"

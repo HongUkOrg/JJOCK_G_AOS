@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/dialog_w3w"
+        android:id="@+id/letterWrite_w3w"
         android:layout_weight="0.05"
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -66,7 +66,7 @@
             android:gravity="center"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:hint="0000"
+            android:text="0000"
             android:textColor="#777"
             />
 
@@ -84,7 +84,7 @@
             android:gravity="center"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:hint="0000"
+            android:text="0000"
             android:textColor="#777"
             />
 
@@ -133,7 +133,7 @@
         android:layout_weight="0.05"
         android:orientation="horizontal">
         <Button
-            android:id="@+id/dialogButtonCancel"
+            android:id="@+id/ButtonCancel"
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_marginLeft="5dp"
@@ -143,7 +143,7 @@
             android:text=" 취소 "
             />
         <Button
-            android:id="@+id/dialogButtonOK"
+            android:id="@+id/ButtonOK"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"

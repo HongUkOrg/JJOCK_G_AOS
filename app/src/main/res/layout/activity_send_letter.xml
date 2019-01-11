@@ -33,9 +33,7 @@
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-
-        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
 
         android:layout_marginTop="20dp">
         <TextView
@@ -45,10 +43,7 @@
             android:textColor="#777"
             android:layout_weight="0.5"
             android:layout_marginLeft="20dp"
-
             android:id="@+id/text1"
-
-
             android:text="현재 위치에 편지를 남겨보세요."/>
         <TextView
 
@@ -58,7 +53,7 @@
             android:textColor="#777"
             android:layout_weight="0.5"
             android:layout_marginTop="20dp"
-            android:text=""
+            android:text="processing.."
             android:textSize="15sp"
             android:layout_marginLeft="20dp"
             />

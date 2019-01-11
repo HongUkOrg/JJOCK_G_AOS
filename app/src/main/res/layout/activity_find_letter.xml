@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#fee"
+    android:background="#fff"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -117,7 +117,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.1"
-            android:text="foiled"
+            android:text="sweeping"
             android:gravity="center"
             android:textColor="#777" />
 
@@ -134,7 +134,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.1"
-            android:text="thank"
+            android:text="caps"
             android:gravity="center"
             android:textColor="#777" />
 
@@ -151,21 +151,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.1"
-            android:text="seats"
+            android:text="dwelled"
             android:gravity="center"
             android:textColor="#777" />
     </LinearLayout>
 
     <Button
-        android:id="@+id/letter_find_btn2"
+        android:id="@+id/find_Letter_search_btn"
         android:layout_width="match_parent"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_height="50dp"
         android:text="편지 찾기"
         android:background="#ffd200"
-
         android:layout_marginTop="60dp"
+
+        />
+    <Button
+        android:id="@+id/find_by_sms"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_height="50dp"
+        android:text="SMS로 찾기"
+        android:background="#22ccff"
+        android:layout_marginTop="10dp"
 
         />
 

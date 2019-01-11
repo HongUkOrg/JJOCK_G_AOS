@@ -28,6 +28,7 @@
         <activity android:name=".SendLetterActivity" />
         <activity android:name=".FindLetterActivity" />
         <activity android:name=".TrackingLetter" />
+        <activity android:name=".LetterWrite"></activity>
     </application>
 
 </manifest>

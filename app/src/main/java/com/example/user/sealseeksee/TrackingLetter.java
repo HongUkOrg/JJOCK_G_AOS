@@ -12,6 +12,7 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Handler;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -38,16 +39,31 @@ import com.google.android.gms.tasks.Task;
 
 import org.w3c.dom.Text;
 
-public class TrackingLetter extends AppCompatActivity implements OnMapReadyCallback, LocationListener {
+import io.nlopez.smartlocation.OnLocationUpdatedListener;
+import io.nlopez.smartlocation.SmartLocation;
+
+public class TrackingLetter extends AppCompatActivity implements OnMapReadyCallback {
 
 
     public static double double_lati = -1;
     public static double double_long = -1;
+    public static double my_lati,my_long;
+    public static double calculatedDistance;
 
     private LocationManager locationManager;
 
+    private OnLocationUpdatedListener locationListener;
     private Location mCurrentLocation;
-    private FusedLocationProviderClient mFusedLcationProviderClient;
+    private Handler handler;
+    private Runnable locationRunnable;
+    private boolean refreshMyLocation = true;
+    
+    private String phone1,phone2,phone3,word1,word2,word3;
+
+    TextView leftDisanceText,responseMessage;
+    Button read_btn,read_btn_update;
+
+    public static final String TAG = LetterConstants.TAG;
 
     GoogleMap mMap;
 
@@ -56,94 +72,73 @@ public class TrackingLetter extends AppCompatActivity implements OnMapReadyCallb
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracking_letter);
 
+        leftDisanceText = (TextView)findViewById(R.id.distance);
+        responseMessage =(TextView) findViewById(R.id.letter_msseage);
+        read_btn = (Button) findViewById(R.id.letter_read_btn);
+        read_btn_update = (Button)findViewById(R.id.letter_read_btn);
+
         FragmentManager fragmentManager = getFragmentManager();
-        MapFragment mapFragment = (MapFragment) fragmentManager
-                .findFragmentById(R.id.map2);
+        MapFragment mapFragment = (MapFragment) fragmentManager.findFragmentById(R.id.map2);
         mapFragment.getMapAsync((OnMapReadyCallback) this);
-
-        mFusedLcationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-
-
-        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                2000,
-                1, locationListenerGPS);
-
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+
+        SmartLocation.with(this).location().start(locationListener);
+
+        handler = new Handler();
+        locationListener = new OnLocationUpdatedListener() {
+            @Override
+            public void onLocationUpdated(Location location) {
+                my_lati = location.getLatitude();
+                my_long = location.getLongitude();
+                Log.d(TAG, "onLocationUpdated: "+my_lati+" , "+my_long);
+                handler.postDelayed(locationRunnable,500);
+            }
+        };
+        SmartLocation.with(this).location().start(locationListener);
+        locationRunnable = new Runnable() {
+            @Override
+            public void run() {
+                if(refreshMyLocation) SmartLocation.with(HongController.getInstance().getMyContext()).location().start(locationListener);
+                updateDistance();
+                updateReadButton();
+            }
+        };
     }
 
-    @Override
-    protected void onStart()
-    {
-        super.onStart();
-        get_current_location();
+    private void updateReadButton() {
+        if(calculatedDistance < 50.0)
+        {
+            read_btn_update.setClickable(true);
+            read_btn_update.setBackground(getResources().getDrawable(R.drawable.btn_on));
+        }
+        else {
+            read_btn_update.setClickable(false);
+            read_btn_update.setBackground(getResources().getDrawable(R.drawable.btn_off));
 
-
-
+        }
     }
 
-    @Override
-    public void onLocationChanged(Location location)
-    {
-
-
-        LatLng current_position = new LatLng(location.getLatitude(),location.getLongitude());
-
-        double distance = cal_distance(double_lati,double_long,current_position);
-        TextView dis_text = (TextView)findViewById(R.id.distance);
-        dis_text.setText((int)distance+"m 남았습니다.");
-
+    private void updateDistance() {
+        LatLng current_position = new LatLng(my_lati,my_long);
+        calculatedDistance = cal_distance(double_lati,double_long,current_position);
+        leftDisanceText.setText((int)calculatedDistance+"m Left ! Fighting");
     }
-
-    @Override
-    public void onStatusChanged(String s, int i, Bundle bundle) {
-
-    }
-
-    @Override
-    public void onProviderEnabled(String s) {
-
-    }
-
-    @Override
-    public void onProviderDisabled(String s) {
-
-    }
-
+    
     @Override
     public void onMapReady(final GoogleMap map)
     {
 
         mMap=map;
-        String phone1 = "";
-        String phone2 = "";
-        String phone3 = "";
-        String word1 = "";
-        String word2 = "";
-        String word3 = "";
-
         String lat_lang = "";
-
         String latitude = "";
         String longitude = "";
         String title = "";
         String message = "";
-
+        
         Intent intent = getIntent();
         if (intent != null) {
-
             phone1 = intent.getStringExtra("phone1");
             phone2 = intent.getStringExtra("phone2");
             phone3 = intent.getStringExtra("phone3");
@@ -154,13 +149,9 @@ public class TrackingLetter extends AppCompatActivity implements OnMapReadyCallb
             message = intent.getStringExtra("message");
             latitude = intent.getStringExtra("latitude");
             longitude = intent.getStringExtra("longitude");
-
-
         }
 
-        TextView res_mesg = (TextView) findViewById(R.id.letter_msseage);
-
-        res_mesg.setText(phone1 + phone2 + phone3 + "" + "\n" + word1 + " " + word2 + " " + word3 + " " +
+        responseMessage.setText(phone1 + phone2 + phone3 + "" + "\n" + word1 + " " + word2 + " " + word3 + " " +
                 "\n latitude :" + latitude + " longitude : " + longitude);
 
         double_lati = Double.parseDouble(latitude);
@@ -176,37 +167,10 @@ public class TrackingLetter extends AppCompatActivity implements OnMapReadyCallb
         map.addMarker(markerOptions);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             return;
         }
         map.setMyLocationEnabled(true);
-
-//        Button find_my_letter=(Button)findViewById(R.id.letter_find_btn2);
-//
-//        find_my_letter.setOnClickListener(new View.OnClickListener()
-//        {
-//            @Override
-//            public void onClick(View view)
-//            {
-//
-//
-//
-//            }
-//        });
-//
-
-
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(SEOUL, 16));
-
-
-        final Button read_btn = (Button) findViewById(R.id.letter_read_btn);
-        final Button refresh_btn = (Button) findViewById(R.id.refresh_location);
 
         final String finalTitle = title;
         final String finalMessage = message;
@@ -217,213 +181,54 @@ public class TrackingLetter extends AppCompatActivity implements OnMapReadyCallb
                 LatLng myLocation = getCurrentLocation(map);
 
                 double distance = -1;
-
                 distance = cal_distance(double_lati, double_long, myLocation);
-
-
 
                 if(distance<50)
                 {
-
                     final Dialog dialog2 = new Dialog(TrackingLetter.this);
                     dialog2.setContentView(R.layout.message_read);
                     dialog2.setTitle("Title...");
 
-
                     Button back_home = (Button)dialog2.findViewById(R.id.back_home);
-
                     TextView read_title = (TextView)dialog2.findViewById(R.id.read_title);
                     TextView read_message = (TextView)dialog2.findViewById(R.id.read_message);
 
                     read_title.setText(finalTitle);
                     read_message.setText(finalMessage);
 
-
                     back_home.setOnClickListener(new View.OnClickListener()
                     {
                         @Override
                         public void onClick(View v)
                         {
-
                             dialog2.dismiss();
-
                             startActivity(new Intent(TrackingLetter.this,MainActivity.class));
-
-
                         }
                     });
-
-
-
                     dialog2.show();
-
-
-
                 }
-
-
-
-
-
             }
         });
-        refresh_btn.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("ResourceAsColor")
-            @Override
-            public void onClick(View view)
-            {
-                LatLng myLocation = getCurrentLocation(map);
-
-                double distance = -1;
-
-                distance = cal_distance(double_lati, double_long, myLocation);
-
-                TextView dis = (TextView) findViewById(R.id.distance);
-
-                dis.setText((int)distance + "m 남았습니다");
-
-                Button read_btn_update = (Button)findViewById(R.id.letter_read_btn);
-
-                if(distance<50.0)
-                {
-
-                    read_btn_update.setClickable(true);
-                    read_btn_update.setBackground(getResources().getDrawable(R.drawable.btn_on));
-                }
-                else {
-                    read_btn_update.setClickable(false);
-                    read_btn_update.setBackground(getResources().getDrawable(R.drawable.btn_off));
-
-                }
-
-
-
-            }
-        });
-
-
-
     }
 
     private double cal_distance(double letter_lati, double letter_long, LatLng latLongB) {
 
         float[] results = new float[1];
-        Location.distanceBetween(letter_lati, letter_long,
-                latLongB.latitude, latLongB.longitude,
-                results);
-
+        Location.distanceBetween(letter_lati, letter_long, latLongB.latitude, latLongB.longitude, results);
         return (double) results[0];
-
-
     }
 
     private LatLng getCurrentLocation(GoogleMap mMap) {
-
 
         Location myLocation = mMap.getMyLocation();
         if (myLocation != null) {
             double dLatitude = myLocation.getLatitude();
             double dLongitude = myLocation.getLongitude();
-
             LatLng result = new LatLng(dLatitude, dLongitude);
-
             return result;
-
-
         } else {
             Toast.makeText(this, "Unable to fetch the current location", Toast.LENGTH_SHORT).show();
             return null;
         }
-
     }
-
-    private void get_current_location() {
-
-        OnCompleteListener<Location> mCompleteListener = new OnCompleteListener<Location>()
-        {
-            @Override
-            public void onComplete(@NonNull Task<Location> task) {
-                if (task.isSuccessful() && task.getResult() != null) {
-                    mCurrentLocation = task.getResult();
-
-                    LatLng current_position = new LatLng(mCurrentLocation.getLatitude(),mCurrentLocation.getLongitude());
-
-                    double distance = cal_distance(double_lati,double_long,current_position);
-                    TextView dis_text = (TextView)findViewById(R.id.distance);
-                    dis_text.setText((int)distance+"m 남았습니다");
-//                    Toast.makeText(TrackingLetter.this, mCurrentLocation.getLatitude() + " " + mCurrentLocation.getLongitude(), Toast.LENGTH_SHORT).show();
-
-
-
-                } else {
-
-                    Log.d("error", "onComplete: error");
-                }
-
-            }
-        };
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        mFusedLcationProviderClient.getLastLocation().addOnCompleteListener(this, mCompleteListener);
-
-
-    }
-
-    LocationListener locationListenerGPS=new LocationListener()
-    {
-        @SuppressLint("ResourceAsColor")
-        @Override
-        public void onLocationChanged(android.location.Location location) {
-
-
-            LatLng current_position = new LatLng(location.getLatitude(),location.getLongitude());
-            double dis = cal_distance(double_lati,double_long,current_position);
-            TextView update_dis =(TextView)findViewById(R.id.distance);
-            update_dis.setText((int)dis+"m 남았습니다");
-            Button read_btn_update = (Button)findViewById(R.id.letter_read_btn);
-
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(current_position, 16));
-
-            if(dis<50.0)
-            {
-
-                read_btn_update.setClickable(true);
-                read_btn_update.setBackground(getResources().getDrawable(R.drawable.btn_on));
-            }
-            else {
-                read_btn_update.setClickable(false);
-                read_btn_update.setBackground(getResources().getDrawable(R.drawable.btn_off));
-
-            }
-
-
-        }
-
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-
-        }
-
-        @Override
-        public void onProviderEnabled(String provider) {
-
-        }
-
-        @Override
-        public void onProviderDisabled(String provider) {
-
-        }
-    };
-
-
-
-
 }
