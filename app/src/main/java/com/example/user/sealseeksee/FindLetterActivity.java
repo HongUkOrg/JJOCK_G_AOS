@@ -159,7 +159,7 @@ public class FindLetterActivity extends AppCompatActivity implements HongControl
                 break;
             case R.id.find_by_sms:
                 new LovelyTextInputDialog(this, R.style.EditTextTintTheme)
-                        .setTopColorRes(R.color.teal)
+                        .setTopColorRes(R.color.rosequartz)
                         .setTitle(R.string.text_input_title)
                         .setMessage(R.string.text_input_message)
                         .setIcon(R.drawable.ic_star_border_white_36dp)

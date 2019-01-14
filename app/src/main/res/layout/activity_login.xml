@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffeeee"
+    android:background="@drawable/mybg"
     tools:context=".LoginActivity">
 
     <TextView
@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:textSize="40dp"
         android:layout_marginTop="40dp"
-        android:textColor="#ff69b4"
+        android:textColor="#fff"
 
         android:text="Seal Seek See"
         android:layout_centerHorizontal="true"
@@ -21,10 +21,10 @@
 
     <ImageView
         android:id="@+id/letter_image"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:text="Button"
-        android:src="@drawable/letter_image"
+        android:src="@drawable/letterbox"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
 
@@ -36,10 +36,10 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="40dp"
-        android:textColor="#ff69b4"
+        android:layout_marginBottom="80dp"
+        android:textColor="#fff"
 
-        android:text="소중한 당신의 마음을 전하세요"
+        android:text="Seal your Letter, Send your Letter"
         android:layout_centerHorizontal="true"
 
         />
