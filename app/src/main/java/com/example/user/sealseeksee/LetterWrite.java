@@ -16,7 +16,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class LetterWrite extends AppCompatActivity implements View.OnClickListener
+public class LetterWrite extends AppCompatActivity implements View.OnClickListener // Fragment로 바꿔야됨
 {
     public static final String TAG ="HONG";
 
@@ -55,6 +55,7 @@ public class LetterWrite extends AppCompatActivity implements View.OnClickListen
 
 
 
+        if(w3w != null) letterWrite_w3w.setText("현재 위치의 W3W : "+w3w);
         ButtonOK.setOnClickListener(LetterWrite.this);
         CancelButton.setOnClickListener(LetterWrite.this);
 
@@ -122,6 +123,7 @@ public class LetterWrite extends AppCompatActivity implements View.OnClickListen
                 send_success_dialog(receiver_phone_number,w3w);
                 break;
             case R.id.ButtonCancel:
+                startActivity(new Intent(this,SendLetterActivity.class));
                 break;
                 default:
                     break;

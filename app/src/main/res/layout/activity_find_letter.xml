@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#fff"
+    android:background="@drawable/mybg"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -26,13 +26,13 @@
 
         android:id="@+id/receiver_phone"
         android:layout_width="match_parent"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp"
+        android:gravity="center"
         android:layout_height="50dp"
         android:background="@drawable/back"
         android:orientation="horizontal"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:weightSum="6"
 
 
         >
@@ -41,35 +41,35 @@
             android:id="@+id/phone1"
             android:gravity="center_horizontal"
 
-            android:layout_weight="0.1"
-            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="010"
             android:textColor="#777"
             />
 
         <TextView
-            android:layout_weight="0.1"
+            android:layout_weight="0.8"
             android:gravity="center_horizontal"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:text=" - "
             android:textColor="#777"
             android:layout_height="wrap_content" />
 
         <EditText
             android:id="@+id/phone2"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.1"
+            android:layout_weight="1"
             android:gravity="center_horizontal"
             android:text="2043"
 
             android:textColor="#777" />
 
         <TextView
-            android:layout_weight="0.1"
+            android:layout_weight="0.8"
             android:gravity="center_horizontal"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:text=" - "
             android:textColor="#777"
             android:layout_height="wrap_content" />
@@ -77,9 +77,9 @@
         <EditText
             android:id="@+id/phone3"
 
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.1"
+            android:layout_weight="1"
             android:gravity="center_horizontal"
             android:text="8751"
 
