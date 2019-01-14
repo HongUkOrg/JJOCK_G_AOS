@@ -14,7 +14,7 @@
         android:padding="1dp"
 
 
-        android:background="#ffdee9"
+        android:background="#4daff2"
         android:orientation="horizontal"
 
         >
@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15sp"
-            android:textColor="#777"
+            android:textColor="#000"
             android:layout_weight="0.5"
             android:layout_marginLeft="20dp"
             android:id="@+id/text1"
@@ -50,31 +50,20 @@
             android:id="@+id/trans_words"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#777"
+            android:textColor="#000"
             android:layout_weight="0.5"
             android:layout_marginTop="20dp"
             android:text="processing.."
             android:textSize="15sp"
             android:layout_marginLeft="20dp"
+            android:layout_marginBottom="30dp"
             />
 
 
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/refresh"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_toEndOf="@+id/map"
 
-        android:layout_gravity="right"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="10dp"
-
-        android:background="@drawable/refresh"
-
-        />
 
     <fragment
 
@@ -100,7 +89,7 @@
         android:layout_marginRight="10dp"
         android:layout_height="50dp"
         android:text="현재 위치에 편지 남기기"
-        android:background="#fcf"
+        android:background="#111"
 
         android:layout_marginBottom="40dp"
         android:layout_alignParentBottom="true"

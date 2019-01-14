@@ -73,7 +73,7 @@ public class SendLetterActivity extends AppCompatActivity implements OnMapReadyC
     private httpConnectionToPhwysl httpConnectionToPhwysl;
     private static GoogleMap myMap;
 
-    Button get_my_position,refresh;
+    Button get_my_position;
     TextView response_msg,text1;
 
     private OnLocationUpdatedListener locationListener;
@@ -130,12 +130,10 @@ public class SendLetterActivity extends AppCompatActivity implements OnMapReadyC
         myMap = map;
 
         get_my_position=(Button)findViewById(R.id.send_letter_msg);
-        refresh=(Button)findViewById(R.id.refresh);
         response_msg = (TextView) findViewById(R.id.trans_words);
         text1 = (TextView) findViewById(R.id.text1);
 
         get_my_position.setOnClickListener(this);
-        refresh.setOnClickListener(this);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
@@ -308,9 +306,6 @@ public class SendLetterActivity extends AppCompatActivity implements OnMapReadyC
 
             case R.id.send_letter_msg:
                 getAndSetCurrentLocation(myMap);
-                break;
-            case R.id.refresh:
-                clearMap();
                 break;
 
             default:
