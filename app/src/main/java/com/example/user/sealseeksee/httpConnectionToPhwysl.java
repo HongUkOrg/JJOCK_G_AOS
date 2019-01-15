@@ -100,7 +100,6 @@ public class httpConnectionToPhwysl extends Thread
             }
         });
         thread.start();
-
     }
 
 }
