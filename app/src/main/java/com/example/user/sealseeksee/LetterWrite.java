@@ -134,8 +134,8 @@ public class LetterWrite extends AppCompatActivity implements View.OnClickListen
 
     private JSONObject getSenderInformation()
     {
-        get_title = content.getText().toString();
-        get_content = title.getText().toString();
+        get_title = title.getText().toString();
+        get_content = content.getText().toString();
         receiver_phone_number = phone1.getText().toString()+"-"+phone2.getText().toString() +"-"+phone3.getText().toString();
         JSONObject myObj = new JSONObject();
         try {
@@ -145,7 +145,8 @@ public class LetterWrite extends AppCompatActivity implements View.OnClickListen
                     .put("w3w_address",w3w)
                     .put("sender_phone","010-2043-8751")
                     .put("latitude",Double.toString(my_lati))
-                    .put("longitude",Double.toString(my_long));
+                    .put("longitude",Double.toString(my_long))
+                    .put("time_lock","20190115");
         } catch (JSONException e) {
             e.printStackTrace();
         }
