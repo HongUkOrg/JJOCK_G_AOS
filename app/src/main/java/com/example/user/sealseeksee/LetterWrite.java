@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.sackcentury.shinebuttonlib.ShineButton;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,11 +21,12 @@ import org.json.JSONObject;
 public class LetterWrite extends AppCompatActivity implements View.OnClickListener // Fragment로 바꿔야됨
 {
     public static final String TAG ="HONG";
-
+    private static boolean timeLockBool = false;
 
     private EditText title,content,phone1,phone2,phone3;
-    private  Button ButtonOK,CancelButton;
-    private TextView letterWrite_w3w;
+    private Button ButtonOK,CancelButton;
+    private ShineButton timeLockButton;
+    private TextView letterWrite_w3w,txt_TimeLock;
     private ImageView image;
     private static String w3w;
     private double my_lati,my_long;
@@ -36,6 +39,7 @@ public class LetterWrite extends AppCompatActivity implements View.OnClickListen
         setContentView(R.layout.activity_letter_write);
 
         letterWrite_w3w = (TextView)findViewById(R.id.letterWrite_w3w);
+        txt_TimeLock =(TextView)findViewById(R.id.txt_timeLock);
         title = (EditText) findViewById(R.id.dialog_title);
         content = (EditText)findViewById(R.id.content);
         phone1 = (EditText) findViewById(R.id.phone1);
@@ -43,10 +47,11 @@ public class LetterWrite extends AppCompatActivity implements View.OnClickListen
         phone3 = (EditText) findViewById(R.id.phone3);
         ButtonOK = (Button) findViewById(R.id.ButtonOK);
         CancelButton = (Button)findViewById(R.id.ButtonCancel);
+        timeLockButton = (ShineButton)findViewById(R.id.po_image2);
         image= (ImageView)findViewById(R.id.image);
-        image.setImageResource(R.drawable.letter_image);
 
-        Intent intentGetFromSendLetter = getIntent();
+                Intent intentGetFromSendLetter = getIntent();
+        image.setImageResource(R.drawable.letter_image);
         w3w = intentGetFromSendLetter.getStringExtra("w3w");
         my_lati = intentGetFromSendLetter.getDoubleExtra("my_lati",-1);
         my_long = intentGetFromSendLetter.getDoubleExtra("my_long",-1);
@@ -58,6 +63,22 @@ public class LetterWrite extends AppCompatActivity implements View.OnClickListen
         if(w3w != null) letterWrite_w3w.setText("현재 위치의 W3W : "+w3w);
         ButtonOK.setOnClickListener(LetterWrite.this);
         CancelButton.setOnClickListener(LetterWrite.this);
+        timeLockButton.init(LetterWrite.this);
+        timeLockButton.setOnCheckStateChangeListener(new ShineButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(View view, boolean checked) {
+                Log.d(TAG, "onClick: po_image2");
+                if(checked){
+                    txt_TimeLock.setText("봉인");
+                    timeLockBool = true;
+                }
+                else{
+                    txt_TimeLock.setText("봉인하지 않음");
+                    timeLockBool = false;
+                }
+
+            }
+        });
 
 
 
@@ -152,6 +173,42 @@ public class LetterWrite extends AppCompatActivity implements View.OnClickListen
         }
 
         return myObj;
+    }
+
+    private void datePicker()
+    {
+        SublimePickerFragment.Callback mFragmentCallback = new SublimePickerFragment.Callback() {
+            @Override
+            public void onCancelled() {
+                rlDateTimeRecurrenceInfo.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onDateTimeRecurrenceSet(SelectedDate selectedDate,
+                                                int hourOfDay, int minute,
+                                                SublimeRecurrencePicker.RecurrenceOption recurrenceOption,
+                                                String recurrenceRule) {
+
+                mSelectedDate = selectedDate;
+                mHour = hourOfDay;
+                mMinute = minute;
+                mRecurrenceOption = recurrenceOption != null ?
+                        recurrenceOption.name() : "n/a";
+                mRecurrenceRule = recurrenceRule != null ?
+                        recurrenceRule : "n/a";
+
+                updateInfoView();
+
+                svMainContainer.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        svMainContainer.scrollTo(svMainContainer.getScrollX(),
+                                cbAllowDateRangeSelection.getBottom());
+                    }
+                });
+            }
+        };
+
     }
 
     @Override
