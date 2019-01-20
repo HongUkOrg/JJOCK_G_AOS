@@ -125,7 +125,7 @@ public class TrackingLetter extends AppCompatActivity implements OnMapReadyCallb
             long days = hours / 24;
             long remainingHour = hours-days*24;
             timeLockText.setVisibility(View.VISIBLE);
-            timeLockText.setText("편지가 봉인되어 있습니다.. "+days+"일 "+remainingHour+"시간 뒤에 열립니다.");
+            timeLockText.setText("편지가 봉인되어 있습니다.. "+days+"일 "+remainingHour+"시간 뒤에 열립니다.\n"+"오픈 시각 : "+myTimeLockDate.toString());
 
             return;
 

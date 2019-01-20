@@ -198,18 +198,19 @@ public class LetterWrite extends AppCompatActivity implements View.OnClickListen
     private JSONObject getSenderInformation() {
         get_title = title.getText().toString();
         get_content = content.getText().toString();
-        if(LetterUtils.isEmptyString(get_title))
+        if(!LetterUtils.isEmptyString(get_title))
         {
             Toast.makeText(this,"제목을 입력하세요.",Toast.LENGTH_SHORT);
             return null;
         }
-        else if(LetterUtils.isEmptyString(get_content))
+        else if(!LetterUtils.isEmptyString(get_content))
         {
             Toast.makeText(this,"내용을 입력하세요.",Toast.LENGTH_SHORT);
             return null;
         }
-        else if(LetterUtils.isValidPhoneNumber(phone2.getText().toString(),phone3.getText().toString()))
+        else if(!LetterUtils.isValidPhoneNumber(phone2.getText().toString(),phone3.getText().toString()))
         {
+            Log.d(TAG, "invaild phone number!");
             Toast.makeText(this,"Invalid Phone Number",Toast.LENGTH_SHORT);
             return null;
         }
