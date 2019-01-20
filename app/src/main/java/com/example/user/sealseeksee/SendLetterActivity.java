@@ -1,26 +1,19 @@
 package com.example.user.sealseeksee;
 
 import android.Manifest;
-import android.app.Dialog;
 import android.app.FragmentManager;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.location.LocationListener;
-import android.net.Uri;
 import android.os.Handler;
 import android.os.StrictMode;
-import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,29 +25,15 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestHandle;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.math.MathContext;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import io.nlopez.smartlocation.OnLocationUpdatedListener;
 import io.nlopez.smartlocation.SmartLocation;
@@ -66,6 +45,7 @@ public class SendLetterActivity extends AppCompatActivity implements OnMapReadyC
     private static double my_lati;
     private static double my_long;
     private static String myW3W;
+    private static boolean firstTimeLocSet = true;
 
     private Location mCurrentLocation;
     private FusedLocationProviderClient mFusedLcationProviderClient;
@@ -77,10 +57,11 @@ public class SendLetterActivity extends AppCompatActivity implements OnMapReadyC
     TextView response_msg,text1;
 
     private OnLocationUpdatedListener locationListener;
-    private Runnable locationRunnable;
+    private Runnable locationRunnable,initRunnable;
     private Context ctx;
     private Handler handler;
     private boolean refreshMyLocation = true;
+    private int postionUpdateCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -100,19 +81,25 @@ public class SendLetterActivity extends AppCompatActivity implements OnMapReadyC
 
         Toast.makeText(this,"Searching for Current Location",Toast.LENGTH_LONG);
 
-        SmartLocation.with(this).location().start(locationListener);
-
         handler = new Handler();
         locationListener = new OnLocationUpdatedListener() {
             @Override
             public void onLocationUpdated(Location location) {
-                 my_lati = location.getLatitude();
-                 my_long = location.getLongitude();
+                my_lati = location.getLatitude();
+                my_long = location.getLongitude();
+                if(firstTimeLocSet)
+                {
+                    Log.d(TAG, "first Time Setting : ");
+                    markCurrentPosition();
+                    transaction(location_processing(my_lati,my_long),0);
+                    firstTimeLocSet = false;
+                }
                 Log.d(TAG, "onLocationUpdated: "+my_lati+" , "+my_long);
-                handler.postDelayed(locationRunnable,500);
+                handler.postDelayed(locationRunnable,2000);
             }
         };
         SmartLocation.with(this).location().start(locationListener);
+
         locationRunnable = new Runnable() {
             @Override
             public void run() {
@@ -121,6 +108,7 @@ public class SendLetterActivity extends AppCompatActivity implements OnMapReadyC
                 if(refreshMyLocation) SmartLocation.with(ctx).location().start(locationListener);
             }
         };
+
     }
 
 
@@ -142,12 +130,7 @@ public class SendLetterActivity extends AppCompatActivity implements OnMapReadyC
         map.setMyLocationEnabled(true);
 
         LatLng SEOUL = new LatLng(37.56, 126.97);
-        map.addMarker(new MarkerOptions()
-                .position(SEOUL)
-                .title("Seoul")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.city)));
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(SEOUL,16));
-        initilizeMyLocation();
         clearMap();
 
 
@@ -160,12 +143,16 @@ public class SendLetterActivity extends AppCompatActivity implements OnMapReadyC
 
     private void markCurrentPosition()
     {
-        myMap.clear();
-        myMap.addMarker(new MarkerOptions()
-                .position(new LatLng(my_lati, my_long))
-                .title("CurrentMyLocation")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.person_walking)));
-        myMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(my_lati, my_long), 16));
+        if(postionUpdateCount%5==0) {
+            Log.d(TAG, "updated current position. period : 5-times retrying.");
+            myMap.clear();
+            myMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(my_lati, my_long))
+                    .title("CurrentMyLocation")
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.person_walking)));
+            myMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(my_lati, my_long), 16));
+        }
+        postionUpdateCount++;
     }
 
     private void initilizeMyLocation()
@@ -180,18 +167,11 @@ public class SendLetterActivity extends AppCompatActivity implements OnMapReadyC
         }
     }
 
-    void getAndSetCurrentLocation(GoogleMap mMap) {
+    void sendMyLetter(GoogleMap mMap) {
         Location myLocation  = mMap.getMyLocation();
-        if(myLocation!=null)
+        if(myW3W!=null)
         {
-            initilizeMyLocation();
-            mMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(my_lati, my_long))
-                        .title("CurrentMyLocation")
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.person_walking)));
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(my_lati, my_long), 16));
-
-            transaction(location_processing(my_lati,my_long),1);
+            movePageToLetterWrite(myW3W);
         }
         else
         {
@@ -241,13 +221,9 @@ public class SendLetterActivity extends AppCompatActivity implements OnMapReadyC
         RequestHandle requestHandle = client.get(link, new JsonHttpResponseHandler()
         {
             @Override
-            public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, JSONObject responseBody) {
-                try {
-                    if(SendOrNot == 1) response_parse(responseBody); //send
-                    else setW3W(responseBody); //set
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+            public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, JSONObject responseBody)
+            {
+                setW3W(responseBody); //set
             }
         });
     }
@@ -264,29 +240,6 @@ public class SendLetterActivity extends AppCompatActivity implements OnMapReadyC
         }
     }
 
-
-    private void response_parse(JSONObject response) throws JSONException {
-
-        String words = response.getString("words").toString();
-        String first = "";
-        String second = "";
-        String third = "";
-        String[] word = words.split("\\.");
-        first = word[0];
-        second = word[1];
-        third = word[2];
-
-        response_msg.setText("first : " + first + "\n" + "second : " + second + "\n" + "third : " + third);
-
-        text1.setText("변환된 WHAT3WORDS 주소는 : ");
-        String w3w_words = word[0]+","+word[1]+","+word[2];
-
-        movePageToLetterWrite(w3w_words);
-//        make_json_object(w3w_words);
-
-//        sendSmsIntent("010-2043-9851",word);
-
-    }
 
     private void movePageToLetterWrite(String w3w_words)
     {
@@ -305,11 +258,17 @@ public class SendLetterActivity extends AppCompatActivity implements OnMapReadyC
         {
 
             case R.id.send_letter_msg:
-                getAndSetCurrentLocation(myMap);
+                sendMyLetter(myMap);
                 break;
 
             default:
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Log.d(TAG, "onBackPressed Called");
+        startActivity(new Intent(this, MainActivity.class));
     }
 }

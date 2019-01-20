@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#fff"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -132,31 +133,45 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="60dp"
         android:layout_marginBottom="10dp"
+        android:layout_marginLeft="5dp"
         android:layout_weight="0.05"
+        android:weightSum="2"
         android:orientation="horizontal">
         <TextView
-            android:id="@+id/txt_"
-            android:layout_width="match_parent"
+            android:id="@+id/timeLock_time"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="시간 설정하기"
+            android:visibility="invisible"
+            android:gravity="center"
+            android:textColor="#000"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/txt_timeLock"
+            android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:gravity="center"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:textColor="#000"
             android:text="봉인하지 않음"
             />
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/rosequartz"
-            android:layout_marginRight="5dp"
-            android:layout_marginLeft="5dp"
-            android:text="Time Lock"
-
-            />
+        <com.sackcentury.shinebuttonlib.ShineButton
+            android:layout_width="50dp"
+            android:layout_gravity="center"
+            android:layout_height="50dp"
+            android:layout_marginRight="20dp"
+            android:layout_centerInParent="true"
+            android:elevation="10dp"
+            android:src="@android:color/darker_gray"
+            android:id="@+id/po_image2"
+            app:btn_color="@android:color/darker_gray"
+            app:btn_fill_color="#f26d7d"
+            app:allow_random_color="false"
+            app:siShape="@raw/heart"/>
 
     </LinearLayout>
 

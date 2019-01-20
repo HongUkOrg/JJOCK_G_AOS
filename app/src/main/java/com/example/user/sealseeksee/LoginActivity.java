@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 public class LoginActivity extends AppCompatActivity
@@ -24,9 +25,11 @@ public class LoginActivity extends AppCompatActivity
             {
 
                 startActivity(new Intent(LoginActivity.this,MainActivity.class));
+//                startActivity(new Intent(LoginActivity.this,sampler.class));
 
             }
         });
+
 
     }
 

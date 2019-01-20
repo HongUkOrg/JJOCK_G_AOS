@@ -50,6 +50,7 @@ public class httpConnectionToPhwysl extends Thread
                     http.setDoInput(true);
                     http.setDoOutput(true);
                     http.setRequestMethod("POST");
+                    http.setRequestProperty("Accept-Charset", "UTF-8");
                     http.setRequestProperty("content-type", "application/x-www-form-urlencoded");
 
                     ContentValues contentValues = new ContentValues();

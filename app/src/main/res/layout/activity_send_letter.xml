@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffeeee"
+    android:background="#fff9f9"
     android:orientation="vertical"
+    android:weightSum="4"
     tools:context=".SendLetterActivity">
     <RelativeLayout
         android:id="@+id/Top"
@@ -14,7 +15,7 @@
         android:padding="1dp"
 
 
-        android:background="#4daff2"
+        android:background="#d39492"
         android:orientation="horizontal"
 
         >
@@ -31,8 +32,9 @@
 
     <LinearLayout
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:orientation="vertical"
 
         android:layout_marginTop="20dp">
@@ -40,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15sp"
-            android:textColor="#000"
+            android:textColor="@color/rosequartz"
             android:layout_weight="0.5"
             android:layout_marginLeft="20dp"
             android:id="@+id/text1"
@@ -50,7 +52,7 @@
             android:id="@+id/trans_words"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#000"
+            android:textColor="#754F44"
             android:layout_weight="0.5"
             android:layout_marginTop="20dp"
             android:text="processing.."
@@ -69,10 +71,11 @@
 
 
         android:id="@+id/map"
+        android:layout_weight="3"
         android:layout_width="match_parent"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_height="450dp"
+        android:layout_height="0dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="30dp"
         android:layout_centerHorizontal="true"
@@ -89,7 +92,7 @@
         android:layout_marginRight="10dp"
         android:layout_height="50dp"
         android:text="현재 위치에 편지 남기기"
-        android:background="#111"
+        android:background="#b26361"
 
         android:layout_marginBottom="40dp"
         android:layout_alignParentBottom="true"
