@@ -39,6 +39,8 @@ import com.google.android.gms.tasks.Task;
 
 import org.w3c.dom.Text;
 
+import java.util.Date;
+
 import io.nlopez.smartlocation.OnLocationUpdatedListener;
 import io.nlopez.smartlocation.SmartLocation;
 
@@ -59,8 +61,10 @@ public class TrackingLetter extends AppCompatActivity implements OnMapReadyCallb
     private boolean refreshMyLocation = true;
     
     private String phone1,phone2,phone3,word1,word2,word3;
+    private Date myTimeLockDate;
+    private long myTimeLockLong;
 
-    TextView leftDisanceText,responseMessage;
+    TextView leftDisanceText,responseMessage,timeLockText;
     Button read_btn,read_btn_update;
 
     public static final String TAG = LetterConstants.TAG;
@@ -74,6 +78,7 @@ public class TrackingLetter extends AppCompatActivity implements OnMapReadyCallb
 
         leftDisanceText = (TextView)findViewById(R.id.distance);
         responseMessage =(TextView) findViewById(R.id.letter_msseage);
+        timeLockText = (TextView)findViewById(R.id.txt_timeLock_TrackingLetter);
         read_btn = (Button) findViewById(R.id.letter_read_btn);
         read_btn_update = (Button)findViewById(R.id.letter_read_btn);
 
@@ -108,6 +113,23 @@ public class TrackingLetter extends AppCompatActivity implements OnMapReadyCallb
     }
 
     private void updateReadButton() {
+
+        if(myTimeLockDate!=null && myTimeLockDate.after(new Date()))
+        {
+            read_btn_update.setClickable(false);
+            read_btn_update.setBackground(getResources().getDrawable(R.drawable.btn_off));
+            long diff = myTimeLockDate.getTime() - new Date().getTime();
+            long seconds = diff / 1000;
+            long minutes = seconds / 60;
+            long hours = minutes / 60;
+            long days = hours / 24;
+            long remainingHour = hours-days*24;
+            timeLockText.setVisibility(View.VISIBLE);
+            timeLockText.setText("편지가 봉인되어 있습니다.. "+days+"일 "+remainingHour+"시간 뒤에 열립니다.");
+
+            return;
+
+        }
         if(calculatedDistance < 50.0)
         {
             read_btn_update.setClickable(true);
@@ -149,6 +171,14 @@ public class TrackingLetter extends AppCompatActivity implements OnMapReadyCallb
             message = intent.getStringExtra("message");
             latitude = intent.getStringExtra("latitude");
             longitude = intent.getStringExtra("longitude");
+            myTimeLockLong = intent.getLongExtra("time_lock",-1);
+            if(myTimeLockLong != -1)
+            {
+                myTimeLockDate = new Date();
+                myTimeLockDate.setTime(myTimeLockLong);
+            }
+
+
         }
 
         responseMessage.setText(phone1 + phone2 + phone3 + "" + "\n" + word1 + " " + word2 + " " + word3 + " " +

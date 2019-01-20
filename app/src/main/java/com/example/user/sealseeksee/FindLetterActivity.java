@@ -79,6 +79,7 @@ public class FindLetterActivity extends AppCompatActivity implements HongControl
         String title,message,latitude,longitude;
         JSONObject myJson = null;
         String serarch_letter = resultJson;
+        String myTimeLocktime;
 
         if(serarch_letter==null)
         {
@@ -110,6 +111,9 @@ public class FindLetterActivity extends AppCompatActivity implements HongControl
                 message = myJson.getString("message");
                 latitude = myJson.getString("latitude");
                 longitude = myJson.getString("longitude");
+                myTimeLocktime = myJson.getString("time_lock");
+                long myTimeLockTimeLongType = Long.parseLong(myTimeLocktime);
+
 
                 Intent intent = new Intent(FindLetterActivity.this,TrackingLetter.class);
 
@@ -123,6 +127,10 @@ public class FindLetterActivity extends AppCompatActivity implements HongControl
                         .putExtra("message",message)
                         .putExtra("latitude",latitude)
                         .putExtra("longitude",longitude);
+                if(myTimeLockTimeLongType!=-1) {
+                    Log.d("HONG", "TimeLock is Set! send to TrackingLetter Activity including date of timeLock");
+                    intent.putExtra("time_lock",myTimeLockTimeLongType);
+                }
                 startActivity(intent);
             }
             else

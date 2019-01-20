@@ -58,6 +58,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (internetPermission != PackageManager.PERMISSION_GRANTED) listPermissionsNeeded.add(Manifest.permission.INTERNET);
         int access_loc = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
         if (access_loc != PackageManager.PERMISSION_GRANTED) listPermissionsNeeded.add(Manifest.permission.ACCESS_FINE_LOCATION);
+        int read_phone_state = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE);
+        if (read_phone_state != PackageManager.PERMISSION_GRANTED) listPermissionsNeeded.add(Manifest.permission.READ_PHONE_STATE);
 
         if (!listPermissionsNeeded.isEmpty()) {
             Log.d(TAG, "checkAndRequestPermissions: not empty");

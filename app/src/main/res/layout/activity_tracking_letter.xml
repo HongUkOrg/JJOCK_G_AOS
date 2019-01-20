@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:background="#fee"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,6 +16,7 @@
     android:background="#fee"
     android:orientation="vertical"
     tools:context=".TrackingLetter">
+
     <RelativeLayout
         android:id="@+id/Top"
         android:layout_width="fill_parent"
@@ -72,6 +82,16 @@
 
         />
 
+    <TextView
+        android:id="@+id/txt_timeLock_TrackingLetter"
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:text=""
+        android:gravity="center"
+        android:visibility="gone"
+        android:textColor="#000"
+        android:layout_height="50dp" />
+
     <Button
 
 
@@ -89,4 +109,7 @@
 
         />
 
+
+</LinearLayout>
+</ScrollView>
 </LinearLayout>

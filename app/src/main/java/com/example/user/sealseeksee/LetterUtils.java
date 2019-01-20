@@ -19,4 +19,17 @@ public class LetterUtils
         Log.d(TAG, "line 2 : "+lines[1]);
         return true;
     }
+    public static boolean isEmptyString(String str)
+    {
+        if(str == null || str.length()==0)return false;
+        else return true;
+    }
+    public static boolean isValidPhoneNumber(String middle,String end)
+    {
+        if(middle.length()<3 || middle.length()>4) return false;
+        if(end.length()<3 || end.length()>4) return false;
+        return true;
+
+    }
+
 }
