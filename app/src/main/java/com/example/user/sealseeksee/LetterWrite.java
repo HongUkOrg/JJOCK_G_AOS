@@ -158,7 +158,7 @@ public class LetterWrite extends AppCompatActivity implements View.OnClickListen
         success_receiver_phone_number.setText(receiver_phone_number);
 
         int width = (int)(getResources().getDisplayMetrics().widthPixels*0.95);
-        int height = (int)(getResources().getDisplayMetrics().heightPixels*0.90);
+        int height = (int)(getResources().getDisplayMetrics().heightPixels*0.7);
         dialog2.getWindow().setLayout(width,height);
 
         dialogButton.setOnClickListener(new View.OnClickListener() {
