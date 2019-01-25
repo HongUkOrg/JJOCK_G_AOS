@@ -155,8 +155,7 @@ public class sampler extends AppCompatActivity {
                 Pair<Boolean, SublimeOptions> optionsPair = getOptions();
 
                 if (!optionsPair.first) { // If options are not valid
-                    Toast.makeText(sampler.this, "No pickers activated",
-                            Toast.LENGTH_SHORT).show();
+                    Toast.makeText(sampler.this, "No pickers activated", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
