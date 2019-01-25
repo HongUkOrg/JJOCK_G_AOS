@@ -163,7 +163,7 @@
         android:layout_marginRight="10dp"
         android:layout_height="50dp"
         android:text="편지 찾기"
-        android:background="#ffd200"
+        android:background="@drawable/btn_round_yello"
         android:layout_marginTop="60dp"
 
         />
@@ -174,7 +174,7 @@
         android:layout_marginRight="10dp"
         android:layout_height="50dp"
         android:text="SMS로 찾기"
-        android:background="#22ccff"
+        android:background="@drawable/btn_round_blue"
         android:layout_marginTop="10dp"
 
         />
