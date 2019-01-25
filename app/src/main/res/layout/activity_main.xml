@@ -27,7 +27,7 @@
         android:layout_marginRight="10dp"
         android:layout_height="50dp"
         android:text="편지 남기기"
-        android:background="#fcf"
+        android:background="@drawable/btn_round_pink"
         android:layout_marginBottom="166dp"
         android:layout_alignParentBottom="true"
 
@@ -40,7 +40,7 @@
         android:layout_marginRight="10dp"
         android:layout_height="50dp"
         android:text="편지 찾기"
-        android:background="#ffd200"
+        android:background="@drawable/btn_round_yello"
 
         android:layout_marginBottom="108dp"
         android:layout_alignParentBottom="true"
@@ -54,7 +54,7 @@
         android:layout_marginRight="10dp"
         android:layout_height="50dp"
         android:text="서비스 소개"
-        android:background="#4daff4"
+        android:background="@drawable/btn_round_blue"
 
         android:layout_marginBottom="48dp"
         android:layout_alignParentBottom="true"

@@ -79,7 +79,7 @@ public class SendLetterActivity extends AppCompatActivity implements OnMapReadyC
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        Toast.makeText(this,"Searching for Current Location",Toast.LENGTH_LONG);
+        Toast.makeText(this,"Searching for Current Location",Toast.LENGTH_LONG).show();
 
         handler = new Handler();
         locationListener = new OnLocationUpdatedListener() {

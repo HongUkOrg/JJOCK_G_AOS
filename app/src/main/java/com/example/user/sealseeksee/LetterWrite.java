@@ -200,18 +200,18 @@ public class LetterWrite extends AppCompatActivity implements View.OnClickListen
         get_content = content.getText().toString();
         if(!LetterUtils.isEmptyString(get_title))
         {
-            Toast.makeText(this,"제목을 입력하세요.",Toast.LENGTH_SHORT);
+            Toast.makeText(this,"제목을 입력하세요.",Toast.LENGTH_SHORT).show();
             return null;
         }
         else if(!LetterUtils.isEmptyString(get_content))
         {
-            Toast.makeText(this,"내용을 입력하세요.",Toast.LENGTH_SHORT);
+            Toast.makeText(this,"내용을 입력하세요.",Toast.LENGTH_SHORT).show();
             return null;
         }
         else if(!LetterUtils.isValidPhoneNumber(phone2.getText().toString(),phone3.getText().toString()))
         {
             Log.d(TAG, "invaild phone number!");
-            Toast.makeText(this,"Invalid Phone Number",Toast.LENGTH_SHORT);
+            Toast.makeText(this,"Invalid Phone Number",Toast.LENGTH_SHORT).show();
             return null;
         }
 
@@ -243,8 +243,7 @@ public class LetterWrite extends AppCompatActivity implements View.OnClickListen
         Pair<Boolean, SublimeOptions> optionsPair = getOptions();
 
         if (!optionsPair.first) { // If options are not valid
-            Toast.makeText(this, "No pickers activated",
-                    Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "No pickers activated", Toast.LENGTH_SHORT).show();
             return;
         }
 
