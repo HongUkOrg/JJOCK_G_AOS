@@ -21,22 +21,26 @@ public class HongController
     public static double getMy_lati() {
         return my_lati;
     }
-
     public static void setMy_lati(double my_lati) {
         HongController.my_lati = my_lati;
     }
-
-    public static double my_lati;
+    public static double my_lati = -1;
 
     public static double getMy_long() {
         return my_long;
     }
-
     public static void setMy_long(double my_long) {
         HongController.my_long = my_long;
     }
+    public static double my_long = -1;
 
-    public static double my_long;
+    public static String getMy_w3w() {
+        return my_w3w;
+    }
+    public static void setMy_w3w(String my_w3w) {
+        HongController.my_w3w = my_w3w;
+    }
+    public static String my_w3w;
 
 
 

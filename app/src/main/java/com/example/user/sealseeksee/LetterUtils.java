@@ -2,6 +2,9 @@ package com.example.user.sealseeksee;
 
 import android.util.Log;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
+
 import static com.example.user.sealseeksee.LetterConstants.TAG;
 
 
@@ -29,6 +32,31 @@ public class LetterUtils
         if(middle.length()<3 || middle.length()>4) return false;
         if(end.length()<3 || end.length()>4) return false;
         return true;
+
+    }
+
+    public static String location_processing(double latitude, double longitude)
+    {
+        String result ="nothing";
+
+        BigDecimal bd = new BigDecimal(latitude);
+        bd = bd.round(new MathContext(6));
+        double rounded_lati = bd.doubleValue();
+
+        BigDecimal bd2 = new BigDecimal(longitude);
+        bd = bd.round(new MathContext(6));
+        double rounded_long = bd2.doubleValue();
+
+//        my_lati=rounded_lati;
+//        my_long=rounded_long;
+
+        result = "";
+
+        result += Double.toString(rounded_lati) + "," + Double.toString(rounded_long);
+
+        Log.d("HONG", "get_my_long_lat: "+result);
+
+        return result;
 
     }
 

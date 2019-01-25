@@ -77,7 +77,6 @@ public class TrackingLetter extends AppCompatActivity implements OnMapReadyCallb
         setContentView(R.layout.activity_tracking_letter);
 
         leftDisanceText = (TextView)findViewById(R.id.distance);
-        responseMessage =(TextView) findViewById(R.id.letter_msseage);
         timeLockText = (TextView)findViewById(R.id.txt_timeLock_TrackingLetter);
         read_btn = (Button) findViewById(R.id.letter_read_btn);
         read_btn_update = (Button)findViewById(R.id.letter_read_btn);
@@ -97,8 +96,8 @@ public class TrackingLetter extends AppCompatActivity implements OnMapReadyCallb
             public void onLocationUpdated(Location location) {
                 my_lati = location.getLatitude();
                 my_long = location.getLongitude();
-                Log.d(TAG, "onLocationUpdated: "+my_lati+" , "+my_long);
-                handler.postDelayed(locationRunnable,500);
+                Log.d(TAG, "onLocationUpdated-TrackingLetter: "+my_lati+" , "+my_long);
+                handler.postDelayed(locationRunnable,2000);
             }
         };
         SmartLocation.with(this).location().start(locationListener);
@@ -181,9 +180,6 @@ public class TrackingLetter extends AppCompatActivity implements OnMapReadyCallb
 
         }
 
-        responseMessage.setText(phone1 + phone2 + phone3 + "" + "\n" + word1 + " " + word2 + " " + word3 + " " +
-                "\n latitude :" + latitude + " longitude : " + longitude);
-
         double_lati = Double.parseDouble(latitude);
         double_long = Double.parseDouble(longitude);
 
@@ -225,6 +221,10 @@ public class TrackingLetter extends AppCompatActivity implements OnMapReadyCallb
 
                     read_title.setText(finalTitle);
                     read_message.setText(finalMessage);
+
+                    int width = (int)(getResources().getDisplayMetrics().widthPixels*0.95);
+                    int height = (int)(getResources().getDisplayMetrics().heightPixels*0.90);
+                    dialog2.getWindow().setLayout(width,height);
 
                     back_home.setOnClickListener(new View.OnClickListener()
                     {

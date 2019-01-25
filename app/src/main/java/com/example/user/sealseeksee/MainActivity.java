@@ -30,11 +30,15 @@ import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.nlopez.smartlocation.OnLocationUpdatedListener;
+import io.nlopez.smartlocation.SmartLocation;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 2001;
+
     public static final String TAG ="HONG";
+    private OnLocationUpdatedListener locationListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,44 +51,53 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         letter_find_btn.setOnClickListener(this);
         letter_send_btn.setOnClickListener(this);
         serviceIntroduce_btn.setOnClickListener(this);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) checkAndRequestPermissions();
 
-    }
-    private boolean checkAndRequestPermissions() {
-        List<String> listPermissionsNeeded = new ArrayList<>();
-        listPermissionsNeeded.clear();
+        locationListener = new OnLocationUpdatedListener() {
+            @Override
+            public void onLocationUpdated(Location location) {
+                Log.d("HONG", "MyApplication : refresh my location");
+                HongController.getInstance().setMy_long(location.getLongitude());
+                HongController.getInstance().setMy_lati(location.getLatitude());
 
-        int internetPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_NETWORK_STATE);
-        if (internetPermission != PackageManager.PERMISSION_GRANTED) listPermissionsNeeded.add(Manifest.permission.INTERNET);
-        int access_loc = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
-        if (access_loc != PackageManager.PERMISSION_GRANTED) listPermissionsNeeded.add(Manifest.permission.ACCESS_FINE_LOCATION);
-        int read_phone_state = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE);
-        if (read_phone_state != PackageManager.PERMISSION_GRANTED) listPermissionsNeeded.add(Manifest.permission.READ_PHONE_STATE);
-
-        if (!listPermissionsNeeded.isEmpty()) {
-            Log.d(TAG, "checkAndRequestPermissions: not empty");
-            ActivityCompat.requestPermissions(this, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]), REQUEST_ID_MULTIPLE_PERMISSIONS);
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case REQUEST_ID_MULTIPLE_PERMISSIONS: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0) {
-                } else {
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-                    Toast.makeText(this, "Please Allow All Permission To Continue..", Toast.LENGTH_SHORT).show();
-                    finish();
+                String link = "https://api.what3words.com/v2/reverse?coords=";
+                String position = LetterUtils.location_processing(location.getLatitude(),location.getLongitude());
+                if(position ==null) {
+                    Log.d(TAG, "location is null");
+                    link += "51.521251,-0.203586";
                 }
+                else
+                {
+                    link+=position;
+                }
+                link+= "&display=full&format=json&key=KYM3G8LX";
+                AsyncHttpClient client = new AsyncHttpClient();
+                RequestHandle requestHandle = client.get(link, new JsonHttpResponseHandler()
+                {
+                    @Override
+                    public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, JSONObject responseBody)
+                    {
+                        if(responseBody.has("words")) {
+                            try {
+                                HongController.setMy_w3w((String) responseBody.get("words"));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        else
+                        {
+                            Log.d(TAG, "MainApplication : jsonObject has not key 'words'");
+                        }
+                    }
+                });
+
             }
-            break;
-        }
+        };
+
+        SmartLocation.with(this).location().start(locationListener);
+
+
     }
+
 
 
     @Override
@@ -107,4 +120,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
+
 }

@@ -38,6 +38,8 @@ import java.math.MathContext;
 import io.nlopez.smartlocation.OnLocationUpdatedListener;
 import io.nlopez.smartlocation.SmartLocation;
 
+import static com.example.user.sealseeksee.LetterUtils.location_processing;
+
 public class SendLetterActivity extends AppCompatActivity implements OnMapReadyCallback,View.OnClickListener
 {
 
@@ -69,6 +71,10 @@ public class SendLetterActivity extends AppCompatActivity implements OnMapReadyC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_letter);
 
+        get_my_position=(Button)findViewById(R.id.send_letter_msg);
+        response_msg = (TextView) findViewById(R.id.trans_words);
+        text1 = (TextView) findViewById(R.id.text1);
+
         ctx = this;
 
         FragmentManager fragmentManager = getFragmentManager();
@@ -87,6 +93,8 @@ public class SendLetterActivity extends AppCompatActivity implements OnMapReadyC
             public void onLocationUpdated(Location location) {
                 my_lati = location.getLatitude();
                 my_long = location.getLongitude();
+                HongController.getInstance().setMy_lati(my_lati);
+                HongController.getInstance().setMy_long(my_long);
                 if(firstTimeLocSet)
                 {
                     Log.d(TAG, "first Time Setting : ");
@@ -111,16 +119,33 @@ public class SendLetterActivity extends AppCompatActivity implements OnMapReadyC
 
     }
 
+    private void checkHasInfoOfLocation() {
+        String my_w3w;
+        double my_lati,my_long;
+        my_w3w = HongController.getInstance().getMy_w3w();
+        my_lati = HongController.getInstance().getMy_lati();
+        my_long = HongController.getInstance().getMy_long();
+
+        Log.d(TAG, "checkHasInfoOfLocation: "+my_w3w+" "+my_lati+" "+my_long);
+        if(my_lati != -1 && my_long != -1 && my_w3w!=null)
+        {
+            Log.d(TAG, "my location is already set!");
+            response_msg.setText(my_w3w);
+            myMap.clear();
+            myMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(my_lati, my_long))
+                    .title("CurrentMyLocation")
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.person_walking)));
+            myMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(my_lati, my_long), 16));
+        }
+    }
+
 
     @Override
     public void onMapReady(final GoogleMap map) {
 
         myMap = map;
-
-        get_my_position=(Button)findViewById(R.id.send_letter_msg);
-        response_msg = (TextView) findViewById(R.id.trans_words);
-        text1 = (TextView) findViewById(R.id.text1);
-
+        checkHasInfoOfLocation();
         get_my_position.setOnClickListener(this);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -180,36 +205,12 @@ public class SendLetterActivity extends AppCompatActivity implements OnMapReadyC
 
     }
 
-    public String location_processing(double latitude,double longitude)
-    {
-        String result ="nothing";
-
-        BigDecimal bd = new BigDecimal(latitude);
-        bd = bd.round(new MathContext(6));
-        double rounded_lati = bd.doubleValue();
-
-        BigDecimal bd2 = new BigDecimal(longitude);
-        bd = bd.round(new MathContext(6));
-        double rounded_long = bd2.doubleValue();
-
-        my_lati=rounded_lati;
-        my_long=rounded_long;
-
-        result = "";
-
-        result += Double.toString(rounded_lati) + "," + Double.toString(rounded_long);
-
-        Log.d("HONG", "get_my_long_lat: "+result);
-
-        return result;
-
-    }
-
 
     public void transaction(String position, final int SendOrNot) {
 
         String link = "https://api.what3words.com/v2/reverse?coords=";
         if(position==null) {
+            Log.d(TAG, "transaction: position is null");
             link += "51.521251,-0.203586";
         }
         else
