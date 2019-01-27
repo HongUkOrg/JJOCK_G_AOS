@@ -118,11 +118,14 @@ public class LetterWrite extends AppCompatActivity implements View.OnClickListen
                 if (checked) {
                     txt_TimeLock.setText("봉인");
                     timeLockBool = true;
+                    timeLockButton.setShapeResource(R.drawable.ic_lock);
                     timeLockTime.setVisibility(View.VISIBLE);
                 } else {
                     txt_TimeLock.setText("봉인하지 않음");
+                    timeLockButton.setShapeResource(R.drawable.ic_unlock);
                     timeLockBool = false;
                     timeLockTime.setVisibility(View.INVISIBLE);
+
                 }
 
             }

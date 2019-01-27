@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 HongController.getInstance().setMy_lati(location.getLatitude());
 
                 String link = "https://api.what3words.com/v2/reverse?coords=";
+//                String link = "https://api.what3words.com/v2/languages?format=json&key=KYM3G8LX";
                 String position = LetterUtils.location_processing(location.getLatitude(),location.getLongitude());
                 if(position ==null) {
                     Log.d(TAG, "location is null");
@@ -70,12 +71,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     link+=position;
                 }
                 link+= "&display=full&format=json&key=KYM3G8LX";
+                link += "&lang=ko";
                 AsyncHttpClient client = new AsyncHttpClient();
                 RequestHandle requestHandle = client.get(link, new JsonHttpResponseHandler()
                 {
                     @Override
                     public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, JSONObject responseBody)
                     {
+                        Log.d(TAG, "Response Words : "+responseBody.toString());
                         if(responseBody.has("words")) {
                             try {
                                 HongController.setMy_w3w((String) responseBody.get("words"));
@@ -89,6 +92,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
                     }
                 });
+
+
 
             }
         };

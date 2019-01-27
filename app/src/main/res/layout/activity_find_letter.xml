@@ -8,14 +8,21 @@
     android:orientation="vertical"
     tools:context=".FindLetterActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="80dp"
+
+        android:background="#fff"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text = " Receiver Phone Number"
         android:textColor="#777"
+        android:gravity="center"
         android:textSize="20sp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="10dp"
 
 
         />
@@ -23,12 +30,10 @@
     <LinearLayout
         android:layout_marginTop="20dp"
 
-
         android:id="@+id/receiver_phone"
         android:layout_width="match_parent"
         android:gravity="center"
         android:layout_height="50dp"
-        android:background="@drawable/back"
         android:orientation="horizontal"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -88,8 +93,14 @@
 
     <TextView
         android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#fff"/>
+
+    <TextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text = "   What3Words"
+        android:gravity="center"
         android:textColor="#777"
         android:textSize="20sp"
         android:layout_marginTop="20dp"
@@ -104,7 +115,6 @@
         android:paddingLeft="50dp"
         android:paddingRight="50dp"
         android:layout_height="50dp"
-        android:background="@drawable/back"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="10dp"
@@ -155,6 +165,11 @@
             android:gravity="center"
             android:textColor="#777" />
     </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#fff"/>
 
     <Button
         android:id="@+id/find_Letter_search_btn"
