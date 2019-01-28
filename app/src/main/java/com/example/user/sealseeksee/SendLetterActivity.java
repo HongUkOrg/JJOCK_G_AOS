@@ -225,7 +225,7 @@ public class SendLetterActivity extends AppCompatActivity implements OnMapReadyC
             @Override
             public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, JSONObject responseBody)
             {
-                Log.d(TAG, "sendActivity w3w response body : "+responseBody.toString());
+//                Log.d(TAG, "sendActivity w3w response body : "+responseBody.toString());
                 setW3W(responseBody); //set
             }
         });

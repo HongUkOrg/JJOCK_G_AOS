@@ -225,6 +225,7 @@ public class LetterWrite extends AppCompatActivity implements View.OnClickListen
         receiver_phone_number = phone1.getText().toString() + "-" + phone2.getText().toString() + "-" + phone3.getText().toString();
         JSONObject myObj = new JSONObject();
         try {
+            /*
             myObj.put("receiver_phone", receiver_phone_number)
                     .put("message", get_content)
                     .put("title", get_title)
@@ -233,8 +234,15 @@ public class LetterWrite extends AppCompatActivity implements View.OnClickListen
                     .put("latitude", Double.toString(my_lati))
                     .put("longitude", Double.toString(my_long));
             if (timeLockBool) myObj.put("time_lock", myTimeLockTime);
-            else myObj.put("time_lock", -1); // -1 means that user does not set time_lock setting.
-            Log.d("HONG", "myTimeLock Save : " + myTimeLockTime);
+            */
+            myObj.put("receiver_phone", "010-1213-1414")
+                    .put("message", "2th letter")
+                    .put("title", "2")
+                    .put("w3w_address", "넣은.경품.의식")
+                    .put("sender_phone", "010-2043-8751")
+                    .put("latitude", 37.42198530)
+                    .put("longitude", -122.08401320);
+            myObj.put("time_lock", 123);
         } catch (JSONException e) {
             e.printStackTrace();
         }
