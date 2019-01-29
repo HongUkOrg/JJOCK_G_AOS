@@ -9,8 +9,8 @@
 
     <string name="connecting_to_server">Connecting to server</string>
 
-    <string name="donate_title">Donate?</string>
-    <string name="donate_message">Select an option please. This app isn\'t released yet, so no money will be charged.</string>
+    <string name="donate_title">편지가 2개 이상 검색되었습니다.</string>
+    <string name="donate_message">제목</string>
 
     <string name="order_food_title">Order some food!</string>
 

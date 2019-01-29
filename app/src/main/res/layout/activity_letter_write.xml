@@ -171,7 +171,7 @@
             app:btn_color="@android:color/darker_gray"
             app:btn_fill_color="#f26d7d"
             app:allow_random_color="false"
-            app:siShape="@raw/heart"/>
+            app:siShape="@drawable/ic_lock"/>
 
     </LinearLayout>
 

@@ -118,11 +118,14 @@ public class LetterWrite extends AppCompatActivity implements View.OnClickListen
                 if (checked) {
                     txt_TimeLock.setText("봉인");
                     timeLockBool = true;
+                    timeLockButton.setShapeResource(R.drawable.ic_lock);
                     timeLockTime.setVisibility(View.VISIBLE);
                 } else {
                     txt_TimeLock.setText("봉인하지 않음");
+                    timeLockButton.setShapeResource(R.drawable.ic_unlock);
                     timeLockBool = false;
                     timeLockTime.setVisibility(View.INVISIBLE);
+
                 }
 
             }
@@ -222,6 +225,7 @@ public class LetterWrite extends AppCompatActivity implements View.OnClickListen
         receiver_phone_number = phone1.getText().toString() + "-" + phone2.getText().toString() + "-" + phone3.getText().toString();
         JSONObject myObj = new JSONObject();
         try {
+
             myObj.put("receiver_phone", receiver_phone_number)
                     .put("message", get_content)
                     .put("title", get_title)
@@ -230,8 +234,6 @@ public class LetterWrite extends AppCompatActivity implements View.OnClickListen
                     .put("latitude", Double.toString(my_lati))
                     .put("longitude", Double.toString(my_long));
             if (timeLockBool) myObj.put("time_lock", myTimeLockTime);
-            else myObj.put("time_lock", -1); // -1 means that user does not set time_lock setting.
-            Log.d("HONG", "myTimeLock Save : " + myTimeLockTime);
         } catch (JSONException e) {
             e.printStackTrace();
         }
