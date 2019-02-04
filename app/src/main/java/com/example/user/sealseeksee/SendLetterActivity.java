@@ -103,7 +103,7 @@ public class SendLetterActivity extends AppCompatActivity implements OnMapReadyC
                     firstTimeLocSet = false;
                 }
                 Log.d(TAG, "onLocationUpdated: "+my_lati+" , "+my_long);
-                handler.postDelayed(locationRunnable,2000);
+                handler.postDelayed(locationRunnable,1000);
             }
         };
         SmartLocation.with(this).location().start(locationListener);
@@ -168,8 +168,8 @@ public class SendLetterActivity extends AppCompatActivity implements OnMapReadyC
 
     private void markCurrentPosition()
     {
-        if(postionUpdateCount%5==0) {
-            Log.d(TAG, "updated current position. period : 5-times retrying.");
+        if(postionUpdateCount%3==0) {
+            Log.d(TAG, "updated current position. period : 3-times retrying.");
             myMap.clear();
             myMap.addMarker(new MarkerOptions()
                     .position(new LatLng(my_lati, my_long))
