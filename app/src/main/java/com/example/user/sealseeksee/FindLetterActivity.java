@@ -60,12 +60,11 @@ public class FindLetterActivity extends AppCompatActivity implements HongControl
     private Button find_btn,sms_find_btn;
     private int letterNumber;
     private static Context mContext;
-    String title,message,latitude,longitude;
-    JSONObject myJson = null;
-    JSONObject myLetter = null;
-    JSONArray myJsonArr = null;
-    String serarch_letter ;
-    String myTimeLocktime;
+    private String title,message,latitude,longitude;
+    private JSONObject myJson = null,myLetter=null;
+    private JSONArray myJsonArr = null;
+    private String serarch_letter,myTimeLocktime;
+    private long myTimeLockTimeLongType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -150,8 +149,14 @@ public class FindLetterActivity extends AppCompatActivity implements HongControl
             latitude = myLetter.getString("latitude");
             longitude = myLetter.getString("longitude");
             myTimeLocktime = myLetter.getString("time_lock");
-            long myTimeLockTimeLongType = Long.parseLong(myTimeLocktime);
 
+            if(myTimeLocktime.getClass().equals(Long.class)) {
+                myTimeLockTimeLongType = Long.parseLong(myTimeLocktime);
+            }
+            else
+            {
+                myTimeLockTimeLongType = -1;
+            }
 
             Intent intent = new Intent(FindLetterActivity.this, TrackingLetter.class);
 
@@ -171,7 +176,11 @@ public class FindLetterActivity extends AppCompatActivity implements HongControl
             }
             startActivity(intent);
         } else {
-            Toast.makeText(FindLetterActivity.this, "편지를 찾을 수 없습니다.", Toast.LENGTH_SHORT).show();
+            FindLetterActivity.this.runOnUiThread(new Runnable() {
+                public void run() {
+                    Toast.makeText(getApplicationContext(), "편지를 찾을 수 없습니다.", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 
@@ -191,10 +200,8 @@ public class FindLetterActivity extends AppCompatActivity implements HongControl
 
                 Log.d(LetterConstants.TAG, "w3w, receiver_phone :  "+w3w_adrress+"   "+receiver_phone);
                 try {
-                    myObj.put("w3w_address","넣은.경품.의식");
-                    myObj.put("receiver_phone","010-1213-1414");
-//                    myObj.put("w3w_address",w3w_adrress);
-//                    myObj.put("receiver_phone",receiver_phone);
+                    myObj.put("w3w_address",w3w_adrress);
+                    myObj.put("receiver_phone",receiver_phone);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
