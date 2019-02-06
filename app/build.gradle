@@ -35,5 +35,4 @@ dependencies {
     implementation 'com.sackcentury:shinebutton:0.2.0'
     implementation 'com.appeaser.sublimepickerlibrary:sublimepickerlibrary:2.1.2'
 
-
 }

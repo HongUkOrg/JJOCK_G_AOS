@@ -1,6 +1,7 @@
 package com.example.user.sealseeksee;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.app.FragmentManager;
 import android.content.ContentValues;
 import android.content.Context;
@@ -211,8 +212,15 @@ public class FindLetterActivity extends AppCompatActivity implements HongControl
             case R.id.find_by_sms:
                 new LovelyTextInputDialog(this, R.style.EditTextTintTheme)
                         .setTopColorRes(R.color.rosequartz)
-                        .setTitle(R.string.text_input_title)
-                        .setMessage(R.string.text_input_message)
+                        .setTitle("\nSMS 붙여넣기")
+                        .setTitleGravity(1)
+                        .setMessageGravity(1)
+                        .setConfirmButtonColor(R.color.darkDeepOrange)
+                        .setCancelable(true)
+                        .setNegativeButtonColor(R.color.darkDeepOrange)
+                        .setTopTitleColor(0x000000)
+                        .setHint("010-2043-8751\n하이,헬로우,안녕")
+                        .setMessage("받은 메시지를 입력해주세요\n\n")
                         .setIcon(R.drawable.ic_star_border_white_36dp)
                         .setInputFilter(R.string.text_input_error_message, new LovelyTextInputDialog.TextFilter() {
                             @Override
