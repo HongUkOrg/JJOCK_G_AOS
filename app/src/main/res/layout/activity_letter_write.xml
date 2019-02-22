@@ -189,7 +189,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_height="wrap_content"
-            android:background="@color/serenity"
+            android:background="@drawable/btn_round_pink"
             android:text=" 취소 "
             />
         <Button
@@ -197,7 +197,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/rosequartz"
+            android:background="@drawable/btn_round_blue"
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"
             android:text=" 전송 "

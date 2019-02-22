@@ -15,7 +15,7 @@
         android:padding="1dp"
 
 
-        android:background="#d39492"
+        android:background="@color/serenity"
         android:orientation="horizontal"
 
         >
@@ -41,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15sp"
-            android:textColor="@color/rosequartz"
+            android:textColor="#333"
             android:layout_weight="0.5"
             android:layout_marginLeft="20dp"
             android:id="@+id/text1"

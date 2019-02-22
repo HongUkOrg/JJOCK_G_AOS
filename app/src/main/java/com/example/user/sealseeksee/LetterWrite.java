@@ -26,7 +26,10 @@ import com.appeaser.sublimepickerlibrary.datepicker.SelectedDate;
 import com.appeaser.sublimepickerlibrary.helpers.SublimeOptions;
 import com.appeaser.sublimepickerlibrary.recurrencepicker.SublimeRecurrencePicker;
 import com.example.user.sealseeksee.DateHelper.SublimePickerFragment;
+import com.example.user.sealseeksee.DateHelper.myDatePicker;
 import com.sackcentury.shinebuttonlib.ShineButton;
+import com.yarolegovich.lovelydialog.LovelyInfoDialog;
+import com.yarolegovich.lovelydialog.LovelyStandardDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,7 +38,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 
-public class LetterWrite extends AppCompatActivity implements View.OnClickListener // Fragment로 바꿔야됨
+public class LetterWrite extends AppCompatActivity implements View.OnClickListener// Fragment로 바꿔야됨
 {
     public static final String TAG = "HONG";
     private static boolean timeLockBool = false;
@@ -48,6 +51,7 @@ public class LetterWrite extends AppCompatActivity implements View.OnClickListen
     private static String w3w;
     private double my_lati, my_long;
     private long myTimeLockTime = -1;
+    private Context mContext;
 
     private String receiver_phone_number, get_title, get_content;
 
@@ -83,6 +87,8 @@ public class LetterWrite extends AppCompatActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_letter_write);
+
+        mContext = this;
 
         letterWrite_w3w = (TextView) findViewById(R.id.letterWrite_w3w);
         txt_TimeLock = (TextView) findViewById(R.id.txt_timeLock);
@@ -148,36 +154,31 @@ public class LetterWrite extends AppCompatActivity implements View.OnClickListen
 
     void send_success_dialog(final String receiver_phone_number, final String w3w_words) {
 
-        final Dialog dialog2 = new Dialog(this);
-        dialog2.setContentView(R.layout.dialog2);
-        dialog2.setTitle("Title...");
-        Button dialogButton = (Button) dialog2.findViewById(R.id.success_dialogButtonOK);
-        Button dialogCanelButton = (Button) dialog2.findViewById(R.id.success_dialogButtonCancel);
 
-        TextView w3w = (TextView) dialog2.findViewById(R.id.success_w3w);
-        w3w.setText(w3w_words);
+        new LovelyStandardDialog(this, LovelyStandardDialog.ButtonLayout.HORIZONTAL)
+                .setTopColorRes(R.color.indigo)
+                .setButtonsColorRes(R.color.darkDeepOrange)
+                .setIcon(R.drawable.ic_info_outline_white_36dp)
+                .setTitle("편지 작성이 완료되었습니다\n")
+                .setMessage(w3w_words+"\n"+receiver_phone_number+"\n\nSMS로 전송하시겠습니까?\n")
+                .setTitleGravity(1)
+                .setMessageGravity(1)
+                .setNegativeButton(android.R.string.no, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Log.d(TAG, "do not send sms! move to MainActivity");
+                        startActivity(new Intent(mContext,MainActivity.class));
+                    }
+                })
+                .setPositiveButton(android.R.string.ok, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        sendSmsIntent(receiver_phone_number, w3w_words);
+                        Toast.makeText(mContext, "SMS 전송", Toast.LENGTH_SHORT).show();
+                    }
+                })
 
-        TextView success_receiver_phone_number = (TextView) dialog2.findViewById(R.id.success_phone);
-        success_receiver_phone_number.setText(receiver_phone_number);
-
-        int width = (int)(getResources().getDisplayMetrics().widthPixels*0.95);
-        int height = (int)(getResources().getDisplayMetrics().heightPixels*0.7);
-        dialog2.getWindow().setLayout(width,height);
-
-        dialogButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendSmsIntent(receiver_phone_number, w3w_words);
-                dialog2.dismiss();
-            }
-        });
-        dialogCanelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog2.dismiss();
-            }
-        });
-        dialog2.show();
+                .show();
     }
 
     @Override
@@ -242,6 +243,8 @@ public class LetterWrite extends AppCompatActivity implements View.OnClickListen
     }
 
     private void datePicker() {
+
+
         SublimePickerFragment pickerFrag = new SublimePickerFragment();
         pickerFrag.setCallback(mFragmentCallback);
 
@@ -260,6 +263,9 @@ public class LetterWrite extends AppCompatActivity implements View.OnClickListen
 
         pickerFrag.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
         pickerFrag.show(getSupportFragmentManager(), "SUBLIME_PICKER");
+
+//        DialogFragment newFragment = new myDatePicker();
+//        newFragment.show(getSupportFragmentManager(), "date picker");
 
     }
 
@@ -301,4 +307,5 @@ public class LetterWrite extends AppCompatActivity implements View.OnClickListen
         Log.d(TAG, "getSendrPhone: "+mPhoneNumber);
         return mPhoneNumber;
     }
+
 }

@@ -2,45 +2,63 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/mybg"
+    android:background="#fff"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".FindLetterActivity">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="80dp"
 
-        android:background="#fff"/>
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text = " Receiver Phone Number"
-        android:textColor="#777"
-        android:gravity="center"
-        android:textSize="20sp"
+        android:layout_height="60dp"
+        android:background="#eee"/>
+
+    <TextView
         android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:text="편지 찾기"
 
+        android:textColor="@color/serenity"
+        android:gravity="center"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:textSize="12sp"
+        android:layout_marginLeft="20dp"
+        android:gravity="center_vertical"
+        android:textColor="#888"
+        android:text="편지를 찾으려면 핸드폰 번호와\n현재 위치를 나타내는 3개의 What 3 Words를 입력해주세요."/>
 
-        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="#eee"/>
 
     <LinearLayout
-        android:layout_marginTop="20dp"
-
         android:id="@+id/receiver_phone"
         android:layout_width="match_parent"
         android:gravity="center"
         android:layout_height="50dp"
         android:orientation="horizontal"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:weightSum="6"
 
 
         >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text = "핸드폰 번호"
+            android:textColor="#3c9fe2"
+            android:gravity=""
+            android:textSize="10sp"
+            />
+
 
         <EditText
             android:id="@+id/phone1"
@@ -49,15 +67,17 @@
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:textSize="12sp"
             android:text="010"
             android:textColor="#777"
             />
 
         <TextView
-            android:layout_weight="0.8"
+            android:layout_weight="0.5"
             android:gravity="center_horizontal"
             android:layout_width="0dp"
             android:text=" - "
+            android:textSize="12sp"
             android:textColor="#777"
             android:layout_height="wrap_content" />
 
@@ -65,6 +85,7 @@
             android:id="@+id/phone2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:textSize="12sp"
             android:layout_weight="1"
             android:gravity="center_horizontal"
             android:text="2043"
@@ -72,10 +93,11 @@
             android:textColor="#777" />
 
         <TextView
-            android:layout_weight="0.8"
+            android:layout_weight="0.5"
             android:gravity="center_horizontal"
             android:layout_width="0dp"
             android:text=" - "
+            android:textSize="12sp"
             android:textColor="#777"
             android:layout_height="wrap_content" />
 
@@ -85,88 +107,118 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textSize="12sp"
             android:gravity="center_horizontal"
             android:text="8751"
 
             android:textColor="#777" />
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
     </LinearLayout>
 
 
 
     <TextView
+        android:layout_marginLeft="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text = "   What3Words"
-        android:gravity="center"
-        android:textColor="#777"
-        android:textSize="20sp"
+        android:text = "What3Words"
+        android:gravity="start"
+        android:textColor="#3c9fe2"
+        android:textSize="10sp"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
 
 
         />
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:textColor="#222"
+                android:textSize="10sp"
+                android:gravity="center"
+                android:text="첫 번째 단어"/>
+            <EditText
+                android:id="@+id/first_word"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:layout_weight="1"
+                android:hint="사랑"
+                android:textColorHint="#777"
+                android:gravity="center"
+                android:textColor="#222" />
+
+        </LinearLayout>
     <LinearLayout
-
-        android:id="@+id/wtat3words_find"
         android:layout_width="match_parent"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="10dp"
-        android:orientation="horizontal"
-
-        >
-
-        <EditText
-            android:id="@+id/first_word"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.1"
-            android:text="sweeping"
-            android:gravity="center"
-            android:textColor="#777" />
-
+        android:layout_height="40dp"
+        android:orientation="horizontal">
         <TextView
-            android:layout_weight="0.1"
-            android:layout_width="wrap_content"
-            android:text=" - "
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:textColor="#222"
+            android:textSize="10sp"
             android:gravity="center"
-            android:textColor="#777"
-            android:layout_height="wrap_content" />
+            android:text="두 번째 단어"/>
 
         <EditText
             android:id="@+id/second_word"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.1"
-            android:text="caps"
+            android:layout_weight="1"
+            android:textSize="10sp"
+            android:hint="로맨틱"
+            android:textColorHint="#777"
             android:gravity="center"
-            android:textColor="#777" />
+            android:textColor="#222" />
 
-        <TextView
-            android:layout_weight="0.1"
-            android:layout_width="wrap_content"
-            android:text=" - "
-            android:gravity="center"
-            android:textColor="#777"
-            android:layout_height="wrap_content" />
-
-        <EditText
-            android:id="@+id/third_word"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.1"
-            android:text="dwelled"
-            android:gravity="center"
-            android:textColor="#777" />
     </LinearLayout>
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#fff"/>
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:textColor="#222"
+            android:textSize="10sp"
+            android:gravity="center"
+            android:text="세 번째 단어"/>
+        <EditText
+            android:id="@+id/third_word"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="10sp"
+            android:hint="실패"
+            android:textColorHint="#777"
+            android:gravity="center"
+            android:textColor="#222" />
+
+    </LinearLayout>
+
+
+
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginBottom="20dp"
+        android:background="#eee"/>
 
     <Button
         android:id="@+id/find_Letter_search_btn"
@@ -176,7 +228,6 @@
         android:layout_height="50dp"
         android:text="편지 찾기"
         android:background="@drawable/btn_round_yello"
-        android:layout_marginTop="60dp"
 
         />
     <Button

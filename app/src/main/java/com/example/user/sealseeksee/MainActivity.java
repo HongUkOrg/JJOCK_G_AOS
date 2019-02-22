@@ -1,6 +1,8 @@
 package com.example.user.sealseeksee;
 
 import android.Manifest;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -21,6 +23,10 @@ import android.widget.Toast;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestHandle;
+import com.yarolegovich.lovelydialog.LovelyDialogCompat;
+import com.yarolegovich.lovelydialog.LovelyInfoDialog;
+import com.yarolegovich.lovelydialog.LovelyStandardDialog;
+import com.yarolegovich.lovelydialog.LovelyTextInputDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public static final String TAG ="HONG";
     private OnLocationUpdatedListener locationListener;
+    private Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +58,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         letter_find_btn.setOnClickListener(this);
         letter_send_btn.setOnClickListener(this);
         serviceIntroduce_btn.setOnClickListener(this);
+
+        mContext = this;
 
         locationListener = new OnLocationUpdatedListener() {
             @Override
@@ -101,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SmartLocation.with(this).location().start(locationListener);
 
 
+        //info dialog does not support veiw.onClickListener ....
     }
 
 

@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/rosequartz</item>
         <item name="colorPrimaryDark">@color/rosequartz</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:datePickerDialogTheme">@style/MyDatePickerStyle</item>
     </style>
     <style name="TintTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="colorAccent">@color/indigo</item>
@@ -16,6 +17,7 @@
 
     <style name="EditTextTintTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="colorAccent">@color/primaryText</item>
+
     </style>
 
     <style name="DialogTriggerButton">
@@ -23,6 +25,13 @@
         <item name="android:layout_marginLeft">30dp</item>
         <item name="android:layout_marginRight">30dp</item>
         <item name="android:textColor">@android:color/white</item>
+    </style>
+    <style name="MyDatePickerDialogTheme" parent="android:Theme.Material.Light.Dialog">
+        <item name="android:datePickerStyle">@style/MyDatePickerStyle</item>
+    </style>
+    <style name="MyDatePickerStyle" parent="@android:style/Widget.Material.Light.DatePicker">
+        <item name="android:headerBackground">@color/rosequartz</item>
+
     </style>
 
 
