@@ -4,7 +4,7 @@
     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/rosequartz</item>
-        <item name="colorPrimaryDark">@color/rosequartz</item>
+        <item name="colorPrimaryDark">@color/ganari</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:datePickerDialogTheme">@style/MyDatePickerStyle</item>
     </style>

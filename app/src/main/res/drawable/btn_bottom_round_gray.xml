@@ -3,24 +3,27 @@
     <item android:state_pressed="true" >
         <shape>
             <solid
-                android:color="#dbd" />
+                android:color="#b3eeeeee" />
             <corners
-                android:radius="12dp" />
+                android:bottomLeftRadius="15dp"
+                android:bottomRightRadius="15dp" />
         </shape>
     </item>
     <item android:state_enabled="true">
-        <shape>
-            <solid android:color="#fcf">
+        <shape>1
+            <solid android:color="#b3ffffff">
 
             </solid>
             <corners
-                android:radius="12dp" />
+                android:bottomLeftRadius="15dp"
+                android:bottomRightRadius="15dp"
+                />
 
         </shape>
     </item>
     <item android:state_enabled="false">
         <shape>
-            <solid android:color="#7f7f7f">
+            <solid android:color="#eee">
 
             </solid>
             <corners

@@ -234,7 +234,7 @@ public class SendLetterActivity extends AppCompatActivity implements OnMapReadyC
     public void setW3W(JSONObject response)
     {
 
-        text1.setText("Address is transformed to WHAT3WORDS ");
+        text1.setText("나의 현재 주소");
         try {
             response_msg.setText(response.getString("words"));
             myW3W = response.getString("words");
