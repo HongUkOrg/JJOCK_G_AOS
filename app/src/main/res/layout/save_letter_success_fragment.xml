@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.ContentFrameLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/letter_top_round"
+    android:orientation="vertical"
+    android:gravity="bottom"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/success_top"
+        android:layout_height="80dp">
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/letter_view_ganari"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="40dp"
+            android:textSize="17sp"
+            android:text="작성이 완료되었습니다"
+            android:textColor="@color/semi_black"/>
+
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="140dp"
+        android:orientation="vertical"
+        android:background="#fff">
+
+        <TextView
+
+            android:id="@+id/success_w3w"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="35dp"
+            android:background="@drawable/success_w3w"
+            android:gravity="center"
+            android:text="허브   /   숟가락   /   창문"
+            android:textColor="#754F44"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="35dp"
+
+            android:weightSum="5">
+
+            <TextView
+
+                android:id="@+id/success_phone"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_weight="4"
+                android:background="@drawable/success_w3w"
+                android:layout_gravity="center"
+                android:text="010 2043 8751"
+                android:gravity="center"
+                android:textColor="#754F44"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:gravity="center"
+                android:layout_marginLeft="5dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/success_phone"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="bottom|center_horizontal">
+            <Button
+                android:id="@+id/btn_success_sms"
+                android:layout_width="match_parent"
+                android:layout_gravity="bottom"
+                android:background="@color/semi_black"
+                android:text="SMS 보내서 알려주기"
+                android:layout_height="60dp" />
+            <Button
+                android:id="@+id/btn_success_cancel"
+                android:layout_width="55dp"
+                android:layout_marginTop="10dp"
+                android:layout_height="55dp"
+                android:background="@drawable/success_cancel"
+                android:layout_marginBottom="10dp"/>
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</android.support.v7.widget.ContentFrameLayout>

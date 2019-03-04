@@ -15,7 +15,7 @@ public class LetterUtils
         if(input == null || input.length()==0) return false;
         String lines[] = input.split("\n");
         if(lines.length!=2) {
-            Log.d(TAG, "line length "+lines.length);
+            Log.d(TAG, "line height "+lines.length);
             return false;
         }
         Log.d(TAG, "line 1 : "+lines[0]);

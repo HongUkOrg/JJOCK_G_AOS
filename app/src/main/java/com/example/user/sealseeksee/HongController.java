@@ -6,8 +6,41 @@ public class HongController
 {
 
     private static HongController instance;
+
+
+
+
+
+    public int width, height;
     public static String resultFromFindLetterServer;
     public static Context myContext;
+    public static String savedPhoneNumber;
+    public static boolean writingNow = false;
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+    public int getHeight() {
+        return height;
+    }
+
+
+    public static String getSavedPhoneNumber() {
+        return savedPhoneNumber;
+    }
+
+    public static void setSavedPhoneNumber(String savedPhoneNumber) {
+        HongController.savedPhoneNumber = savedPhoneNumber;
+    }
+
 
 
     public static Context getMyContext() {
@@ -17,7 +50,6 @@ public class HongController
     public static void setMyContext(Context myContext) {
         HongController.myContext = myContext;
     }
-
     public static double getMy_lati() {
         return my_lati;
     }
@@ -41,6 +73,7 @@ public class HongController
         HongController.my_w3w = my_w3w;
     }
     public static String my_w3w;
+
 
 
 

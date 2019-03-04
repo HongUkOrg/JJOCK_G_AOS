@@ -15,11 +15,13 @@
     <color name="serenity">#92a8d1</color>
     <color name="rosequartz">#f7cac9</color>
     <color name="ganari">#ffcd4d</color>
+    <color name="ganari_dark">#eeac3a</color>
+    <color name="semi_black">#3a3209</color>
 
 
     <color name="primaryText">#212121</color>
     <color name="secondaryText">#727272</color>
-    <color name="c_accent">#325C80</color>
+    <color name="c_accent">#3a3209</color>
 
     <color name="c_primary">#2B4F6F</color>
 

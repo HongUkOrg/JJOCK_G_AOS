@@ -1,40 +1,20 @@
 package com.example.user.sealseeksee;
 
-import android.Manifest;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestHandle;
-import com.yarolegovich.lovelydialog.LovelyDialogCompat;
-import com.yarolegovich.lovelydialog.LovelyInfoDialog;
-import com.yarolegovich.lovelydialog.LovelyStandardDialog;
-import com.yarolegovich.lovelydialog.LovelyTextInputDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.math.BigDecimal;
-import java.math.MathContext;
-import java.util.ArrayList;
-import java.util.List;
 
 import io.nlopez.smartlocation.OnLocationUpdatedListener;
 import io.nlopez.smartlocation.SmartLocation;
@@ -125,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.letter_send_btn :
                 Log.d(TAG, "??? ");
-                startActivity(new Intent(MainActivity.this,SendLetterActivity.class));
+                startActivity(new Intent(MainActivity.this,LetterMainActivity.class));
                 break;
             case R.id.service_introduce :
                 break;

@@ -1,13 +1,9 @@
 package com.example.user.sealseeksee;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,7 +13,6 @@ import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,9 +21,7 @@ import com.appeaser.sublimepickerlibrary.datepicker.SelectedDate;
 import com.appeaser.sublimepickerlibrary.helpers.SublimeOptions;
 import com.appeaser.sublimepickerlibrary.recurrencepicker.SublimeRecurrencePicker;
 import com.example.user.sealseeksee.DateHelper.SublimePickerFragment;
-import com.example.user.sealseeksee.DateHelper.myDatePicker;
 import com.sackcentury.shinebuttonlib.ShineButton;
-import com.yarolegovich.lovelydialog.LovelyInfoDialog;
 import com.yarolegovich.lovelydialog.LovelyStandardDialog;
 
 import org.json.JSONException;
@@ -90,7 +83,7 @@ public class LetterWrite extends AppCompatActivity implements View.OnClickListen
 
         mContext = this;
 
-        letterWrite_w3w = (TextView) findViewById(R.id.letterWrite_w3w);
+//        letterWrite_w3w = (TextView) findViewById(R.id.letterWrite_w3w);
         txt_TimeLock = (TextView) findViewById(R.id.txt_timeLock);
         timeLockTime = (TextView) findViewById(R.id.timeLock_time);
         title = (EditText) findViewById(R.id.dialog_title);
@@ -112,7 +105,7 @@ public class LetterWrite extends AppCompatActivity implements View.OnClickListen
         Log.d(TAG, "w3w Test : " + w3w);
 
 
-        if (w3w != null) letterWrite_w3w.setText("현재 위치의 W3W : " + w3w);
+//        if (w3w != null) letterWrite_w3w.setText("현재 위치의 W3W : " + w3w);
         ButtonOK.setOnClickListener(LetterWrite.this);
         CancelButton.setOnClickListener(LetterWrite.this);
         timeLockTime.setOnClickListener(LetterWrite.this);
@@ -122,7 +115,7 @@ public class LetterWrite extends AppCompatActivity implements View.OnClickListen
             public void onCheckedChanged(View view, boolean checked) {
                 Log.d(TAG, "onClick: po_image2");
                 if (checked) {
-                    txt_TimeLock.setText("봉인");
+                    txt_TimeLock.setText("");
                     timeLockBool = true;
                     timeLockButton.setShapeResource(R.drawable.ic_lock);
                     timeLockTime.setVisibility(View.VISIBLE);
@@ -192,7 +185,7 @@ public class LetterWrite extends AppCompatActivity implements View.OnClickListen
                 send_success_dialog(receiver_phone_number, w3w);
                 break;
             case R.id.ButtonCancel:
-                startActivity(new Intent(this, SendLetterActivity.class));
+                startActivity(new Intent(this, LetterMainActivity.class));
                 break;
             case R.id.timeLock_time:
                 datePicker();

@@ -7,7 +7,7 @@
     android:background="@color/ganari"
     android:orientation="vertical"
     android:weightSum="4"
-    tools:context=".SendLetterActivity">
+    tools:context=".LetterMainActivity">
 
     <fragment
         android:id="@+id/map"
@@ -21,7 +21,7 @@
     <RelativeLayout
         android:id="@+id/Top"
         android:layout_width="fill_parent"
-        android:layout_height="155dp"
+        android:layout_height="65dp"
         android:layout_gravity="top|center_horizontal"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -31,22 +31,24 @@
 
         >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:padding="10dp"
-            android:text="Seal Seek See"
-            android:textColor="#000"
-            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/info_question_btn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/question"
+            android:layout_alignParentRight="true"/>
 
     </RelativeLayout>
 
     <LinearLayout
+        android:id="@+id/topTitleMyCurrentLocation"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_gravity="top|center_horizontal"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="10dp"
         android:orientation="vertical">
 
         <TextView
@@ -56,7 +58,7 @@
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:text="ProCessing..."
-            android:textColor="#333"
+            android:textColor="@color/semi_black"
             android:textSize="15sp" />
 
     </LinearLayout>
@@ -65,9 +67,9 @@
 
         android:id="@+id/trans_words"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="35dp"
         android:layout_marginLeft="35dp"
-        android:layout_marginTop="95dp"
+        android:layout_marginTop="50dp"
         android:layout_marginRight="35dp"
         android:background="@drawable/btn_round_ganari"
         android:gravity="center"
@@ -75,20 +77,61 @@
         android:textColor="#754F44"
         android:textSize="16sp" />
 
+    <TextView
+        android:id="@+id/info_text"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:textColor="@color/semi_black"
+        android:layout_height="30dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="110dp"
+        android:layout_marginRight="35dp"
+        android:gravity="center_horizontal"
+        android:text="Seal Seek Seed, What 3 Words란..."/>
+
 
     <Button
-        android:id="@+id/send_letter_msg"
-        android:layout_width="match_parent"
+        android:layout_width="100dp"
         android:layout_height="50dp"
+        android:id="@+id/main_find_letter_btn"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="125dp"
+        android:stateListAnimator="@null"
+        android:layout_marginLeft="80dp"
+        android:visibility="visible"
+        android:background="@drawable/letter_find_btn"/>
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:id="@+id/main_save_letter_btn"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="125dp"
+        android:layout_marginRight="80dp"
+        android:stateListAnimator="@null"
+        android:visibility="visible"
+        android:background="@drawable/save_letter_btn"/>
+
+    <Button
+        android:id="@+id/main_btn"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginBottom="40dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:textColor="@color/ganari"
-
-        android:background="@drawable/btn_round_semiblack"
-        android:text="현재 위치에 편지 남기기"
+        android:stateListAnimator="@null"
+        android:background="@drawable/main_btn"
 
         />
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/changeFragment"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="bottom|center_horizontal"/>
+
+
 
 </android.support.v7.widget.ContentFrameLayout>

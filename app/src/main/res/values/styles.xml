@@ -33,6 +33,11 @@
         <item name="android:headerBackground">@color/rosequartz</item>
 
     </style>
+    <style name="Theme.App.Base" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorControlNormal">#c5c5c5</item>
+        <item name="colorControlActivated">@color/ganari_dark</item>
+        <item name="colorControlHighlight">@color/ganari_dark</item>
+    </style>
 
 
 

@@ -26,7 +26,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SendLetterActivity" />
+        <activity android:name=".LetterMainActivity" />
         <activity android:name=".FindLetterActivity" />
         <activity android:name=".TrackingLetter" />
         <activity android:name=".LetterWrite" />

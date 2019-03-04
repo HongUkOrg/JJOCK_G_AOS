@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/letter_top_round"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/letter_view_ganari"
+            android:orientation="vertical">
+
+            <LinearLayout
+
+                android:id="@+id/receiver_phone"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="0.1"
+                android:gravity="center"
+                android:orientation="horizontal"
+
+                >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="0.3"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center"
+                    android:text="받는이"
+                    android:textColor="#fff" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/btn_round_white"
+                    android:orientation="horizontal"
+                    >
+
+                    <EditText
+                        android:id="@+id/phone1"
+
+                        android:layout_width="0dp"
+                        android:layout_weight="3"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="010"
+                        android:textSize="15sp"
+                        android:textColor="#777" />
+
+                    <TextView
+
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text=" - "
+                        android:textColor="#777" />
+
+                    <EditText
+                        android:id="@+id/phone2"
+
+                        android:layout_width="0dp"
+                        android:layout_weight="4"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:hint="0000"
+                        android:textSize="15sp"
+                        android:textColor="#777"
+                        android:textColorHint="#ddd" />
+
+                    <TextView
+
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text=" - "
+                        android:textColor="#777" />
+
+                    <EditText
+                        android:id="@+id/phone3"
+
+                        android:layout_width="0dp"
+                        android:layout_weight="4"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:hint="0000"
+                        android:textSize="15sp"
+                        android:textColor="#777"
+                        android:textColorHint="#ddd" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+
+            <com.example.user.sealseeksee.LinedEditText
+
+                android:id="@+id/content"
+                android:layout_height="240dp"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:gravity="top"
+                android:textSize="20sp"
+                android:lines="10"
+                android:hint="편지를 작성해보세요"
+                android:lineSpacingExtra="5sp"
+                android:textColor="@color/semi_black"
+                android:textColorHint="#eee" />
+            />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="0.05"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/timeLock_time"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="시간 설정하기"
+                    android:textColor="#000"
+                    android:visibility="invisible" />
+
+                <TextView
+                    android:id="@+id/txt_timeLock"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="UNLOCK"
+                    android:textColor="#000" />
+
+                <com.sackcentury.shinebuttonlib.ShineButton
+                    android:id="@+id/po_image2"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="20dp"
+                    android:elevation="10dp"
+                    android:src="@android:color/darker_gray"
+                    app:allow_random_color="false"
+                    app:btn_color="@android:color/darker_gray"
+                    app:btn_fill_color="#f26d7d"
+                    app:siShape="@drawable/ic_lock" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/ButtonOK"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:textColor="@color/semi_black"
+                    android:background="@drawable/btn_round_gray"
+                    android:text=" 쪽지 남기기 ">
+
+                </Button>
+                <Button
+                    android:id="@+id/ButtonCancel"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/btn_round_ganari_dark"
+                    android:text=" 취소 " />
+
+
+
+                />
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</FrameLayout>
