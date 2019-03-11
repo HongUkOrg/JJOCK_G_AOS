@@ -24,7 +24,6 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -90,7 +89,7 @@ public class LetterMainActivity extends FragmentActivity implements OnMapReadyCa
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_send_letter);
+        setContentView(R.layout.main_letter_activit);
 
         main_save_letter_btn =(Button)findViewById(R.id.main_save_letter_btn);
         main_find_letter_btn =(Button)findViewById(R.id.main_find_letter_btn);
@@ -106,6 +105,8 @@ public class LetterMainActivity extends FragmentActivity implements OnMapReadyCa
 
         ctx = this;
         resizeFragment();
+
+
 
         FragmentManager fragmentManager = getFragmentManager();
         MapFragment mapFragment = (MapFragment) fragmentManager
@@ -152,7 +153,7 @@ public class LetterMainActivity extends FragmentActivity implements OnMapReadyCa
 
     private void resizeFragment() {
         FrameLayout.LayoutParams layout = new FrameLayout.LayoutParams(
-                (int)(HongController.getInstance().getWidth()*0.92),(int)(HongController.getInstance().getHeight()*0.77));
+                (int)(HongController.getInstance().getWidth()*0.92),(int)(HongController.getInstance().getHeight()*LetterConstants.LETTER_FRAGMENT_HEIGHT_LATIO));
         layout.gravity = Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL;
         fragment.setLayoutParams(layout);
 
@@ -249,18 +250,6 @@ public class LetterMainActivity extends FragmentActivity implements OnMapReadyCa
         }
     }
 
-    void sendMyLetter(GoogleMap mMap) {
-        Location myLocation  = mMap.getMyLocation();
-        if(myW3W!=null)
-        {
-            movePageToLetterWrite(myW3W);
-        }
-        else
-        {
-            Toast.makeText(this, "Unable to fetch the current location", Toast.LENGTH_SHORT).show();
-        }
-
-    }
 
 
     public void transaction(String position, final int SendOrNot) {
@@ -319,12 +308,11 @@ public class LetterMainActivity extends FragmentActivity implements OnMapReadyCa
                 viewSubButtons(v);
                 break;
             case R.id.main_save_letter_btn:
-                viewSaveLetterFragmment();
+                viewSealLetterFragmment();
                 translateW3Wbar(1);
-//                sendMyLetter(myMap);
                 break;
             case R.id.main_find_letter_btn :
-                startActivity(new Intent(LetterMainActivity.this,FindLetterActivity.class));
+                viewSeekLetterFragment();
                     break;
             case R.id.info_question_btn:
                 if(!infoViewState) changeInfomationView(600);
@@ -424,8 +412,19 @@ public class LetterMainActivity extends FragmentActivity implements OnMapReadyCa
         return processedW3W;
     }
 
-    private void viewSaveLetterFragmment(){
-        Log.d(TAG, "viewSaveLetterFragmment ");
+    private void viewSeekLetterFragment() {
+        Log.d(TAG, "viewSealLetterFragmment ");
+        android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        transaction.setCustomAnimations(R.anim.open_letter_seek_anim,R.anim.open_letter_seek_anim2);
+        Fragment frag = new LetterSeekFragment();
+        transaction.replace(R.id.changeFragment, frag);
+        transaction.commit();
+    }
+
+
+    private void viewSealLetterFragmment(){
+        Log.d(TAG, "viewSealLetterFragmment ");
         android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
         HongController.getInstance().setMy_w3w(myW3W);
@@ -436,7 +435,7 @@ public class LetterMainActivity extends FragmentActivity implements OnMapReadyCa
         위에 번들로 넘길필요 없음
          */
         transaction.setCustomAnimations(R.anim.open_letter_write_anim,R.anim.open_letter_write_anim2);
-        Fragment frag = new LetterWriteFragment();
+        Fragment frag = new LetterSealFragment();
         transaction.replace(R.id.changeFragment, frag);
         transaction.commit();
 
@@ -453,4 +452,6 @@ public class LetterMainActivity extends FragmentActivity implements OnMapReadyCa
 
 
     }
+
+
 }

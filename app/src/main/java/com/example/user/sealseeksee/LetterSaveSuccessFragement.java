@@ -27,7 +27,7 @@ public class LetterSaveSuccessFragement extends Fragment implements View.OnClick
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.d("HONG", "frag onCreateView: ");
-        View view = inflater.inflate(R.layout.save_letter_success_fragment,null);
+        View view = inflater.inflate(R.layout.seal_letter_success_fragment,null);
 
         btn_sms_send = (Button)view.findViewById(R.id.btn_success_sms);
         btn_sms_cancel = (Button)view.findViewById(R.id.btn_success_cancel);

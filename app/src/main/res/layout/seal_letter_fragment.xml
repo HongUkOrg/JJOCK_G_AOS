@@ -39,75 +39,91 @@
                     android:layout_marginLeft="20dp"
                     android:gravity="center"
                     android:text="받는이"
-                    android:textColor="#fff" />
+                    android:textColor="@color/semi_black" />
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_weight="1"
-                    android:layout_marginRight="15dp"
+                    android:layout_marginRight="5dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:layout_marginLeft="5dp"
                     android:background="@drawable/btn_round_white"
                     android:orientation="horizontal"
+                    android:weightSum="3"
                     >
 
                     <EditText
                         android:id="@+id/phone1"
-
+                        android:layout_marginLeft="10dp"
                         android:layout_width="0dp"
-                        android:layout_weight="3"
+                        android:layout_weight="0.8"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="010"
+                        android:inputType="number"
                         android:textSize="15sp"
                         android:textColor="#777" />
 
                     <TextView
 
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text=" - "
+                        android:text=" "
                         android:textColor="#777" />
 
                     <EditText
                         android:id="@+id/phone2"
 
                         android:layout_width="0dp"
-                        android:layout_weight="4"
+                        android:layout_weight="1.1"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:hint="0000"
                         android:textSize="15sp"
                         android:textColor="#777"
+                        android:inputType="number"
                         android:textColorHint="#ddd" />
 
                     <TextView
 
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text=" - "
+                        android:text=" "
                         android:textColor="#777" />
 
                     <EditText
                         android:id="@+id/phone3"
 
                         android:layout_width="0dp"
-                        android:layout_weight="4"
+                        android:layout_weight="1.1"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:hint="0000"
                         android:textSize="15sp"
                         android:textColor="#777"
-                        android:textColorHint="#ddd" />
+                        android:textColorHint="#ddd"
+                        android:inputType="number"
+                        android:layout_marginRight="10dp"/>
+
+
 
                 </LinearLayout>
-
+                <LinearLayout
+                    android:layout_marginTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="5dp"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/success_phone"/>
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -171,7 +187,7 @@
                     android:src="@android:color/darker_gray"
                     app:allow_random_color="false"
                     app:btn_color="@android:color/darker_gray"
-                    app:btn_fill_color="#f26d7d"
+                    app:btn_fill_color="@color/semi_black"
                     app:siShape="@drawable/ic_lock" />
 
             </LinearLayout>

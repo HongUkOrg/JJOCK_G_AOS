@@ -8,6 +8,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.telephony.TelephonyManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -30,7 +32,7 @@ import org.json.JSONObject;
 import java.util.Calendar;
 import java.util.Date;
 
-public class LetterWriteFragment extends Fragment implements View.OnClickListener{
+public class LetterSealFragment extends Fragment implements View.OnClickListener{
     public static final String TAG = "HONG";
     private static boolean timeLockBool = false;
 
@@ -44,6 +46,110 @@ public class LetterWriteFragment extends Fragment implements View.OnClickListene
     private Context mContext;
 
     private String receiver_phone_number, get_title, get_content;
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        Log.d("HONG", "frag onCreate: ");
+        super.onCreate(savedInstanceState);
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.d("HONG", "frag onCreateView: ");
+        View view = inflater.inflate(R.layout.seal_letter_fragment,null);
+
+        mContext = getActivity();
+
+        txt_TimeLock = (TextView) view.findViewById(R.id.txt_timeLock);
+        timeLockTime = (TextView) view.findViewById(R.id.timeLock_time);
+        content = (LinedEditText) view.findViewById(R.id.content);
+        phone1 = (EditText) view.findViewById(R.id.phone1);
+        phone2 = (EditText) view.findViewById(R.id.phone2);
+        phone3 = (EditText) view.findViewById(R.id.phone3);
+        ButtonOK = (Button) view.findViewById(R.id.ButtonOK);
+        CancelButton = (Button) view.findViewById(R.id.ButtonCancel);
+        timeLockButton = (ShineButton) view.findViewById(R.id.po_image2);
+
+
+        HongController.writingNow = true;
+
+        my_W3W = HongController.getInstance().getMy_w3w();
+        my_lati = HongController.getInstance().getMy_lati();
+        my_long = HongController.getInstance().getMy_long();
+        Log.d(TAG, "my_W3W Test : " + my_W3W);
+
+        ButtonOK.setOnClickListener(this);
+        CancelButton.setOnClickListener(this);
+        timeLockTime.setOnClickListener(this);
+        timeLockButton.init(getActivity());
+        timeLockButton.setOnCheckStateChangeListener(new ShineButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(View view, boolean checked) {
+                Log.d(TAG, "onClick: po_image2");
+                if (checked) {
+                    txt_TimeLock.setText("LOCK");
+                    timeLockBool = true;
+                    timeLockButton.setShapeResource(R.drawable.ic_lock);
+                    timeLockTime.setVisibility(View.VISIBLE);
+                } else {
+                    txt_TimeLock.setText("UNLOCK");
+                    timeLockButton.setShapeResource(R.drawable.ic_unlock);
+                    timeLockBool = false;
+                    timeLockTime.setVisibility(View.INVISIBLE);
+
+                }
+
+            }
+        });
+
+        phone1.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(phone1.getText().toString().length()==3)     //size as per your requirement
+                {
+                    phone2.requestFocus();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        phone2.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(phone2.getText().toString().length()==4)     //size as per your requirement
+                {
+                    phone3.requestFocus();
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams((int)(HongController.getInstance().getWidth()*0.92),
+                (int)(HongController.getInstance().getHeight()*LetterConstants.LETTER_FRAGMENT_HEIGHT_LATIO));
+        view.setLayoutParams(params);
+
+        return view;
+    }
 
     SublimePickerFragment.Callback mFragmentCallback = new SublimePickerFragment.Callback() {
         @Override
@@ -70,69 +176,6 @@ public class LetterWriteFragment extends Fragment implements View.OnClickListene
         timeLockTime.setText(myCalender.get(Calendar.YEAR) + "/" + myCalender.get(Calendar.MONTH) + 1 + "/" + myCalender.get(Calendar.DAY_OF_MONTH) + "\n"
                 + myCalender.get(Calendar.HOUR_OF_DAY) + "시" + myCalender.get(Calendar.MINUTE) + "분");
         Log.d(TAG, "setTimeLockTime: " + myTime.toString());
-    }
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        Log.d("HONG", "frag onCreate: ");
-        super.onCreate(savedInstanceState);
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.d("HONG", "frag onCreateView: ");
-        View view = inflater.inflate(R.layout.save_letter_fragment,null);
-
-        mContext = getActivity();
-
-//        letterWrite_w3w = (TextView) view.findViewById(R.id.letterWrite_w3w);
-        txt_TimeLock = (TextView) view.findViewById(R.id.txt_timeLock);
-        timeLockTime = (TextView) view.findViewById(R.id.timeLock_time);
-//        title = (EditText) view.findViewById(R.id.dialog_title);
-        content = (LinedEditText) view.findViewById(R.id.content);
-        phone1 = (EditText) view.findViewById(R.id.phone1);
-        phone2 = (EditText) view.findViewById(R.id.phone2);
-        phone3 = (EditText) view.findViewById(R.id.phone3);
-        ButtonOK = (Button) view.findViewById(R.id.ButtonOK);
-        CancelButton = (Button) view.findViewById(R.id.ButtonCancel);
-        timeLockButton = (ShineButton) view.findViewById(R.id.po_image2);
-
-
-        HongController.writingNow = true;
-
-        my_W3W = HongController.getInstance().getMy_w3w();
-        my_lati = HongController.getInstance().getMy_lati();
-        my_long = HongController.getInstance().getMy_long();
-        Log.d(TAG, "my_W3W Test : " + my_W3W);
-
-//        if (my_W3W != null) letterWrite_w3w.setText("현재 위치의 W3W : " + my_W3W);
-        ButtonOK.setOnClickListener(this);
-        CancelButton.setOnClickListener(this);
-        timeLockTime.setOnClickListener(this);
-        timeLockButton.init(getActivity());
-        timeLockButton.setOnCheckStateChangeListener(new ShineButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(View view, boolean checked) {
-                Log.d(TAG, "onClick: po_image2");
-                if (checked) {
-                    txt_TimeLock.setText("LOCK");
-                    timeLockBool = true;
-                    timeLockButton.setShapeResource(R.drawable.ic_lock);
-                    timeLockTime.setVisibility(View.VISIBLE);
-                } else {
-                    txt_TimeLock.setText("UNLOCK");
-                    timeLockButton.setShapeResource(R.drawable.ic_unlock);
-                    timeLockBool = false;
-                    timeLockTime.setVisibility(View.INVISIBLE);
-
-                }
-
-            }
-        });
-
-
-
-        return view;
     }
 
 
@@ -281,6 +324,7 @@ public class LetterWriteFragment extends Fragment implements View.OnClickListene
         }
 
     }
+
 
 
 }

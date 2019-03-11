@@ -58,6 +58,7 @@ public class FindLetterActivity extends AppCompatActivity implements HongControl
 
     private HttpURLConnection http;
     private EditText phone1,phone2,phone3,word1,word2,word3;
+    private EditText fullPhoneNumber;
     private Button find_btn,sms_find_btn;
     private int letterNumber;
     private static Context mContext;
@@ -86,6 +87,7 @@ public class FindLetterActivity extends AppCompatActivity implements HongControl
         word1 = (EditText)findViewById(R.id.first_word);
         word2 = (EditText)findViewById(R.id.second_word);
         word3 = (EditText)findViewById(R.id.third_word);
+
 
         find_btn.setOnClickListener(this);
         sms_find_btn.setOnClickListener(this);

@@ -5,7 +5,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/rosequartz</item>
         <item name="colorPrimaryDark">@color/ganari</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/semi_black</item>
         <item name="android:datePickerDialogTheme">@style/MyDatePickerStyle</item>
     </style>
     <style name="TintTheme" parent="Theme.AppCompat.Light.Dialog.Alert">

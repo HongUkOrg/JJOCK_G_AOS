@@ -224,7 +224,7 @@
         android:background="#eee" />
 
     <Button
-        android:id="@+id/find_Letter_search_btn"
+        android:id="@+id/find_Letter_search_btn2"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginLeft="10dp"
@@ -235,7 +235,7 @@
         />
 
     <Button
-        android:id="@+id/find_by_sms"
+        android:id="@+id/find_by_sms2"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginLeft="10dp"
