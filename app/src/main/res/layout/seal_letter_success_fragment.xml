@@ -6,6 +6,7 @@
     android:background="@drawable/letter_top_round"
     android:orientation="vertical"
     android:gravity="bottom"
+    android:clickable="true"
     android:weightSum="1">
 
     <LinearLayout

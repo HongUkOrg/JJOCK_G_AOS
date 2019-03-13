@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/sms_find_fragment"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_gravity="bottom"
+    android:clickable="true"
+    android:layout_height="380dp">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/sms_linear_layout"
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:gravity="bottom"
+        android:background="@drawable/letter_top_round"
+        android:orientation="vertical">
+
+
+            <Button
+                android:id="@+id/find_by_sms"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textColor="@color/white"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/btn_round_ganari"
+                android:text="SMS로 찾기" />
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:background="@drawable/layout_ganari"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="65dp"
+        android:orientation="vertical"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:textSize="13sp"
+            android:text="SMS로 찾기"
+            android:textColor="@color/semi_black"
+            android:gravity="center"/>
+        <TextView
+            android:layout_weight="1.5"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:textSize="13sp"
+            android:text="받으신 SMS를 복사하고 붙여넣어주세요"
+            android:textColor="#999"
+            android:gravity="center"/>
+        <TextView
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_weight="1.5"
+            android:textColor="#999"
+            android:text="SMS에는 세단어 주소와\n받는이의 번호가 포함되어 있습니다"
+            android:layout_height="0dp" />
+        <LinearLayout
+
+            android:gravity="center_horizontal|bottom"
+            android:paddingBottom="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:id="@+id/btn_OK_sms"
+            android:gravity="center"
+            android:text="확인"
+            android:background="@color/ganari"
+            android:textColor="@color/semi_black"/>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/sms_edit_text"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:paddingLeft="10dp"
+        android:gravity="center"
+        android:textColor="@color/semi_black"
+        android:paddingRight="10dp"
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="130dp"
+        android:textSize="12sp"
+        android:background="@drawable/btn_round_white"
+        android:layout_height="35dp" />
+
+</FrameLayout>

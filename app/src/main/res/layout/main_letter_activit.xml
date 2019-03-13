@@ -25,11 +25,10 @@
         android:layout_gravity="top|center_horizontal"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="@drawable/btn_bottom_round_gray"
+        android:background="@drawable/botton_round_grary"
         android:orientation="horizontal"
-        android:padding="1dp"
+        android:padding="1dp">
 
-        >
 
 
         <Button
@@ -40,6 +39,17 @@
             android:layout_marginRight="5dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/question" />
+
+        <TextView
+            android:id="@+id/info_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:text="Seal Seek See, What 3 Words란..."
+            android:textColor="@color/semi_black"
+            android:visibility="gone" />
 
     </RelativeLayout>
 
@@ -57,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="ProCessing..."
+            android:text="나의 현재 주소"
             android:textColor="@color/semi_black"
             android:textSize="15sp" />
 
@@ -73,21 +83,11 @@
         android:layout_marginTop="50dp"
         android:background="@drawable/btn_round_ganari"
         android:gravity="center"
-        android:text="processing.."
+        android:text="위치 탐색 중.."
         android:textColor="#754F44"
         android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/info_text"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="35dp"
-        android:layout_marginTop="110dp"
-        android:gravity="center_horizontal"
-        android:text="Seal Seek Seed, What 3 Words란..."
-        android:textColor="@color/semi_black"
-        android:visibility="gone" />
+
 
 
     <Button
@@ -114,13 +114,13 @@
 
     <Button
         android:id="@+id/main_btn"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="70dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:background="@drawable/main_btn"
+        android:background="@drawable/icon_acorn"
         android:stateListAnimator="@null"
         android:textColor="@color/ganari"
 

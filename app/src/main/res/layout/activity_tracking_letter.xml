@@ -1,98 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.ContentFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fee"
+    android:background="@color/ganari"
     android:orientation="vertical"
-    android:weightSum="5.5"
-    tools:context=".TrackingLetter">
+    android:weightSum="4"
+    tools:context=".LetterMainActivity">
+
+    <fragment
+        android:id="@+id/map2"
+        class="com.google.android.gms.maps.MapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
+    </fragment>
+
+
+    <com.david.user.sealseeksee.LinedTextView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+
+        android:id="@+id/letter_content"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_height="200dp"
+        android:layout_marginBottom="140dp"
+        android:gravity="top"
+        android:textSize="18sp"
+        android:lineSpacingMultiplier="1.2"
+        android:textColor="@color/semi_black"
+        android:background="@drawable/top_round_ganari"
+        android:layout_gravity="bottom|center_horizontal">
+    </com.david.user.sealseeksee.LinedTextView>
+
+
+
+    <LinearLayout
+        android:id="@+id/tracking_info"
+        android:layout_width="fill_parent"
+        android:layout_height="150dp"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/btn_round_gray"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal|bottom"
+        android:padding="1dp" >
+        <TextView
+            android:id="@+id/distance"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:text="거리 계산중..."
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/semi_black"
+            android:layout_marginBottom="10dp"/>
+    </LinearLayout>
+
+
 
     <RelativeLayout
-        android:layout_weight="0.5"
         android:id="@+id/Top"
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:padding="1dp"
-        android:layout_marginTop="5dp"
-        android:background="#ffdee9"
+        android:layout_height="65dp"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/botton_round_ganari"
         android:orientation="horizontal"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="Seal Seek See"
-            android:textSize="20sp"
-            android:layout_alignParentRight="true"/>
-
+        android:padding="1dp">
+        <Button
+            android:id="@+id/info_question_btn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/question" />
     </RelativeLayout>
 
     <LinearLayout
-        android:layout_weight="0.6"
+        android:id="@+id/topTitleMyCurrentLocation"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="40dp"
+        android:layout_gravity="top|center_horizontal"
         android:layout_marginTop="10dp"
-        android:weightSum="2"
-        android:gravity="center"
-        >
-    <TextView
-        android:layout_weight="0.7"
-        android:id="@+id/distance"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Distacne Processing..."
-        android:textSize="20sp"
-        android:textColor="#666"
-        />
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="쪽지찾기"
+            android:textColor="@color/semi_black"
+            android:textSize="15sp" />
 
     </LinearLayout>
 
-    <fragment
-        android:layout_weight="3.3"
-        android:layout_marginTop="10dp"
-        android:id="@+id/map2"
-        android:layout_width="match_parent"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_height="0dp"
-        android:layout_alignParentBottom="true"
-
-        android:layout_centerHorizontal="true"
-        class="com.google.android.gms.maps.MapFragment"
-
-
-        />
 
     <TextView
-        android:layout_weight="0.5"
-        android:id="@+id/txt_timeLock_TrackingLetter"
+        android:id="@+id/info_text"
         android:layout_width="match_parent"
-        android:layout_marginTop="20dp"
-        android:text=""
-        android:gravity="center"
-        android:visibility="gone"
-        android:textColor="#000"
-        android:layout_height="50dp" />
+        android:layout_height="30dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:layout_marginTop="110dp"
+        android:gravity="center_horizontal"
+        android:text="Seal Seek Seed, What 3 Words란..."
+        android:textColor="@color/semi_black"
+        android:visibility="gone" />
 
-    <Button
 
-
-        android:layout_weight="0.5"
-        android:id="@+id/letter_read_btn"
+    <LinearLayout
+        android:id="@+id/bottomButtons"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:text = "편지 읽기"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:background="#eee"
-        android:layout_marginTop="15dp"
-        android:clickable="false"
+        android:layout_height="140dp"
+        android:orientation="vertical"
+        android:background="@drawable/tracking_letter_top_round">
+        <TextView
+            android:id="@+id/letter_read_btn"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="쪽지 열어보기"
+            android:textColor="@color/semi_black"
+            android:gravity="center"
+            android:background="@drawable/tracking_letter_read_btn_gray"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/semi_black"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+            <ImageView
+                android:id="@+id/btn_tracking_cancel"
+                android:src="@drawable/button_cancle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 
 
-        />
 
-</LinearLayout>
+
+
+</android.support.v7.widget.ContentFrameLayout>
