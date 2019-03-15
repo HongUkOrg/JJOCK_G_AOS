@@ -34,18 +34,11 @@ public class LoginActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         mContext = this;
-        ImageView main_image = (ImageView)findViewById(R.id.letter_image);
+//        ImageView main_image = (ImageView)findViewById(R.id.letter_image);
         HongController.getInstance().setMyContext(getApplicationContext());
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) checkAndRequestPermissions();
 
-        Handler handler = new Handler();
-        Runnable r = new Runnable() {
-            @Override
-            public void run() {
-                startActivity(new Intent(LoginActivity.this,MainActivity.class));
-            }
-        };
-        handler.postDelayed(r,2000);
+
 
 
 
@@ -78,7 +71,16 @@ public class LoginActivity extends AppCompatActivity
             case REQUEST_ID_MULTIPLE_PERMISSIONS: {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0) {
-                } else {
+                    Handler handler = new Handler();
+                    Runnable r = new Runnable() {
+                        @Override
+                        public void run() {
+                            startActivity(new Intent(LoginActivity.this,MainViewActivity.class));
+                        }
+                    };
+                    handler.postDelayed(r,1000);
+                }
+                else {
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
                     Toast.makeText(this, "Please Allow All Permission To Continue..", Toast.LENGTH_SHORT).show();

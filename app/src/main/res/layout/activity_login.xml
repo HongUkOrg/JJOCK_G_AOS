@@ -5,42 +5,69 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffcd4d"
-    tools:context=".LoginActivity">
+    tools:context=".LoginActivity"
+    >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="40dp"
-        android:layout_marginTop="40dp"
-        android:textColor="#fff"
-
-        android:text="Seal Seek See"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:gravity="center"
         android:layout_centerHorizontal="true"
+        android:layout_alignBottom="@+id/app_name"
+        android:layout_marginBottom="120dp">
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="bottom"
+            android:src="@drawable/do1"/>
+        <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_gravity="bottom"
 
-        />
+            android:layout_marginLeft="10dp"
+        android:src="@drawable/do2"/>
+        <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_gravity="bottom"
+
+            android:layout_marginLeft="10dp"
+        android:src="@drawable/do3"/>
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="bottom"
+
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/do1"/>
+        <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_gravity="bottom"
+
+            android:layout_marginLeft="10dp"
+        android:src="@drawable/do2"/>
+        <ImageView
+            android:layout_gravity="bottom"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginRight="40dp"
+            android:src="@drawable/main_character"/>
+        
+    </LinearLayout>
 
     <ImageView
-        android:id="@+id/letter_image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:text="Button"
-        android:src="@drawable/letterbox"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-
-
-        />
-
-    <TextView
+        android:id="@+id/app_name"
+        android:layout_marginTop="70dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="80dp"
-        android:textColor="#fff"
-
-        android:text="Seal your Letter, Send your Letter"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="60dp"
+        android:src="@drawable/app_name"/>
 
-        />
+
+
 </RelativeLayout>

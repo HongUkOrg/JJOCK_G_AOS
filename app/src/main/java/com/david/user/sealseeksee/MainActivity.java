@@ -3,12 +3,17 @@ package com.david.user.sealseeksee;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.david.user.sealseeksee.TabLayoutFragment.Fragment1;
+import com.david.user.sealseeksee.TabLayoutFragment.Fragment2;
+import com.david.user.sealseeksee.TabLayoutFragment.Fragment3;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestHandle;
@@ -20,7 +25,7 @@ import io.nlopez.smartlocation.OnLocationUpdatedListener;
 import io.nlopez.smartlocation.SmartLocation;
 
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends FragmentActivity implements View.OnClickListener {
 
 
     public static final String TAG ="HONG";
@@ -31,15 +36,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button letter_find_btn = (Button) findViewById(R.id.letter_find_btn);
-        Button letter_send_btn = (Button) findViewById(R.id.letter_send_btn);
-        Button serviceIntroduce_btn = (Button) findViewById(R.id.service_introduce);
-
-        letter_find_btn.setOnClickListener(this);
-        letter_send_btn.setOnClickListener(this);
-        serviceIntroduce_btn.setOnClickListener(this);
-
         mContext = this;
+
 
         locationListener = new OnLocationUpdatedListener() {
             @Override
@@ -92,27 +90,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //info dialog does not support veiw.onClickListener ....
     }
-
+//    public void onPageSelected(int position) {
+//
+//        //.instantiateItem() from until .destroyItem() is called it will be able to get the View of page.
+//        View page = adapter.getPage(position);
+//
+//    }
 
 
     @Override
     public void onClick(View v)
     {
-        switch(v.getId())
-        {
-            case R.id.letter_find_btn :
-//                startActivity(new Intent(MainActivity.this,FindLetterActivity.class));
-                break;
-            case R.id.letter_send_btn :
-                Log.d(TAG, "??? ");
-                startActivity(new Intent(MainActivity.this,LetterMainActivity.class));
-                break;
-            case R.id.service_introduce :
-                break;
-            default :
-                break;
-
-        }
 
     }
 

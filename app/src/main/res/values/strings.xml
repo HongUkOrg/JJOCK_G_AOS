@@ -28,4 +28,7 @@
     <string name="later">Later</string>
     <string name="repo_waiting">GitHub repo is waiting for your star!</string>
     <string name="you_donated">"You donated: %s!"</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

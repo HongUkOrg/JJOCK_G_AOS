@@ -359,7 +359,7 @@ public class LetterMainActivity extends FragmentActivity implements OnMapReadyCa
     @Override
     public void onBackPressed() {
         Log.d(TAG, "onBackPressed Called");
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, MainViewActivity.class));
     }
 
     private void translateSubMenu(View v, int alpha) {
@@ -576,6 +576,8 @@ public class LetterMainActivity extends FragmentActivity implements OnMapReadyCa
         }
         return result;
     }
+
+
 
 
 }

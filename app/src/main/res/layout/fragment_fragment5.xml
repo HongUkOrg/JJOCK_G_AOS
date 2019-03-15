@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TabLayoutFragment.Fragment5"
+    android:background="@color/ganari">
+
+    <ImageView
+        android:id="@+id/startImage"
+        android:layout_width="260dp"
+        android:layout_height="400dp"
+        android:layout_gravity="center"
+        android:src="@drawable/frag5"/>
+
+    <TextView
+        android:id="@+id/btn_main_start"
+        android:layout_width="60dp"
+        android:layout_height="36dp"
+        android:background="@color/ganari"
+        android:textColor="@color/semi_black"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:text="시작"
+        android:layout_gravity="right|bottom"
+        android:layout_marginBottom="30dp"
+        android:layout_marginRight="30dp"/>
+</FrameLayout>
