@@ -36,7 +36,17 @@ public class LoginActivity extends AppCompatActivity
         mContext = this;
 //        ImageView main_image = (ImageView)findViewById(R.id.letter_image);
         HongController.getInstance().setMyContext(getApplicationContext());
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) checkAndRequestPermissions();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+            if(checkAndRequestPermissions()){
+                Handler handler = new Handler();
+                Runnable r = new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(new Intent(LoginActivity.this,MainViewActivity.class));
+                    }
+                };
+                handler.postDelayed(r,1000);
+            }
 
 
 
