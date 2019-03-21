@@ -18,6 +18,10 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBKgm5ZnJWd-M0DTSMHBZk7JNrM3qXBZIs" />
 
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="fbf43d96d651c17db0a80e2eec63e050" />
+
         <activity android:name=".MainActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>

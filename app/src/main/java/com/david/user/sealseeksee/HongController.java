@@ -1,6 +1,12 @@
 package com.david.user.sealseeksee;
 
 import android.content.Context;
+import android.util.Log;
+
+import com.kakao.kakaotalk.callback.TalkResponseCallback;
+import com.kakao.kakaotalk.response.KakaoTalkProfile;
+import com.kakao.kakaotalk.v2.KakaoTalkService;
+import com.kakao.network.ErrorResult;
 
 public class HongController
 {
@@ -9,13 +15,13 @@ public class HongController
 
 
 
-
-
     public int width, height;
     public static String resultFromFindLetterServer;
     public static Context myContext;
     public static String savedPhoneNumber;
     public static boolean writingNow = false;
+    public
+    WorkerThread workerThread = new WorkerThread("seal_letter");
 
     public int getWidth() {
         return width;
@@ -74,7 +80,10 @@ public class HongController
     }
     public static String my_w3w;
 
-
+    interface LetterListener
+    {
+        void onReceiveLetter(String resultJson);
+    }
 
 
     public static LetterListener myLetterListener;
@@ -89,11 +98,41 @@ public class HongController
     {
         myLetterListener =  letterListener;
     }
-
-
-    interface LetterListener
-    {
-        void onReceiveLetter(String resultJson);
+    public void requestKakatoTalkProfile(){
+        requestProfile();
     }
+    private abstract class KakaoTalkResponseCallback<T> extends TalkResponseCallback<T> {
+        @Override
+        public void onNotKakaoTalkUser() {
+            Log.d("HONG", "not a KakaoTalk user");
+        }
+
+        @Override
+        public void onFailure(ErrorResult errorResult) {
+            Log.d("HONG", "onFailure: "+errorResult.toString());
+        }
+
+        @Override
+        public void onSessionClosed(ErrorResult errorResult) {
+//            redirectLoginActivity();
+        }
+
+        @Override
+        public void onNotSignedUp() {
+//            redirectSignupActivity();
+        }
+    }
+    private void requestProfile(){
+        KakaoTalkService.getInstance().requestProfile(new KakaoTalkResponseCallback<KakaoTalkProfile>() {
+            @Override
+            public void onSuccess(KakaoTalkProfile talkProfile) {
+                final String nickName = talkProfile.getNickName();
+                final String profileImageURL = talkProfile.getProfileImageUrl();
+                final String thumbnailURL = talkProfile.getThumbnailUrl();
+                final String countryISO = talkProfile.getCountryISO();
+            }
+        });
+    }
+
 
 }

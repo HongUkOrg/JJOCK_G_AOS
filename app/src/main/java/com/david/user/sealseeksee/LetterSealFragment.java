@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,10 @@ import com.appeaser.sublimepickerlibrary.datepicker.SelectedDate;
 import com.appeaser.sublimepickerlibrary.helpers.SublimeOptions;
 import com.appeaser.sublimepickerlibrary.recurrencepicker.SublimeRecurrencePicker;
 import com.david.user.sealseeksee.DateHelper.SublimePickerFragment;
+import com.kakao.kakaotalk.callback.TalkResponseCallback;
+import com.kakao.kakaotalk.response.KakaoTalkProfile;
+import com.kakao.kakaotalk.v2.KakaoTalkService;
+import com.kakao.network.ErrorResult;
 import com.sackcentury.shinebuttonlib.ShineButton;
 
 import org.json.JSONException;
@@ -44,8 +49,10 @@ public class LetterSealFragment extends Fragment implements View.OnClickListener
     private double my_lati, my_long;
     private long myTimeLockTime = -1;
     private Context mContext;
+    private ImageView phonebook;
 
     private String receiver_phone_number, get_title, get_content;
+
 
 
     @Override
@@ -71,7 +78,7 @@ public class LetterSealFragment extends Fragment implements View.OnClickListener
         ButtonOK = (Button) view.findViewById(R.id.ButtonOK);
         CancelButton = (Button) view.findViewById(R.id.ButtonCancel);
         timeLockButton = (ShineButton) view.findViewById(R.id.po_image2);
-
+        phonebook = (ImageView) view.findViewById(R.id.phone_book);
 
         HongController.writingNow = true;
 
@@ -83,6 +90,7 @@ public class LetterSealFragment extends Fragment implements View.OnClickListener
         ButtonOK.setOnClickListener(this);
         CancelButton.setOnClickListener(this);
         timeLockTime.setOnClickListener(this);
+        phonebook.setOnClickListener(this);
         timeLockButton.init(getActivity());
         timeLockButton.setOnCheckStateChangeListener(new ShineButton.OnCheckedChangeListener() {
             @Override
@@ -347,12 +355,17 @@ public class LetterSealFragment extends Fragment implements View.OnClickListener
                 break;
             case R.id.timeLock_time:
                 datePicker();
+            case R.id.phone_book :
+                HongController.getInstance().requestKakatoTalkProfile();
+                break;
             default:
                 break;
 
         }
 
     }
+
+
 
 
 
