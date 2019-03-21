@@ -16,7 +16,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-<<<<<<< HEAD
     compileOptions {
         sourceCompatibility = '1.8'
         targetCompatibility = '1.8'
@@ -51,7 +50,6 @@ dependencies {
     implementation group: 'com.kakao.sdk', name: 'kakaotalk', version: '1.16.0'
     implementation 'com.kakao.sdk:friends:1.16.0'
 
-=======
 }
 
 dependencies {
@@ -72,5 +70,14 @@ dependencies {
     implementation 'com.sackcentury:shinebutton:0.2.0'
     implementation 'com.appeaser.sublimepickerlibrary:sublimepickerlibrary:2.1.2'
     implementation 'com.igaworks.adbrix:abx-common-rm:+'
->>>>>>> parent of 7abbf91... add kakaotalk sdk
+    // 카카오 로그인 sdk를 사용하기 위해 필요.
+    implementation group: 'com.kakao.sdk', name: 'usermgmt', version: '1.16.0'
+
+    // 카카오링크 sdk를 사용하기 위해 필요.
+    implementation group: 'com.kakao.sdk', name: 'kakaolink', version: '1.16.0'
+
+    // 카카오톡 sdk를 사용하기 위해 필요.
+    implementation group: 'com.kakao.sdk', name: 'kakaotalk', version: '1.16.0'
+    implementation 'com.kakao.sdk:friends:1.16.0'
+
 }

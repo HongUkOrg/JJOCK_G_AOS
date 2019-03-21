@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,7 +25,6 @@ import com.appeaser.sublimepickerlibrary.datepicker.SelectedDate;
 import com.appeaser.sublimepickerlibrary.helpers.SublimeOptions;
 import com.appeaser.sublimepickerlibrary.recurrencepicker.SublimeRecurrencePicker;
 import com.david.user.sealseeksee.DateHelper.SublimePickerFragment;
-<<<<<<< HEAD
 import com.kakao.auth.ApiResponseCallback;
 import com.kakao.auth.AuthService;
 import com.kakao.auth.network.response.AccessTokenInfoResponse;
@@ -35,8 +35,6 @@ import com.kakao.kakaotalk.response.KakaoTalkProfile;
 import com.kakao.kakaotalk.v2.KakaoTalkService;
 import com.kakao.network.ErrorResult;
 import com.kakao.util.helper.log.Logger;
-=======
->>>>>>> parent of 7abbf91... add kakaotalk sdk
 import com.sackcentury.shinebuttonlib.ShineButton;
 
 import org.json.JSONException;
@@ -57,10 +55,8 @@ public class LetterSealFragment extends Fragment implements View.OnClickListener
     private double my_lati, my_long;
     private long myTimeLockTime = -1;
     private Context mContext;
-<<<<<<< HEAD
     private ImageView phoneBook;
-=======
->>>>>>> parent of 7abbf91... add kakaotalk sdk
+
 
     private String receiver_phone_number, get_title, get_content;
 
@@ -88,11 +84,7 @@ public class LetterSealFragment extends Fragment implements View.OnClickListener
         ButtonOK = (Button) view.findViewById(R.id.ButtonOK);
         CancelButton = (Button) view.findViewById(R.id.ButtonCancel);
         timeLockButton = (ShineButton) view.findViewById(R.id.po_image2);
-<<<<<<< HEAD
         phoneBook = (ImageView) view.findViewById(R.id.phone_book);
-=======
->>>>>>> parent of 7abbf91... add kakaotalk sdk
-
 
         HongController.writingNow = true;
 
@@ -104,10 +96,7 @@ public class LetterSealFragment extends Fragment implements View.OnClickListener
         ButtonOK.setOnClickListener(this);
         CancelButton.setOnClickListener(this);
         timeLockTime.setOnClickListener(this);
-<<<<<<< HEAD
         phoneBook.setOnClickListener(this);
-=======
->>>>>>> parent of 7abbf91... add kakaotalk sdk
         timeLockButton.init(getActivity());
         timeLockButton.setOnCheckStateChangeListener(new ShineButton.OnCheckedChangeListener() {
             @Override
@@ -372,16 +361,12 @@ public class LetterSealFragment extends Fragment implements View.OnClickListener
                 break;
             case R.id.timeLock_time:
                 datePicker();
-<<<<<<< HEAD
             case R.id.phone_book:
                 Log.d(TAG, "onClick: phoneBook");
                 requestAccessTokenInfo();
                 requestProfile();
                 requestFriends();
                 break;
-
-=======
->>>>>>> parent of 7abbf91... add kakaotalk sdk
             default:
                 break;
 

@@ -17,6 +17,9 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.kakao.auth.ISessionCallback;
+import com.kakao.auth.Session;
+import com.kakao.util.exception.KakaoException;
 import com.yarolegovich.lovelydialog.LovelyInfoDialog;
 
 import java.util.ArrayList;
@@ -27,43 +30,64 @@ public class LoginActivity extends AppCompatActivity
 
     private static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 2001;
     private Context mContext;
+    private SessionCallback callback;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         mContext = this;
 //        ImageView main_image = (ImageView)findViewById(R.id.letter_image);
         HongController.getInstance().setMyContext(getApplicationContext());
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-            if(checkAndRequestPermissions()){
-                Handler handler = new Handler();
-                Runnable r = new Runnable() {
-                    @Override
-                    public void run() {
-                        startActivity(new Intent(LoginActivity.this,MainViewActivity.class));
-                    }
-                };
-                handler.postDelayed(r,1000);
+            if (checkAndRequestPermissions()) {
+//                Handler handler = new Handler();
+//                Runnable r = new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        startActivity(new Intent(LoginActivity.this,MainViewActivity.class));
+//                    }
+//                };
+//                handler.postDelayed(r,1000);
             }
-
-<<<<<<< HEAD
-
+        callback = new SessionCallback();
+        Session.getCurrentSession().addCallback(callback);
+        Session.getCurrentSession().checkAndImplicitOpen();
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
             return;
         }
-=======
->>>>>>> parent of 7abbf91... add kakaotalk sdk
 
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Session.getCurrentSession().removeCallback(callback);
+    }
 
+    private class SessionCallback implements ISessionCallback {
 
+        @Override
+        public void onSessionOpened() {
+            redirectSignupActivity();
+        }
 
+        @Override
+        public void onSessionOpenFailed(KakaoException exception) {
+            if(exception != null) {
+                Log.d("HONG", "onSessionOpenFailed: "+exception.toString());
+            }
+        }
+    }
 
+    protected void redirectSignupActivity() {
+        final Intent intent = new Intent(this, MainViewActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     private boolean checkAndRequestPermissions() {
@@ -95,11 +119,7 @@ public class LoginActivity extends AppCompatActivity
                     Runnable r = new Runnable() {
                         @Override
                         public void run() {
-<<<<<<< HEAD
 //                            startActivity(new Intent(LoginActivity.this,MainViewActivity.class));
-=======
-                            startActivity(new Intent(LoginActivity.this,MainViewActivity.class));
->>>>>>> parent of 7abbf91... add kakaotalk sdk
                         }
                     };
                     handler.postDelayed(r,1000);
