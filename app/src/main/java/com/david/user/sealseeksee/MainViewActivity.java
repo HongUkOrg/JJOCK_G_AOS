@@ -26,7 +26,6 @@ public class MainViewActivity extends FragmentActivity {
         LetterCollectionPagerAdapter letterCollectionPagerAdapter = new LetterCollectionPagerAdapter(getSupportFragmentManager());
         ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         viewPager.setAdapter(letterCollectionPagerAdapter);
-
         if(getIntent().getData()!=null)
         {
             Bundle bundle = getIntent().getExtras();
@@ -34,7 +33,7 @@ public class MainViewActivity extends FragmentActivity {
             Log.d("HONG", "onCreate: "+getIntent().getData().toString());
         }
     }
-}
+}l
 
 // Since this is an object collection, use a FragmentStatePagerAdapter,
 // and NOT a FragmentPagerAdapter.

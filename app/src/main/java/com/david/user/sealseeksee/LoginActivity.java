@@ -33,15 +33,14 @@ public class LoginActivity extends AppCompatActivity
     private SessionCallback callback;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         mContext = this;
 //        ImageView main_image = (ImageView)findViewById(R.id.letter_image);
         HongController.getInstance().setMyContext(getApplicationContext());
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-            if(checkAndRequestPermissions()){
+            if (checkAndRequestPermissions()) {
 //                Handler handler = new Handler();
 //                Runnable r = new Runnable() {
 //                    @Override
@@ -54,8 +53,6 @@ public class LoginActivity extends AppCompatActivity
         callback = new SessionCallback();
         Session.getCurrentSession().addCallback(callback);
         Session.getCurrentSession().checkAndImplicitOpen();
-
-
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

@@ -57,6 +57,7 @@ public class LetterSealFragment extends Fragment implements View.OnClickListener
     private Context mContext;
     private ImageView phoneBook;
 
+
     private String receiver_phone_number, get_title, get_content;
 
 
@@ -84,7 +85,6 @@ public class LetterSealFragment extends Fragment implements View.OnClickListener
         CancelButton = (Button) view.findViewById(R.id.ButtonCancel);
         timeLockButton = (ShineButton) view.findViewById(R.id.po_image2);
         phoneBook = (ImageView) view.findViewById(R.id.phone_book);
-
 
         HongController.writingNow = true;
 
@@ -367,7 +367,6 @@ public class LetterSealFragment extends Fragment implements View.OnClickListener
                 requestProfile();
                 requestFriends();
                 break;
-
             default:
                 break;
 
@@ -501,7 +500,5 @@ public class LetterSealFragment extends Fragment implements View.OnClickListener
                     }
                 });
     }
-
-
 
 }
