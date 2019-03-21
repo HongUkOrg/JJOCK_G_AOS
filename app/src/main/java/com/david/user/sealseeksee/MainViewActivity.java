@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,13 @@ public class MainViewActivity extends FragmentActivity {
         LetterCollectionPagerAdapter letterCollectionPagerAdapter = new LetterCollectionPagerAdapter(getSupportFragmentManager());
         ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         viewPager.setAdapter(letterCollectionPagerAdapter);
+
+        if(getIntent().getData()!=null)
+        {
+            Bundle bundle = getIntent().getExtras();
+            Log.d("HONG", "onCreate: "+bundle.toString());
+            Log.d("HONG", "onCreate: "+getIntent().getData().toString());
+        }
     }
 }
 

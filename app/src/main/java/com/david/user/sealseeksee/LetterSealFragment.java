@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,16 @@ import com.appeaser.sublimepickerlibrary.datepicker.SelectedDate;
 import com.appeaser.sublimepickerlibrary.helpers.SublimeOptions;
 import com.appeaser.sublimepickerlibrary.recurrencepicker.SublimeRecurrencePicker;
 import com.david.user.sealseeksee.DateHelper.SublimePickerFragment;
+import com.kakao.auth.ApiResponseCallback;
+import com.kakao.auth.AuthService;
+import com.kakao.auth.network.response.AccessTokenInfoResponse;
+import com.kakao.friends.AppFriendContext;
+import com.kakao.friends.response.AppFriendsResponse;
+import com.kakao.kakaotalk.callback.TalkResponseCallback;
+import com.kakao.kakaotalk.response.KakaoTalkProfile;
+import com.kakao.kakaotalk.v2.KakaoTalkService;
+import com.kakao.network.ErrorResult;
+import com.kakao.util.helper.log.Logger;
 import com.sackcentury.shinebuttonlib.ShineButton;
 
 import org.json.JSONException;
@@ -44,6 +55,7 @@ public class LetterSealFragment extends Fragment implements View.OnClickListener
     private double my_lati, my_long;
     private long myTimeLockTime = -1;
     private Context mContext;
+    private ImageView phoneBook;
 
     private String receiver_phone_number, get_title, get_content;
 
@@ -71,6 +83,7 @@ public class LetterSealFragment extends Fragment implements View.OnClickListener
         ButtonOK = (Button) view.findViewById(R.id.ButtonOK);
         CancelButton = (Button) view.findViewById(R.id.ButtonCancel);
         timeLockButton = (ShineButton) view.findViewById(R.id.po_image2);
+        phoneBook = (ImageView) view.findViewById(R.id.phone_book);
 
 
         HongController.writingNow = true;
@@ -83,6 +96,7 @@ public class LetterSealFragment extends Fragment implements View.OnClickListener
         ButtonOK.setOnClickListener(this);
         CancelButton.setOnClickListener(this);
         timeLockTime.setOnClickListener(this);
+        phoneBook.setOnClickListener(this);
         timeLockButton.init(getActivity());
         timeLockButton.setOnCheckStateChangeListener(new ShineButton.OnCheckedChangeListener() {
             @Override
@@ -347,11 +361,145 @@ public class LetterSealFragment extends Fragment implements View.OnClickListener
                 break;
             case R.id.timeLock_time:
                 datePicker();
+            case R.id.phone_book:
+                Log.d(TAG, "onClick: phoneBook");
+                requestAccessTokenInfo();
+                requestProfile();
+                requestFriends();
+                break;
+
             default:
                 break;
 
         }
 
+    }
+    private abstract class KakaoTalkResponseCallback<T> extends TalkResponseCallback<T> {
+        @Override
+        public void onNotKakaoTalkUser() {
+            Log.d("HONG", "onNotKakaoTalkUser: not kakao talk user");
+        }
+
+        @Override
+        public void onFailure(ErrorResult errorResult) {
+            Log.d(TAG, "onFailure: "+errorResult.toString());
+        }
+
+        @Override
+        public void onSessionClosed(ErrorResult errorResult) {
+//            redirectLoginActivity();
+        }
+
+        @Override
+        public void onNotSignedUp() {
+//            redirectSignupActivity();
+        }
+    }
+
+    public void requestProfile() {
+        Log.d(TAG, "requestProfile is called!");
+        KakaoTalkService.getInstance().requestProfile(new KakaoTalkResponseCallback<KakaoTalkProfile>() {
+            @Override
+            public void onNotKakaoTalkUser() {
+                Log.d(TAG, "onNotKakaoTalkUser: ");
+                super.onNotKakaoTalkUser();
+            }
+
+            @Override
+            public void onFailure(ErrorResult errorResult) {
+                Log.d(TAG, "onFailure: "+errorResult.toString());
+                super.onFailure(errorResult);
+            }
+
+            @Override
+            public void onSessionClosed(ErrorResult errorResult) {
+                Log.d(TAG, "onSessionClosed: "+errorResult.toString());
+                super.onSessionClosed(errorResult);
+            }
+
+            @Override
+            public void onNotSignedUp() {
+                Log.d(TAG, "onNotSignedUp: ");
+                super.onNotSignedUp();
+            }
+
+            @Override
+            public void onSuccess(KakaoTalkProfile talkProfile) {
+
+                final String nickName = talkProfile.getNickName();
+                final String profileImageURL = talkProfile.getProfileImageUrl();
+                final String thumbnailURL = talkProfile.getThumbnailUrl();
+                final String countryISO = talkProfile.getCountryISO();
+                Log.d(TAG, "onSuccess: "+nickName);
+                Log.d(TAG, "onSuccess: "+profileImageURL);
+                Log.d(TAG, "onSuccess: "+thumbnailURL);
+                Log.d(TAG, "onSuccess: "+countryISO);
+            }
+        });
+    }
+    private void requestAccessTokenInfo() {
+        AuthService.getInstance().requestAccessTokenInfo(new ApiResponseCallback<AccessTokenInfoResponse>() {
+            @Override
+            public void onSessionClosed(ErrorResult errorResult) {
+                Log.d(TAG, "onSessionClosed: "+errorResult.toString());
+//                redirectLoginActivity(self);
+            }
+
+            @Override
+            public void onNotSignedUp() {
+                // not happened
+            }
+
+            @Override
+            public void onFailure(ErrorResult errorResult) {
+                Logger.e("failed to get access token info. msg=" + errorResult);
+            }
+
+            @Override
+            public void onSuccess(AccessTokenInfoResponse accessTokenInfoResponse) {
+                long userId = accessTokenInfoResponse.getUserId();
+                Logger.d("this access token is for userId=" + userId);
+
+                long expiresInMilis = accessTokenInfoResponse.getExpiresInMillis();
+                Logger.d("this access token expires after " + expiresInMilis + " milliseconds.");
+            }
+        });
+    }
+
+    public void requestFriends() {
+
+        // offset = 0, limit = 100
+        AppFriendContext friendContext = new AppFriendContext(true, 0, 100, "asc");
+
+        KakaoTalkService.getInstance().requestAppFriends(friendContext,
+                new TalkResponseCallback<AppFriendsResponse>() {
+                    @Override
+                    public void onNotKakaoTalkUser() {
+                        Log.d(TAG, "onNotKakaoTalkUser: ");
+                    }
+
+                    @Override
+                    public void onSessionClosed(ErrorResult errorResult) {
+//                        redirectLoginActivity();
+                    }
+
+                    @Override
+                    public void onNotSignedUp() {
+//                        redirectSignupActivity();
+                    }
+
+                    @Override
+                    public void onFailure(ErrorResult errorResult) {
+                        Logger.e("onFailure: " + errorResult.toString());
+                    }
+
+                    @Override
+                    public void onSuccess(AppFriendsResponse result) {
+                        // 친구 목록
+                        Logger.e("Friends: " + result.getFriends().toString());
+                        // context의 beforeUrl과 afterUrl이 업데이트 된 상태.
+                    }
+                });
     }
 
 
