@@ -25,6 +25,16 @@ public class MainViewActivity extends FragmentActivity {
         LetterCollectionPagerAdapter letterCollectionPagerAdapter = new LetterCollectionPagerAdapter(getSupportFragmentManager());
         ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         viewPager.setAdapter(letterCollectionPagerAdapter);
+<<<<<<< HEAD
+
+        if(getIntent().getData()!=null)
+        {
+            Bundle bundle = getIntent().getExtras();
+            Log.d("HONG", "onCreate: "+bundle.toString());
+            Log.d("HONG", "onCreate: "+getIntent().getData().toString());
+        }
+=======
+>>>>>>> parent of 7abbf91... add kakaotalk sdk
     }
 }
 

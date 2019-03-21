@@ -48,6 +48,16 @@ public class LoginActivity extends AppCompatActivity
                 handler.postDelayed(r,1000);
             }
 
+<<<<<<< HEAD
+
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
+            return;
+        }
+=======
+>>>>>>> parent of 7abbf91... add kakaotalk sdk
 
 
 
@@ -85,7 +95,11 @@ public class LoginActivity extends AppCompatActivity
                     Runnable r = new Runnable() {
                         @Override
                         public void run() {
+<<<<<<< HEAD
+//                            startActivity(new Intent(LoginActivity.this,MainViewActivity.class));
+=======
                             startActivity(new Intent(LoginActivity.this,MainViewActivity.class));
+>>>>>>> parent of 7abbf91... add kakaotalk sdk
                         }
                     };
                     handler.postDelayed(r,1000);

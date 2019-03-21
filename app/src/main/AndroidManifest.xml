@@ -8,12 +8,15 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
-        android:name=".MyApplication"
+        android:name=".GlobalApplication"
         android:allowBackup="true"
         android:icon="@drawable/app_title1"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+        android:name="com.kakao.sdk.AppKey"
+        android:value="fbf43d96d651c17db0a80e2eec63e050" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBKgm5ZnJWd-M0DTSMHBZk7JNrM3qXBZIs" />
