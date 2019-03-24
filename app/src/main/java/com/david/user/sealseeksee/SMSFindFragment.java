@@ -115,12 +115,16 @@ public class SMSFindFragment extends Fragment implements View.OnClickListener,Le
     }
 
     private void findBySms(String input) {
-        if(input == null && input.length() == 0) return;
+        if(input == null || input.length() == 0) return;
         int tempIndex = 0;
         JSONObject myObj = new JSONObject();
         String inputText[] = input.split("\n");
-        Log.d(LetterConstants.TAG, "w3w, receiver_phone :  " + inputText[0] + "   " + inputText[1]);
+        if(inputText.length<2) {
+            Toast.makeText(getActivity(),"정해진 형식으로 입력해주세요.",Toast.LENGTH_SHORT).show();
+            return;
+        }
         try {
+            Log.d(LetterConstants.TAG, "w3w, receiver_phone :  " + inputText[0] + "   " + inputText[1]);
             if(inputText[0].startsWith("쪽지가 도착했습니다")) tempIndex = 1;
             else tempIndex = 0;
             myObj.put("receiver_phone", inputText[tempIndex]);
