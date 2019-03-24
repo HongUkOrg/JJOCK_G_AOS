@@ -1,12 +1,22 @@
 package com.david.user.sealseeksee;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -43,7 +53,7 @@ import org.json.JSONObject;
 import java.util.Calendar;
 import java.util.Date;
 
-public class LetterSealFragment extends Fragment implements View.OnClickListener{
+public class LetterSealFragment extends Fragment implements View.OnClickListener, LetterUtils.OnBackPressedListener{
     public static final String TAG = "HONG";
     private static boolean timeLockBool = false;
 
@@ -56,6 +66,7 @@ public class LetterSealFragment extends Fragment implements View.OnClickListener
     private long myTimeLockTime = -1;
     private Context mContext;
     private ImageView phoneBook;
+    public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1001;
 
 
     private String receiver_phone_number, get_title, get_content;
@@ -71,7 +82,7 @@ public class LetterSealFragment extends Fragment implements View.OnClickListener
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.d("HONG", "frag onCreateView: ");
-        View view = inflater.inflate(R.layout.seal_letter_fragment,null);
+        View view = inflater.inflate(R.layout.seal_letter_fragment, null);
 
         mContext = getActivity();
 
@@ -124,9 +135,10 @@ public class LetterSealFragment extends Fragment implements View.OnClickListener
 
 
             }
+
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(phone1.getText().toString().length()==3)     //size as per your requirement
+                if (phone1.getText().toString().length() == 3)     //size as per your requirement
                 {
                     phone2.requestFocus();
                 }
@@ -145,7 +157,7 @@ public class LetterSealFragment extends Fragment implements View.OnClickListener
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(phone2.getText().toString().length()==4)     //size as per your requirement
+                if (phone2.getText().toString().length() == 4)     //size as per your requirement
                 {
                     phone3.requestFocus();
                 }
@@ -165,7 +177,7 @@ public class LetterSealFragment extends Fragment implements View.OnClickListener
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(phone3.getText().toString().length()==4)     //size as per your requirement
+                if (phone3.getText().toString().length() == 4)     //size as per your requirement
                 {
                     content.requestFocus();
                 }
@@ -178,9 +190,11 @@ public class LetterSealFragment extends Fragment implements View.OnClickListener
             }
         });
 
-        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams((int)(HongController.getInstance().getWidth()*0.92),
-                (int)(HongController.getInstance().getHeight()*LetterConstants.LETTER_FRAGMENT_HEIGHT_LATIO));
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams((int) (HongController.getInstance().getWidth() * 0.92),
+                (int) (HongController.getInstance().getHeight() * LetterConstants.LETTER_FRAGMENT_HEIGHT_LATIO));
         view.setLayoutParams(params);
+
+        ((LetterMainActivity)getActivity()).setOnBackPressedListener(this);
 
         return view;
     }
@@ -201,6 +215,7 @@ public class LetterSealFragment extends Fragment implements View.OnClickListener
 
         }
     };
+
     private void setTimeLockTime(SelectedDate selectedDate, int hourOfDay, int minute) {
         selectedDate.getStartDate().set(Calendar.HOUR_OF_DAY, hourOfDay);
         selectedDate.getStartDate().set(Calendar.MINUTE, minute);
@@ -216,21 +231,18 @@ public class LetterSealFragment extends Fragment implements View.OnClickListener
     private JSONObject getSenderInformation() {
         get_content = content.getText().toString();
 
-        if(!LetterUtils.isEmptyString(get_content))
-        {
-            Toast.makeText(getActivity(),"내용을 입력하세요.",Toast.LENGTH_SHORT).show();
+        if (LetterUtils.isEmptyString(get_content)) {
+            Toast.makeText(getActivity(), "내용을 입력하세요.", Toast.LENGTH_SHORT).show();
             return null;
-        }
-        else if(!LetterUtils.isValidPhoneNumber(phone2.getText().toString(),phone3.getText().toString()))
-        {
+        } else if (!LetterUtils.isValidPhoneNumber(phone2.getText().toString(), phone3.getText().toString())) {
             Log.d(TAG, "invaild phone number!");
-            Toast.makeText(getActivity(),"Invalid Phone Number",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Invalid Phone Number", Toast.LENGTH_SHORT).show();
             return null;
         }
 
         receiver_phone_number = phone1.getText().toString() + "-" + phone2.getText().toString() + "-" + phone3.getText().toString();
         HongController.getInstance().setSavedPhoneNumber(receiver_phone_number);
-        if(my_W3W == null || my_W3W.isEmpty()) return null;
+        if (my_W3W == null || my_W3W.isEmpty()) return null;
         HongController.getInstance().setMy_w3w(my_W3W);
         JSONObject myObj = new JSONObject();
         try {
@@ -307,28 +319,30 @@ public class LetterSealFragment extends Fragment implements View.OnClickListener
     public String getSenderPhone() {
         TelephonyManager tMgr = (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
         @SuppressLint("MissingPermission") String mPhoneNumber = tMgr.getLine1Number();
-        Log.d(TAG, "getSendrPhone: "+mPhoneNumber);
+        Log.d(TAG, "getSendrPhone: " + mPhoneNumber);
         return mPhoneNumber;
     }
-    private void removeFragment(boolean sendOrNot)
-    {
+
+    private void removeFragment(boolean sendOrNot) {
+        if(((LetterMainActivity)getActivity()).onBackPressedListener!=null){
+            ((LetterMainActivity)getActivity()).onBackPressedListener=null;
+        }
         getActivity().
                 getSupportFragmentManager().
                 beginTransaction().
-                setCustomAnimations(R.anim.close_letter_write_anim,R.anim.close_letter_write_anim2).
+                setCustomAnimations(R.anim.close_letter_write_anim, R.anim.close_letter_write_anim2).
                 remove(getActivity().getSupportFragmentManager().findFragmentById(R.id.changeFragment)).commit();
-        ((LetterMainActivity)getActivity()).translateW3Wbar(0);
-        ((LetterMainActivity)getActivity()).infoView.setVisibility(View.VISIBLE);
-        if(sendOrNot){
+        ((LetterMainActivity) getActivity()).translateW3Wbar(0);
+        ((LetterMainActivity) getActivity()).infoView.setVisibility(View.VISIBLE);
+        if (sendOrNot) {
             Handler handler = new Handler();
             Runnable r = new Runnable() {
                 @Override
                 public void run() {
-                    ((LetterMainActivity)getActivity()).viewSaveSuccessLetterFragmment();
+                    ((LetterMainActivity) getActivity()).viewSaveSuccessLetterFragmment();
                 }
             };
-            handler.postDelayed(r,500);
-
+            handler.postDelayed(r, 500);
 
 
         }
@@ -343,11 +357,11 @@ public class LetterSealFragment extends Fragment implements View.OnClickListener
             case R.id.ButtonOK:
                 JSONObject myObj;
                 myObj = getSenderInformation();
-                if(myObj==null) {
-                    ((LetterMainActivity)getActivity()).runOnUiThread(new Runnable() {
+                if (myObj == null) {
+                    ((LetterMainActivity) getActivity()).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getActivity(),"위치 탐색 중입니다.",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "위치 탐색 중입니다.", Toast.LENGTH_SHORT).show();
                         }
                     });
                     return;
@@ -356,23 +370,107 @@ public class LetterSealFragment extends Fragment implements View.OnClickListener
                 removeFragment(true);
                 break;
             case R.id.ButtonCancel:
-//                startActivity(new Intent(getActivity(), LetterMainActivity.class));
                 removeFragment(false);
                 break;
             case R.id.timeLock_time:
                 datePicker();
             case R.id.phone_book:
                 Log.d(TAG, "onClick: phoneBook");
-                requestAccessTokenInfo();
-                requestProfile();
-                requestFriends();
+                startContactIntent();
+
+
                 break;
             default:
                 break;
 
         }
-
     }
+
+    private void startContactIntent() {
+        if(checkHasContactPermission()){
+
+            Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+            startActivityForResult(intent, 1000);
+        }
+        else{
+            Log.d(TAG, "ERROR :: Do not Allowed to access contact!");
+        }
+    }
+
+    @Override
+    public void onActivityResult(int reqCode, int resultCode, Intent data) {
+
+        super.onActivityResult(reqCode, resultCode, data);
+        switch (reqCode) {
+            case (1000):
+                if (resultCode == Activity.RESULT_OK) {
+                    Uri contactData = data.getData();
+                    Cursor phone = getActivity().getContentResolver().query(contactData, null, null, null, null);
+                    if (phone.moveToFirst()) {
+                        String hasPhoneNumber = phone.getString(phone.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER));
+                        String id = phone.getString(phone.getColumnIndexOrThrow(ContactsContract.Contacts._ID));
+                        String contactNumberName = phone.getString(phone.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+                        if (Integer.parseInt(hasPhoneNumber) > 0) {
+                            Cursor phones = getActivity().getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
+                                    ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + id, null, null);
+                            phones.moveToFirst();
+                            String contactNumber = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+
+                            if(!LetterUtils.isEmptyString(contactNumber)){
+                                String[] phoneNumbers = contactNumber.split("-");
+                                phone1.setText(phoneNumbers[0]);
+                                phone2.setText(phoneNumbers[1]);
+                                phone3.setText(phoneNumbers[2]);
+                            }
+                            Log.i("HONG", "The phone number is " + contactNumber);
+
+
+                        } else {
+                            Log.d(TAG, "There is no phone number!");
+                        }
+                    }
+                }
+                break;
+        }
+    }
+
+    public boolean checkHasContactPermission(){
+
+        int readContacts = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_CONTACTS);
+        if(readContacts != PackageManager.PERMISSION_GRANTED) {
+            String[] contactPermission = { Manifest.permission.READ_CONTACTS };
+            requestPermissions(contactPermission,REQUEST_ID_MULTIPLE_PERMISSIONS);
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_ID_MULTIPLE_PERMISSIONS: {
+                Log.d(TAG, "onRequestPermissionsResult: ");
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0) {
+                    Log.d(TAG, "onRequestPermissionsResult: Success");
+                    Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+                    startActivityForResult(intent, 1000);
+                }
+                else {
+                    Log.d(TAG, "onRequestPermissionsResult: Fail");
+                    Toast.makeText(getActivity(), "Please Allow contact Permission To Continue..", Toast.LENGTH_SHORT).show();
+                }
+            }
+            break;
+        }
+    }
+
+    @Override
+    public void doBack() {
+        removeFragment(false);
+    }
+
     private abstract class KakaoTalkResponseCallback<T> extends TalkResponseCallback<T> {
         @Override
         public void onNotKakaoTalkUser() {
@@ -381,7 +479,7 @@ public class LetterSealFragment extends Fragment implements View.OnClickListener
 
         @Override
         public void onFailure(ErrorResult errorResult) {
-            Log.d(TAG, "onFailure: "+errorResult.toString());
+            Log.d(TAG, "onFailure: " + errorResult.toString());
         }
 
         @Override
@@ -406,13 +504,13 @@ public class LetterSealFragment extends Fragment implements View.OnClickListener
 
             @Override
             public void onFailure(ErrorResult errorResult) {
-                Log.d(TAG, "onFailure: "+errorResult.toString());
+                Log.d(TAG, "onFailure: " + errorResult.toString());
                 super.onFailure(errorResult);
             }
 
             @Override
             public void onSessionClosed(ErrorResult errorResult) {
-                Log.d(TAG, "onSessionClosed: "+errorResult.toString());
+                Log.d(TAG, "onSessionClosed: " + errorResult.toString());
                 super.onSessionClosed(errorResult);
             }
 
@@ -429,18 +527,19 @@ public class LetterSealFragment extends Fragment implements View.OnClickListener
                 final String profileImageURL = talkProfile.getProfileImageUrl();
                 final String thumbnailURL = talkProfile.getThumbnailUrl();
                 final String countryISO = talkProfile.getCountryISO();
-                Log.d(TAG, "onSuccess: "+nickName);
-                Log.d(TAG, "onSuccess: "+profileImageURL);
-                Log.d(TAG, "onSuccess: "+thumbnailURL);
-                Log.d(TAG, "onSuccess: "+countryISO);
+                Log.d(TAG, "onSuccess: " + nickName);
+                Log.d(TAG, "onSuccess: " + profileImageURL);
+                Log.d(TAG, "onSuccess: " + thumbnailURL);
+                Log.d(TAG, "onSuccess: " + countryISO);
             }
         });
     }
+
     private void requestAccessTokenInfo() {
         AuthService.getInstance().requestAccessTokenInfo(new ApiResponseCallback<AccessTokenInfoResponse>() {
             @Override
             public void onSessionClosed(ErrorResult errorResult) {
-                Log.d(TAG, "onSessionClosed: "+errorResult.toString());
+                Log.d(TAG, "onSessionClosed: " + errorResult.toString());
 //                redirectLoginActivity(self);
             }
 

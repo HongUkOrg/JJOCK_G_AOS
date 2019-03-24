@@ -24,8 +24,8 @@ public class LetterUtils
     }
     public static boolean isEmptyString(String str)
     {
-        if(str == null || str.length()==0)return false;
-        else return true;
+        if(str == null || str.length()==0) return true;
+        else return false;
     }
     public static boolean isValidPhoneNumber(String middle,String end)
     {
@@ -54,10 +54,14 @@ public class LetterUtils
 
         result += Double.toString(rounded_lati) + "," + Double.toString(rounded_long);
 
-        Log.d("HONG", "get_my_long_lat: "+result);
+        Log.d("HONG2", "get_my_long_lat: "+result);
 
         return result;
 
+    }
+
+    public interface OnBackPressedListener {
+        public void doBack();
     }
 
 }

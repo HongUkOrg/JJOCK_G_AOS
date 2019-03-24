@@ -4,20 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".TabLayoutFragment.Fragment3"
-    android:background="@color/ganari">
+    android:background="@drawable/cartoon_04">
 
-    <ImageView
-        android:layout_width="250dp"
-        android:layout_height="400dp"
-        android:layout_gravity="center"
-        android:src="@drawable/frag4"/>
-
-    <ImageView
-        android:layout_width="20dp"
-        android:layout_height="100dp"
-        android:src="@drawable/right_arrow"
-        android:layout_gravity="center|right"
-        android:layout_marginRight="15dp"/>
 
     <Button
         android:id="@+id/btn_main_skip"

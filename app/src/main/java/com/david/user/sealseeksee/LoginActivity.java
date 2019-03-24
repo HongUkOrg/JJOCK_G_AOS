@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity
 
     private static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 2001;
     private Context mContext;
-    private SessionCallback callback;
+//    private SessionCallback callback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,18 +41,18 @@ public class LoginActivity extends AppCompatActivity
         HongController.getInstance().setMyContext(getApplicationContext());
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             if (checkAndRequestPermissions()) {
-//                Handler handler = new Handler();
-//                Runnable r = new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        startActivity(new Intent(LoginActivity.this,MainViewActivity.class));
-//                    }
-//                };
-//                handler.postDelayed(r,1000);
+                Handler handler = new Handler();
+                Runnable r = new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(new Intent(LoginActivity.this,MainViewActivity.class));
+                    }
+                };
+                handler.postDelayed(r,1000);
             }
-        callback = new SessionCallback();
-        Session.getCurrentSession().addCallback(callback);
-        Session.getCurrentSession().checkAndImplicitOpen();
+//        callback = new SessionCallback();
+//        Session.getCurrentSession().addCallback(callback);
+//        Session.getCurrentSession().checkAndImplicitOpen();
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -63,11 +63,11 @@ public class LoginActivity extends AppCompatActivity
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Session.getCurrentSession().removeCallback(callback);
-    }
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        Session.getCurrentSession().removeCallback(callback);
+//    }
 
     private class SessionCallback implements ISessionCallback {
 
@@ -101,6 +101,7 @@ public class LoginActivity extends AppCompatActivity
         int read_phone_state = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE);
         if (read_phone_state != PackageManager.PERMISSION_GRANTED) listPermissionsNeeded.add(Manifest.permission.READ_PHONE_STATE);
 
+
         if (!listPermissionsNeeded.isEmpty()) {
             Log.d("HONG", "checkAndRequestPermissions: not empty");
             ActivityCompat.requestPermissions(this, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]), REQUEST_ID_MULTIPLE_PERMISSIONS);
@@ -119,7 +120,7 @@ public class LoginActivity extends AppCompatActivity
                     Runnable r = new Runnable() {
                         @Override
                         public void run() {
-//                            startActivity(new Intent(LoginActivity.this,MainViewActivity.class));
+                            startActivity(new Intent(LoginActivity.this,MainViewActivity.class));
                         }
                     };
                     handler.postDelayed(r,1000);
