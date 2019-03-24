@@ -35,7 +35,7 @@ import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SMSFindFragment extends Fragment implements View.OnClickListener{
+public class SMSFindFragment extends Fragment implements View.OnClickListener,LetterUtils.OnBackPressedListener{
 
     private EditText smsInput;
     private Button smsOkBtn;
@@ -74,6 +74,7 @@ public class SMSFindFragment extends Fragment implements View.OnClickListener{
         layout.gravity = Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL;
         linearLayout.setLayoutParams(param);
 
+        ((LetterMainActivity)getActivity()).setOnBackPressedListener(this);
         return view;
     }
 
@@ -101,25 +102,15 @@ public class SMSFindFragment extends Fragment implements View.OnClickListener{
     }
 
     private void removeFragmentToLeft() {
+        if(((LetterMainActivity)getActivity()).onBackPressedListener!=null){
+            ((LetterMainActivity)getActivity()).onBackPressedListener=null;
+        }
         getActivity().
                 getSupportFragmentManager().
                 beginTransaction().
                 setCustomAnimations(R.anim.close_letter_seek_to_left, R.anim.close_letter_seek_to_left2).
                 remove(getActivity().getSupportFragmentManager().findFragmentById(R.id.changeFragment)).commit();
-//                ((LetterMainActivity) getActivity()).translateW3Wbar(0);
-//                ((LetterMainActivity) getActivity()).infoView.setVisibility(View.VISIBLE);
-        if (false) {
-            Handler handler = new Handler();
-            Runnable r = new Runnable() {
-                @Override
-                public void run() {
-                    ((LetterMainActivity) getActivity()).viewSaveSuccessLetterFragmment();
-                }
-            };
-            handler.postDelayed(r, 500);
 
-
-        }
         return;
     }
 
@@ -146,6 +137,11 @@ public class SMSFindFragment extends Fragment implements View.OnClickListener{
                 break;
 
         }
+    }
+
+    @Override
+    public void doBack() {
+        removeFragmentToLeft();
     }
 }
 

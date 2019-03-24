@@ -6,8 +6,8 @@ android {
         applicationId "com.david.user.sealseeksee"
         minSdkVersion 20
         targetSdkVersion 28
-        versionCode 4
-        versionName "1.2.0"
+        versionCode 5
+        versionName "1.2.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -71,13 +71,13 @@ dependencies {
     implementation 'com.appeaser.sublimepickerlibrary:sublimepickerlibrary:2.1.2'
     implementation 'com.igaworks.adbrix:abx-common-rm:+'
     // 카카오 로그인 sdk를 사용하기 위해 필요.
-    implementation group: 'com.kakao.sdk', name: 'usermgmt', version: '1.16.0'
+//    implementation group: 'com.kakao.sdk', name: 'usermgmt', version: '1.16.0'
 
     // 카카오링크 sdk를 사용하기 위해 필요.
-    implementation group: 'com.kakao.sdk', name: 'kakaolink', version: '1.16.0'
+//    implementation group: 'com.kakao.sdk', name: 'kakaolink', version: '1.16.0'
 
     // 카카오톡 sdk를 사용하기 위해 필요.
-    implementation group: 'com.kakao.sdk', name: 'kakaotalk', version: '1.16.0'
-    implementation 'com.kakao.sdk:friends:1.16.0'
+//    implementation group: 'com.kakao.sdk', name: 'kakaotalk', version: '1.16.0'
+//    implementation 'com.kakao.sdk:friends:1.16.0'
 
 }

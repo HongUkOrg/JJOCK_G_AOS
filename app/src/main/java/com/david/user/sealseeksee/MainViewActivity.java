@@ -33,7 +33,7 @@ public class MainViewActivity extends FragmentActivity {
             Log.d("HONG", "onCreate: "+getIntent().getData().toString());
         }
     }
-}l
+}
 
 // Since this is an object collection, use a FragmentStatePagerAdapter,
 // and NOT a FragmentPagerAdapter.

@@ -101,6 +101,7 @@ public class LetterMainActivity extends FragmentActivity implements OnMapReadyCa
     private JSONArray myJsonArr = null;
     private int letterNumber;
     private long myTimeLockTimeLongType;
+    public LetterUtils.OnBackPressedListener onBackPressedListener;
 
 
     @Override
@@ -148,7 +149,7 @@ public class LetterMainActivity extends FragmentActivity implements OnMapReadyCa
                     transaction(location_processing(my_lati, my_long), 0);
                     firstTimeLocSet = false;
                 }
-                Log.d(TAG, "onLocationUpdated: " + my_lati + " , " + my_long);
+                Log.d("HONG2", "onLocationUpdated: " + my_lati + " , " + my_long);
                 handler.postDelayed(locationRunnable, 1000);
             }
         };
@@ -166,7 +167,12 @@ public class LetterMainActivity extends FragmentActivity implements OnMapReadyCa
         HongController.getInstance().setLetterListener(this);
 
     }
-
+    public void setOnBackPressedListener(LetterUtils.OnBackPressedListener onBackPressedListener){
+        this.onBackPressedListener = onBackPressedListener;
+    }
+    public void dismissOnBackPressedListener(){
+        this.onBackPressedListener = null;
+    }
     private void resizeFragment() {
         FrameLayout.LayoutParams layout = new FrameLayout.LayoutParams(
                 (int) (HongController.getInstance().getWidth() * 0.92), (int) (HongController.getInstance().getHeight() * LetterConstants.LETTER_FRAGMENT_HEIGHT_LATIO));
@@ -358,8 +364,12 @@ public class LetterMainActivity extends FragmentActivity implements OnMapReadyCa
 
     @Override
     public void onBackPressed() {
-        Log.d(TAG, "onBackPressed Called");
-        startActivity(new Intent(this, MainViewActivity.class));
+        if(onBackPressedListener == null){
+            super.onBackPressed();
+        }
+        else{
+            onBackPressedListener.doBack();
+        }
     }
 
     private void translateSubMenu(View v, int alpha) {
@@ -397,7 +407,7 @@ public class LetterMainActivity extends FragmentActivity implements OnMapReadyCa
     }
 
     public String getMyProcessedW3W(String myW3W) {
-        Log.d(TAG, "origin w3w: " + myW3W);
+        Log.d("HONG2", "origin w3w: " + myW3W);
         String w3ws[] = myW3W.split("\\.");
         String processedW3W = "";
         for (int i = 0; i < w3ws.length; i++) {

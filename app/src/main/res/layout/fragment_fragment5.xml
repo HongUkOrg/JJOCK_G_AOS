@@ -4,14 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".TabLayoutFragment.Fragment5"
-    android:background="@color/ganari">
+    android:background="@drawable/cartoon_05">
 
-    <ImageView
-        android:id="@+id/startImage"
-        android:layout_width="260dp"
-        android:layout_height="400dp"
-        android:layout_gravity="center"
-        android:src="@drawable/frag5"/>
 
     <TextView
         android:id="@+id/btn_main_start"
