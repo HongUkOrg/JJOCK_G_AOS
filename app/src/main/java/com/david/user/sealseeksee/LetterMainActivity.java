@@ -496,7 +496,12 @@ public class LetterMainActivity extends FragmentActivity implements OnMapReadyCa
                 myLetter = (JSONObject) myJsonArr.get(0);
                 showMyLetter(myLetter);
             } else {
-                showLetterSelectionDialog(myJsonArr);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        showLetterSelectionDialog(myJsonArr);
+                    }
+                });
             }
         } catch (JSONException e) {
             e.printStackTrace();

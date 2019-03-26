@@ -183,13 +183,22 @@ public class LetterSeekFragment extends Fragment implements View.OnClickListener
 
         });
 
-        String getMyPhone = getSenderPhone();
-        if (!LetterUtils.isEmptyString(getMyPhone)) {
-            String phoneNumbers[] = getMyPhone.split("-");
-            phone1.setText(phoneNumbers[0]);
-            phone2.setText(phoneNumbers[1]);
-            phone3.setText(phoneNumbers[2]);
+        try{
+            String getMyPhone = getSenderPhone();
+            if (!LetterUtils.isEmptyString(getMyPhone)) {
+                String phoneNumbers[] = new String[3];
+                phoneNumbers[0] = "0"+getMyPhone.substring(3,5);
+                phoneNumbers[1] = getMyPhone.substring(5,9);
+                phoneNumbers[2] = getMyPhone.substring(9,13);
+                phone1.setText(phoneNumbers[0]);
+                phone2.setText(phoneNumbers[1]);
+                phone3.setText(phoneNumbers[2]);
+
+            }
+        }catch (Exception e){
+            Log.d("HONG", "ERROR : Can not get sender phone using telephony manager..! : "+e.getMessage());
         }
+
 
         return view;
     }
@@ -342,7 +351,7 @@ public class LetterSeekFragment extends Fragment implements View.OnClickListener
         int readContacts = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_CONTACTS);
         if(readContacts != PackageManager.PERMISSION_GRANTED) {
             String[] contactPermission = { Manifest.permission.READ_CONTACTS };
-            ActivityCompat.requestPermissions(getActivity(),contactPermission,1001);
+            requestPermissions(contactPermission,1001);
             return false;
         }
         else{
@@ -355,7 +364,9 @@ public class LetterSeekFragment extends Fragment implements View.OnClickListener
             case 1001: {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0) {
-//                    startContactIntent();
+                    Log.d("HONG", "onRequestPermissionsResult: SUCCESS");
+                    Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+                    startActivityForResult(intent, 1000);
                 }
                 else {
                     Toast.makeText(getActivity(), "Please Allow contact Permission To Continue..", Toast.LENGTH_SHORT).show();

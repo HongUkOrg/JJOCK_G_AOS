@@ -59,9 +59,10 @@ public class LetterSaveSuccessFragement extends Fragment implements View.OnClick
 
     public void sendSmsIntent(String number, String word) {
         try {
+            String intro = "쪽지가 도착했습니다.\n"+number+"\n"+word+"\n-쪽쥐-";
             Uri smsUri = Uri.parse("sms:" + number);
             Intent sendIntent = new Intent(Intent.ACTION_SENDTO, smsUri);
-            sendIntent.putExtra("sms_body", number + "\n" + word);
+            sendIntent.putExtra("sms_body", intro);
             getActivity().startActivity(sendIntent);
 
         } catch (Exception e) {
