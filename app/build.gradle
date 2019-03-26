@@ -6,7 +6,7 @@ android {
         applicationId "com.david.user.sealseeksee"
         minSdkVersion 20
         targetSdkVersion 28
-        versionCode 8
+        versionCode 11
         versionName "1.2.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
