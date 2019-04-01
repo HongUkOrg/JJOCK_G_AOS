@@ -17,9 +17,10 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.kakao.auth.ISessionCallback;
-import com.kakao.auth.Session;
-import com.kakao.util.exception.KakaoException;
+//import com.kakao.auth.ISessionCallback;
+//import com.kakao.auth.Session;
+//import com.kakao.util.exception.KakaoException;
+import com.igaworks.v2.core.AdBrixRm;
 import com.yarolegovich.lovelydialog.LovelyInfoDialog;
 
 import java.util.ArrayList;
@@ -45,6 +46,7 @@ public class LoginActivity extends AppCompatActivity
                 Runnable r = new Runnable() {
                     @Override
                     public void run() {
+                        AdBrixRm.login("abc123");
                         startActivity(new Intent(LoginActivity.this,MainViewActivity.class));
                     }
                 };
@@ -54,6 +56,7 @@ public class LoginActivity extends AppCompatActivity
 //        Session.getCurrentSession().addCallback(callback);
 //        Session.getCurrentSession().checkAndImplicitOpen();
     }
+    /*
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
@@ -62,6 +65,7 @@ public class LoginActivity extends AppCompatActivity
 
         super.onActivityResult(requestCode, resultCode, data);
     }
+    */
 
 //    @Override
 //    protected void onDestroy() {
@@ -69,6 +73,7 @@ public class LoginActivity extends AppCompatActivity
 //        Session.getCurrentSession().removeCallback(callback);
 //    }
 
+    /*
     private class SessionCallback implements ISessionCallback {
 
         @Override
@@ -83,6 +88,7 @@ public class LoginActivity extends AppCompatActivity
             }
         }
     }
+    */
 
     protected void redirectSignupActivity() {
         final Intent intent = new Intent(this, MainViewActivity.class);
@@ -120,6 +126,7 @@ public class LoginActivity extends AppCompatActivity
                     Runnable r = new Runnable() {
                         @Override
                         public void run() {
+                            AdBrixRm.login("abc1234");
                             startActivity(new Intent(LoginActivity.this,MainViewActivity.class));
                         }
                     };

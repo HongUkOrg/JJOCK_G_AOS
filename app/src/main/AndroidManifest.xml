@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -21,6 +22,7 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBKgm5ZnJWd-M0DTSMHBZk7JNrM3qXBZIs" />
+        <meta-data android:name="19327da43293b1dce56da3a83829ccaf434bb68ef83ab61a2dca61d3bb15f2be" android:value="true" />
 
         <activity android:name=".MainActivity" />
         <activity android:name=".LoginActivity">
@@ -33,6 +35,13 @@
         <activity android:name=".LetterMainActivity" />
         <activity android:name=".TrackingLetter" />
         <activity android:name=".MainViewActivity"></activity>
+
+        <receiver android:name="com.igaworks.v2.core.AbxReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

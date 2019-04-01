@@ -10,6 +10,7 @@ import android.widget.Button;
 
 import com.david.user.sealseeksee.LetterMainActivity;
 import com.david.user.sealseeksee.R;
+import com.igaworks.v2.core.AdBrixRm;
 
 public class Fragment1 extends Fragment {
     private Button skip;
@@ -27,6 +28,7 @@ public class Fragment1 extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), LetterMainActivity.class));
+                AdBrixRm.event("skip_called");
             }
         });
         return rootView;

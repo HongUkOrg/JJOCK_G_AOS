@@ -39,6 +39,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         mContext = this;
 
 
+
         locationListener = new OnLocationUpdatedListener() {
             @Override
             public void onLocationUpdated(Location location) {

@@ -10,6 +10,7 @@ import android.widget.Button;
 
 import com.david.user.sealseeksee.LetterMainActivity;
 import com.david.user.sealseeksee.R;
+import com.igaworks.v2.core.AdBrixRm;
 
 public class Fragment3 extends Fragment {
     public static final String ARG_OBJECT = "object";
@@ -26,6 +27,7 @@ public class Fragment3 extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), LetterMainActivity.class));
+                AdBrixRm.event("skip_called");
             }
         });
         return rootView;

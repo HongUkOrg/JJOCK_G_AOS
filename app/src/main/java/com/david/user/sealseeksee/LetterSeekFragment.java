@@ -35,6 +35,7 @@ import android.widget.Toast;
 
 import com.david.user.sealseeksee.LetterAdapter.LetterAdapter;
 import com.david.user.sealseeksee.LetterAdapter.LetterOption;
+import com.igaworks.v2.core.AdBrixRm;
 import com.yarolegovich.lovelydialog.LovelyChoiceDialog;
 import com.yarolegovich.lovelydialog.LovelyTextInputDialog;
 
@@ -286,9 +287,11 @@ public class LetterSeekFragment extends Fragment implements View.OnClickListener
                 httpConnectionToPhwysl.getHttpConnectionInstance().HttpPostData(myObj, LetterConstants.FIND_LETTER_API);
                 break;
             case R.id.find_by_sms:
+                AdBrixRm.event("find_by_sms");
                 removeFragmentToLeft();
                 break;
             case R.id.seek_phoneBook:
+                AdBrixRm.event("use_contact");
                 startContactIntent();
                 break;
             default:
