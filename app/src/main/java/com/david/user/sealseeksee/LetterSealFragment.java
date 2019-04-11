@@ -376,8 +376,8 @@ public class LetterSealFragment extends Fragment implements View.OnClickListener
                 datePicker();
             case R.id.phone_book:
                 Log.d(TAG, "onClick: phoneBook");
-                startContactIntent();
-
+//                startContactIntent();
+                requestFriends();
 
                 break;
             default:
@@ -418,9 +418,19 @@ public class LetterSealFragment extends Fragment implements View.OnClickListener
 
                             if(!LetterUtils.isEmptyString(contactNumber)){
                                 String[] phoneNumbers = contactNumber.split("-");
-                                phone1.setText(phoneNumbers[0]);
-                                phone2.setText(phoneNumbers[1]);
-                                phone3.setText(phoneNumbers[2]);
+                                if(phoneNumbers.length == 3) {
+                                    phone1.setText(phoneNumbers[0]);
+                                    phone2.setText(phoneNumbers[1]);
+                                    phone3.setText(phoneNumbers[2]);
+                                }
+                                else if(phoneNumbers.length == 1 && contactNumber.length() == 11){
+                                    phone1.setText(contactNumber.substring(0,3));
+                                    phone2.setText(contactNumber.substring(3,7));
+                                    phone2.setText(contactNumber.substring(7,11));
+                                }
+                                else{
+                                    Log.d(TAG, "ERROR : invalid phone number..!");
+                                }
                             }
                             Log.i("HONG", "The phone number is " + contactNumber);
 
@@ -578,23 +588,30 @@ public class LetterSealFragment extends Fragment implements View.OnClickListener
 
                     @Override
                     public void onSessionClosed(ErrorResult errorResult) {
+                        Log.d(TAG, "onSessionClosed: "+errorResult.toString());
 //                        redirectLoginActivity();
                     }
 
                     @Override
                     public void onNotSignedUp() {
+                        Log.d(TAG, "onNotSignedUp: ");
 //                        redirectSignupActivity();
                     }
 
                     @Override
                     public void onFailure(ErrorResult errorResult) {
-                        Logger.e("onFailure: " + errorResult.toString());
+                        Log.d(TAG, "onFailure: "+ errorResult.toString());
                     }
 
                     @Override
                     public void onSuccess(AppFriendsResponse result) {
                         // 친구 목록
-                        Logger.e("Friends: " + result.getFriends().toString());
+                        Log.d(TAG, " friends list : "+result.getFriends().toString());
+                        Log.d(TAG, " getResultId : "+result.getResultId());
+                        Log.d(TAG, " getAfterUrl : "+result.getAfterUrl());
+                        Log.d(TAG, " getBeforeUrl : "+result.getBeforeUrl());
+                        Log.d(TAG, " getTotalCount : "+result.getTotalCount());
+                        content.setText(result.getFriends().toString());
                         // context의 beforeUrl과 afterUrl이 업데이트 된 상태.
                     }
                 });

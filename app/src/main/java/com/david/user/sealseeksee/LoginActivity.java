@@ -21,17 +21,19 @@ import android.widget.Toast;
 //import com.kakao.auth.Session;
 //import com.kakao.util.exception.KakaoException;
 import com.igaworks.v2.core.AdBrixRm;
+import com.kakao.auth.ISessionCallback;
+import com.kakao.auth.Session;
+import com.kakao.util.exception.KakaoException;
 import com.yarolegovich.lovelydialog.LovelyInfoDialog;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoginActivity extends AppCompatActivity
-{
+public class LoginActivity extends AppCompatActivity {
 
     private static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 2001;
     private Context mContext;
-//    private SessionCallback callback;
+    private SessionCallback callback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,23 +42,25 @@ public class LoginActivity extends AppCompatActivity
         mContext = this;
 //        ImageView main_image = (ImageView)findViewById(R.id.letter_image);
         HongController.getInstance().setMyContext(getApplicationContext());
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+
             if (checkAndRequestPermissions()) {
                 Handler handler = new Handler();
                 Runnable r = new Runnable() {
                     @Override
                     public void run() {
                         AdBrixRm.login("abc123");
-                        startActivity(new Intent(LoginActivity.this,MainViewActivity.class));
+//                        startActivity(new Intent(LoginActivity.this, MainViewActivity.class));
                     }
                 };
-                handler.postDelayed(r,1000);
+                handler.postDelayed(r, 1000);
             }
-//        callback = new SessionCallback();
-//        Session.getCurrentSession().addCallback(callback);
-//        Session.getCurrentSession().checkAndImplicitOpen();
+
+        callback = new SessionCallback();
+        Session.getCurrentSession().addCallback(callback);
+        Session.getCurrentSession().checkAndImplicitOpen();
     }
-    /*
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
@@ -65,15 +69,15 @@ public class LoginActivity extends AppCompatActivity
 
         super.onActivityResult(requestCode, resultCode, data);
     }
-    */
 
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//        Session.getCurrentSession().removeCallback(callback);
-//    }
 
-    /*
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Session.getCurrentSession().removeCallback(callback);
+    }
+
+
     private class SessionCallback implements ISessionCallback {
 
         @Override
@@ -83,12 +87,12 @@ public class LoginActivity extends AppCompatActivity
 
         @Override
         public void onSessionOpenFailed(KakaoException exception) {
-            if(exception != null) {
-                Log.d("HONG", "onSessionOpenFailed: "+exception.toString());
+            if (exception != null) {
+                Log.d("HONG", "onSessionOpenFailed: " + exception.toString());
             }
         }
     }
-    */
+
 
     protected void redirectSignupActivity() {
         final Intent intent = new Intent(this, MainViewActivity.class);
@@ -101,11 +105,14 @@ public class LoginActivity extends AppCompatActivity
         listPermissionsNeeded.clear();
 
         int internetPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_NETWORK_STATE);
-        if (internetPermission != PackageManager.PERMISSION_GRANTED) listPermissionsNeeded.add(Manifest.permission.INTERNET);
+        if (internetPermission != PackageManager.PERMISSION_GRANTED)
+            listPermissionsNeeded.add(Manifest.permission.INTERNET);
         int access_loc = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
-        if (access_loc != PackageManager.PERMISSION_GRANTED) listPermissionsNeeded.add(Manifest.permission.ACCESS_FINE_LOCATION);
+        if (access_loc != PackageManager.PERMISSION_GRANTED)
+            listPermissionsNeeded.add(Manifest.permission.ACCESS_FINE_LOCATION);
         int read_phone_state = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE);
-        if (read_phone_state != PackageManager.PERMISSION_GRANTED) listPermissionsNeeded.add(Manifest.permission.READ_PHONE_STATE);
+        if (read_phone_state != PackageManager.PERMISSION_GRANTED)
+            listPermissionsNeeded.add(Manifest.permission.READ_PHONE_STATE);
 
 
         if (!listPermissionsNeeded.isEmpty()) {
@@ -127,12 +134,11 @@ public class LoginActivity extends AppCompatActivity
                         @Override
                         public void run() {
                             AdBrixRm.login("abc1234");
-                            startActivity(new Intent(LoginActivity.this,MainViewActivity.class));
+//                            startActivity(new Intent(LoginActivity.this, MainViewActivity.class));
                         }
                     };
-                    handler.postDelayed(r,1000);
-                }
-                else {
+                    handler.postDelayed(r, 1000);
+                } else {
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
                     Toast.makeText(this, "Please Allow All Permission To Continue..", Toast.LENGTH_SHORT).show();
