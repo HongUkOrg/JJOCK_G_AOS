@@ -376,8 +376,8 @@ public class LetterSealFragment extends Fragment implements View.OnClickListener
                 datePicker();
             case R.id.phone_book:
                 Log.d(TAG, "onClick: phoneBook");
-//                startContactIntent();
-                requestFriends();
+                startContactIntent();
+//                requestFriends();
 
                 break;
             default:
@@ -388,7 +388,6 @@ public class LetterSealFragment extends Fragment implements View.OnClickListener
 
     private void startContactIntent() {
         if(checkHasContactPermission()){
-
             Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
             startActivityForResult(intent, 1000);
         }

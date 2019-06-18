@@ -54,8 +54,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                     Log.d(TAG, "location is null");
                     link += "51.521251,-0.203586";
                 }
-                else
-                {
+                else {
                     link+=position;
                 }
                 link+= "&display=full&format=json&key=KYM3G8LX";
@@ -80,9 +79,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                         }
                     }
                 });
-
-
-
             }
         };
 

@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         AdBrixRm.login("abc123");
-//                        startActivity(new Intent(LoginActivity.this, MainViewActivity.class));
+                        startActivity(new Intent(LoginActivity.this, MainViewActivity.class));
                     }
                 };
                 handler.postDelayed(r, 1000);
@@ -134,7 +134,7 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             AdBrixRm.login("abc1234");
-//                            startActivity(new Intent(LoginActivity.this, MainViewActivity.class));
+                            startActivity(new Intent(LoginActivity.this, MainViewActivity.class));
                         }
                     };
                     handler.postDelayed(r, 1000);

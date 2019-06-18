@@ -6,8 +6,8 @@ android {
         applicationId "com.david.user.sealseeksee"
         minSdkVersion 20
         targetSdkVersion 28
-        versionCode 13
-        versionName "1.2.4"
+        versionCode 14
+        versionName "1.2.5"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -17,7 +17,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
