@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,14 @@ import android.widget.Toast;
 //import com.kakao.auth.ISessionCallback;
 //import com.kakao.auth.Session;
 //import com.kakao.util.exception.KakaoException;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.load.resource.gif.GifDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
 import com.igaworks.v2.core.AdBrixRm;
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
@@ -40,7 +49,40 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         mContext = this;
-//        ImageView main_image = (ImageView)findViewById(R.id.letter_image);
+        ImageView main_image = (ImageView)findViewById(R.id.mainCharacter);
+
+//        Glide.with(this).asGif().load(R.drawable.giphy).into(main_image);
+        Glide.with(this).asGif().load(R.drawable.giphy)
+                .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE)).listener(new RequestListener<GifDrawable>() {
+            @Override
+            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<GifDrawable> target, boolean isFirstResource) {
+                Log.d("HONG", "GIF FINISHED");
+                return false;
+            }
+
+            @Override
+            public boolean onResourceReady(final GifDrawable resource, Object model, Target<GifDrawable> target, DataSource dataSource, boolean isFirstResource) {
+                resource.setLoopCount(1);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(200);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        while(true) {
+                            if(!resource.isRunning()) {
+                                Log.d("HONG", "GIF FINISHED");
+                                break;
+                            }
+                        }
+                    }
+                }).start();
+                return false;
+            }
+        }).into(main_image);
+
         HongController.getInstance().setMyContext(getApplicationContext());
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
 
@@ -50,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         AdBrixRm.login("abc123");
-                        startActivity(new Intent(LoginActivity.this, MainViewActivity.class));
+//                        startActivity(new Intent(LoginActivity.this, MainViewActivity.class));
                     }
                 };
                 handler.postDelayed(r, 1000);
