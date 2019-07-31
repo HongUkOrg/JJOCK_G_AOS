@@ -78,7 +78,6 @@ public class LetterSaveSuccessFragement extends Fragment implements View.OnClick
                 remove(getActivity().getSupportFragmentManager().findFragmentById(R.id.changeFragment)).commit();
         ((LetterMainActivity)getActivity()).translateW3Wbar(0);
         ((LetterMainActivity)getActivity()).infoView.setVisibility(View.VISIBLE);
-        Toast.makeText(getActivity(),"Move to SMS input",Toast.LENGTH_SHORT).show();
 
         return;
     }

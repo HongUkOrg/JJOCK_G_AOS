@@ -38,8 +38,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         setContentView(R.layout.activity_main);
         mContext = this;
 
-
-
         locationListener = new OnLocationUpdatedListener() {
             @Override
             public void onLocationUpdated(Location location) {

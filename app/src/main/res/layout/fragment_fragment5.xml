@@ -3,20 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TabLayoutFragment.Fragment5"
-    android:background="@drawable/cartoon_05">
+    tools:context=".TabLayoutFragment.Fragment2"
+    android:background="@color/white">
 
+    <LinearLayout
+        android:id="@+id/cartoonView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+        <ImageView
+            android:layout_weight="14"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:src="@drawable/cartoon05"/>
 
-    <TextView
-        android:id="@+id/btn_main_start"
-        android:layout_width="60dp"
-        android:layout_height="36dp"
-        android:background="@color/ganari"
-        android:textColor="@color/semi_black"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:text="시작"
-        android:layout_gravity="right|bottom"
-        android:layout_marginBottom="30dp"
-        android:layout_marginRight="30dp"/>
+    </LinearLayout>
+
 </FrameLayout>

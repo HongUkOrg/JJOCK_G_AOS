@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,8 +12,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -33,7 +30,6 @@ import com.igaworks.v2.core.AdBrixRm;
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
 import com.kakao.util.exception.KakaoException;
-import com.yarolegovich.lovelydialog.LovelyInfoDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,12 +47,11 @@ public class LoginActivity extends AppCompatActivity {
         mContext = this;
         ImageView main_image = (ImageView)findViewById(R.id.mainCharacter);
 
-//        Glide.with(this).asGif().load(R.drawable.giphy).into(main_image);
-        Glide.with(this).asGif().load(R.drawable.giphy)
+        Glide.with(this).asGif().load(R.drawable.main_g)
                 .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE)).listener(new RequestListener<GifDrawable>() {
             @Override
             public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<GifDrawable> target, boolean isFirstResource) {
-                Log.d("HONG", "GIF FINISHED");
+                checkAndMove();
                 return false;
             }
 
@@ -73,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
                         while(true) {
                             if(!resource.isRunning()) {
-                                Log.d("HONG", "GIF FINISHED");
+                                checkAndMove();
                                 break;
                             }
                         }
@@ -84,23 +79,18 @@ public class LoginActivity extends AppCompatActivity {
         }).into(main_image);
 
         HongController.getInstance().setMyContext(getApplicationContext());
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
 
-            if (checkAndRequestPermissions()) {
-                Handler handler = new Handler();
-                Runnable r = new Runnable() {
-                    @Override
-                    public void run() {
-                        AdBrixRm.login("abc123");
-//                        startActivity(new Intent(LoginActivity.this, MainViewActivity.class));
-                    }
-                };
-                handler.postDelayed(r, 1000);
-            }
 
         callback = new SessionCallback();
         Session.getCurrentSession().addCallback(callback);
         Session.getCurrentSession().checkAndImplicitOpen();
+    }
+
+    protected void checkAndMove() {
+        if (checkAndRequestPermissions()) {
+                    AdBrixRm.login("abc123");
+                    startActivity(new Intent(LoginActivity.this, MainViewActivity.class));
+        }
     }
 
     @Override

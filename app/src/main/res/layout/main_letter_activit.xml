@@ -47,7 +47,7 @@
             android:gravity="center"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="10dp"
-            android:text="Seal Seek See, What 3 Words란..."
+            android:text="현재 주소가 세 개의 단어로 변환됩니다"
             android:textColor="@color/semi_black"
             android:visibility="gone" />
 

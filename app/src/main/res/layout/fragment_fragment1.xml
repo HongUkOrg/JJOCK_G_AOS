@@ -3,17 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TabLayoutFragment.Fragment1"
-    android:background="@drawable/cartoon_01">
+    tools:context=".TabLayoutFragment.Fragment2"
+    android:background="@color/white">
 
+    <LinearLayout
+        android:id="@+id/cartoonView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_weight="9"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:src="@drawable/cartoon01_1"/>
+        <ImageView
+            android:layout_weight="9"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:src="@drawable/cartoon01_2"/>
 
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_main_skip"
-        android:layout_width="60dp"
-        android:layout_height="36dp"
-        android:background="@drawable/skip"
-        android:layout_gravity="right|bottom"
-        android:layout_marginBottom="30dp"
-        android:layout_marginRight="30dp"/>
 </FrameLayout>
