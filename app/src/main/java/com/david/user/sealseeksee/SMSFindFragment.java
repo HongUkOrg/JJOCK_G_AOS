@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.david.user.sealseeksee.LetterAdapter.LetterAdapter;
 import com.david.user.sealseeksee.LetterAdapter.LetterOption;
+import com.igaworks.v2.core.AdBrixRm;
 import com.yarolegovich.lovelydialog.LovelyChoiceDialog;
 import com.yarolegovich.lovelydialog.LovelyTextInputDialog;
 
@@ -129,6 +130,7 @@ public class SMSFindFragment extends Fragment implements View.OnClickListener,Le
             else tempIndex = 0;
             myObj.put("receiver_phone", inputText[tempIndex]);
             myObj.put("w3w_address", inputText[tempIndex+1]);
+            AdBrixRm.event("find_by_sms");
             httpConnectionToPhwysl.getHttpConnectionInstance().HttpPostData(myObj, LetterConstants.FIND_LETTER_API);
         } catch (JSONException e) {
             e.printStackTrace();

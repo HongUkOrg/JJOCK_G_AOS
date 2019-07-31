@@ -8,14 +8,12 @@ public class HongController
     private static HongController instance;
 
 
-
-
-
     public int width, height;
     public static String resultFromFindLetterServer;
     public static Context myContext;
     public static String savedPhoneNumber;
     public static boolean writingNow = false;
+    public FinderChangeListener finderChangeListener;
 
     public int getWidth() {
         return width;
@@ -40,8 +38,9 @@ public class HongController
     public static void setSavedPhoneNumber(String savedPhoneNumber) {
         HongController.savedPhoneNumber = savedPhoneNumber;
     }
-
-
+    public void setFinderChangeListener(FinderChangeListener finderChangeListener){
+        this.finderChangeListener = finderChangeListener;
+    }
 
     public static Context getMyContext() {
         return myContext;
@@ -94,6 +93,9 @@ public class HongController
     interface LetterListener
     {
         void onReceiveLetter(String resultJson);
+    }
+    public interface FinderChangeListener {
+        void changeFinder(int i);
     }
 
 }

@@ -3,16 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TabLayoutFragment.Fragment3"
-    android:background="@drawable/cartoon_04">
+    tools:context=".TabLayoutFragment.Fragment2"
+    android:background="@color/white">
 
+    <LinearLayout
+        android:id="@+id/cartoonView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+        <ImageView
+            android:layout_weight="14"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:src="@drawable/cartoon04"/>
 
-    <Button
-        android:id="@+id/btn_main_skip"
-        android:layout_width="60dp"
-        android:layout_height="36dp"
-        android:background="@drawable/skip"
-        android:layout_gravity="right|bottom"
-        android:layout_marginBottom="30dp"
-        android:layout_marginRight="30dp"/>
+    </LinearLayout>
+
 </FrameLayout>

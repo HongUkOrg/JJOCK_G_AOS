@@ -39,6 +39,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.igaworks.v2.abxExtensionApi.AbxCommerce;
+import com.igaworks.v2.core.AdBrixRm;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestHandle;
@@ -69,6 +71,7 @@ public class LetterMainActivity extends FragmentActivity implements OnMapReadyCa
     private static boolean firstTimeLocSet = true;
     private static boolean viewSubButtons = true;
     private static boolean infoViewState = false;
+    private static int numOfMainView = 0;
 
     private Location mCurrentLocation;
     private FusedLocationProviderClient mFusedLcationProviderClient;
@@ -165,14 +168,19 @@ public class LetterMainActivity extends FragmentActivity implements OnMapReadyCa
         };
 
         HongController.getInstance().setLetterListener(this);
+        AbxCommerce.viewHome(new AdBrixRm.AttrModel().setAttrs("main",numOfMainView++));
+
 
     }
-    public void setOnBackPressedListener(LetterUtils.OnBackPressedListener onBackPressedListener){
+
+    public void setOnBackPressedListener(LetterUtils.OnBackPressedListener onBackPressedListener) {
         this.onBackPressedListener = onBackPressedListener;
     }
-    public void dismissOnBackPressedListener(){
+
+    public void dismissOnBackPressedListener() {
         this.onBackPressedListener = null;
     }
+
     private void resizeFragment() {
         FrameLayout.LayoutParams layout = new FrameLayout.LayoutParams(
                 (int) (HongController.getInstance().getWidth() * 0.92), (int) (HongController.getInstance().getHeight() * LetterConstants.LETTER_FRAGMENT_HEIGHT_LATIO));
@@ -315,8 +323,9 @@ public class LetterMainActivity extends FragmentActivity implements OnMapReadyCa
                 viewSeekLetterFragment();
                 break;
             case R.id.info_question_btn:
-                if (!infoViewState) changeInfomationView((int)(HongController.getInstance().getHeight()*0.2));
-                else changeInfomationView((int)(HongController.getInstance().getHeight()*0.1));
+                if (!infoViewState)
+                    changeInfomationView((int) (HongController.getInstance().getHeight() * 0.2));
+                else changeInfomationView((int) (HongController.getInstance().getHeight() * 0.1));
                 break;
             default:
                 break;
@@ -346,7 +355,7 @@ public class LetterMainActivity extends FragmentActivity implements OnMapReadyCa
                 public void run() {
                     info_text.setVisibility(View.VISIBLE);
                 }
-            },500);
+            }, 500);
 
         }
         infoViewState = !infoViewState;
@@ -364,10 +373,9 @@ public class LetterMainActivity extends FragmentActivity implements OnMapReadyCa
 
     @Override
     public void onBackPressed() {
-        if(onBackPressedListener == null){
+        if (onBackPressedListener == null) {
             super.onBackPressed();
-        }
-        else{
+        } else {
             onBackPressedListener.doBack();
         }
     }
@@ -435,11 +443,20 @@ public class LetterMainActivity extends FragmentActivity implements OnMapReadyCa
         HongController.getInstance().setMy_w3w(myW3W);
         HongController.getInstance().setMy_lati(my_lati);
         HongController.getInstance().setMy_long(my_long);
-        /*
-        lati,long 모두 컨트롤러로 이관필요
-        위에 번들로 넘길필요 없음
-         */
-        transaction.setCustomAnimations(R.anim.open_letter_write_anim, R.anim.open_letter_write_anim2);
+        try {
+            AdBrixRm.event("save_letter",
+                    new JSONObject().
+                            put("w3w", myW3W).
+                            put("latitude", my_lati).
+                            put("logitude", my_long));
+            /*
+            lati,long 모두 컨트롤러로 이관필요
+            위에 번들로 넘길필요 없음
+             */
+            transaction.setCustomAnimations(R.anim.open_letter_write_anim, R.anim.open_letter_write_anim2);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         Fragment frag = new LetterSealFragment();
         transaction.replace(R.id.changeFragment, frag);
         transaction.commit();
@@ -571,6 +588,7 @@ public class LetterMainActivity extends FragmentActivity implements OnMapReadyCa
                 })
                 .show();
     }
+
     private List<LetterOption> getLetterOption(JSONArray myJsonArr) {
         List<LetterOption> result = new ArrayList<>();
 //        String[] raw = getResources().getStringArray(R.array.donations);
@@ -591,8 +609,6 @@ public class LetterMainActivity extends FragmentActivity implements OnMapReadyCa
         }
         return result;
     }
-
-
 
 
 }

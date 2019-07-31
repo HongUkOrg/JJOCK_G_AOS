@@ -1,18 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/ganari"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".TabLayoutFragment.Fragment2"
+    android:background="@color/white">
 
-    <android.support.v4.view.ViewPager
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <LinearLayout
+        android:id="@+id/cartoonView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="120dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp">
+        <android.support.v4.view.ViewPager
+            android:layout_weight="18"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" />
+
+    </LinearLayout>
 
 
+    <ImageView
+        android:id="@+id/finder"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="60dp"
+        android:layout_width="207dp"
+        android:layout_height="32dp"
+        android:src="@drawable/finder01"/>
 
-</RelativeLayout>
+    <Button
+        android:id="@+id/btn_main_skip"
+        android:layout_width="65dp"
+        android:layout_height="11dp"
+        android:background="@drawable/skip_btn"
+        android:layout_gravity="top|right"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="10dp"/>
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom|right"
+        android:src="@drawable/next_page"/>
+</FrameLayout>
