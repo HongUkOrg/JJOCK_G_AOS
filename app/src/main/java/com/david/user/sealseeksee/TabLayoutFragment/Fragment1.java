@@ -1,20 +1,14 @@
 package com.david.user.sealseeksee.TabLayoutFragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 
-import com.david.user.sealseeksee.HongController;
-import com.david.user.sealseeksee.LetterMainActivity;
-import com.david.user.sealseeksee.MainViewActivity;
+import com.david.user.sealseeksee.JGController;
 import com.david.user.sealseeksee.R;
-import com.igaworks.v2.core.AdBrixRm;
 
 public class Fragment1 extends Fragment {
     private Button skip;
@@ -31,7 +25,7 @@ public class Fragment1 extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        HongController.getInstance().finderChangeListener.changeFinder(1);
+        JGController.getInstance().finderChangeListener.changeFinder(1);
     }
 
 

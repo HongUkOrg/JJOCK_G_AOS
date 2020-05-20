@@ -1,29 +1,23 @@
 package com.david.user.sealseeksee;
 
 import android.content.Intent;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.david.user.sealseeksee.TabLayoutFragment.LetterCollectionPagerAdapter;
 import com.igaworks.v2.core.AdBrixRm;
 
-public class MainViewActivity extends FragmentActivity implements HongController.FinderChangeListener {
+public class MainViewActivity extends FragmentActivity implements JGController.FinderChangeListener {
 
-    protected HongController.FinderChangeListener finderChangeListener;
+    protected JGController.FinderChangeListener finderChangeListener;
     private ImageView finder;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -33,7 +27,7 @@ public class MainViewActivity extends FragmentActivity implements HongController
         Button skip;
         LinearLayout cartoonView = (LinearLayout) findViewById(R.id.cartoonView);
         ViewGroup.LayoutParams param = cartoonView.getLayoutParams();
-        param.height = (int) (HongController.getInstance().getHeight() * 0.70);
+        param.height = (int) (JGController.getInstance().getHeight() * 0.70);
         cartoonView.setGravity(Gravity.CENTER);
         cartoonView.setLayoutParams(param);
 
@@ -47,7 +41,7 @@ public class MainViewActivity extends FragmentActivity implements HongController
         });
         finder = findViewById(R.id.finder);
 
-        HongController.getInstance().setFinderChangeListener(this);
+        JGController.getInstance().setFinderChangeListener(this);
         LetterCollectionPagerAdapter letterCollectionPagerAdapter = new LetterCollectionPagerAdapter(getSupportFragmentManager());
         ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         viewPager.setAdapter(letterCollectionPagerAdapter);

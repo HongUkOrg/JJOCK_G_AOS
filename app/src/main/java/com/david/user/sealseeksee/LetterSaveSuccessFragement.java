@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class LetterSaveSuccessFragement extends Fragment implements View.OnClickListener{
 
@@ -36,8 +35,8 @@ public class LetterSaveSuccessFragement extends Fragment implements View.OnClick
         btn_sms_send.setOnClickListener(this);
         btn_sms_cancel.setOnClickListener(this);
 
-        success_w3w.setText(HongController.getInstance().getMy_w3w());
-        success_phoneNumber.setText(HongController.getInstance().getSavedPhoneNumber());
+        success_w3w.setText(JGController.getInstance().getMy_w3w());
+        success_phoneNumber.setText(JGController.getInstance().getSavedPhoneNumber());
 
 
         return view;
@@ -49,7 +48,7 @@ public class LetterSaveSuccessFragement extends Fragment implements View.OnClick
         {
             case R.id.btn_success_sms:
                 removeFragment();
-                sendSmsIntent(HongController.getInstance().getSavedPhoneNumber(),HongController.getInstance().getMy_w3w());
+                sendSmsIntent(JGController.getInstance().getSavedPhoneNumber(), JGController.getInstance().getMy_w3w());
                 break;
             case R.id.btn_success_cancel:
                 removeFragment();

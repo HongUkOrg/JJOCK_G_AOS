@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.view.ViewGroup;
 
-import com.david.user.sealseeksee.HongController;
+import com.david.user.sealseeksee.JGController;
 
 
 public class LetterCollectionPagerAdapter extends FragmentStatePagerAdapter {
@@ -85,7 +85,7 @@ public class LetterCollectionPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public void setPrimaryItem(ViewGroup container, int position, Object object) {
         super.setPrimaryItem(container, position, object);
-        HongController.getInstance().finderChangeListener.changeFinder(position+1);
+        JGController.getInstance().finderChangeListener.changeFinder(position+1);
     }
 
 

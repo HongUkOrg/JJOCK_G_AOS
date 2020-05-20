@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.david.user.sealseeksee.HongController;
+import com.david.user.sealseeksee.JGController;
 import com.david.user.sealseeksee.R;
 
 public class Fragment2 extends Fragment {
@@ -23,6 +23,6 @@ public class Fragment2 extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        HongController.getInstance().finderChangeListener.changeFinder(2);
+        JGController.getInstance().finderChangeListener.changeFinder(2);
     }
 }

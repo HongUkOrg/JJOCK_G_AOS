@@ -5,8 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.widget.EditText;
-import android.widget.TextView;
 
 public class LinedTextView extends android.support.v7.widget.AppCompatTextView {
     private Paint mPaint = new Paint();
@@ -34,8 +32,8 @@ public class LinedTextView extends android.support.v7.widget.AppCompatTextView {
     @Override
     protected void onDraw(Canvas canvas) {
         Log.d("HONG", "onDraw called ");
-        int left = (int)(HongController.getInstance().getWidth()*0.00);
-        int right = (int)(HongController.getInstance().getWidth()*0.90);
+        int left = (int)(JGController.getInstance().getWidth()*0.00);
+        int right = (int)(JGController.getInstance().getWidth()*0.90);
         int paddingTop = getPaddingTop();
         int paddingBottom = getPaddingBottom();
         int paddingLeft = getPaddingLeft();

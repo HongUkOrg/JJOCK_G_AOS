@@ -8,11 +8,6 @@ import android.support.multidex.MultiDex;
 import com.david.user.sealseeksee.kakaotalk.KakaoSDKAdapter;
 import com.igaworks.v2.core.application.AbxActivityHelper;
 import com.igaworks.v2.core.application.AbxActivityLifecycleCallbacks;
-import com.kakao.auth.ApprovalType;
-import com.kakao.auth.AuthType;
-import com.kakao.auth.IApplicationConfig;
-import com.kakao.auth.ISessionConfig;
-import com.kakao.auth.KakaoAdapter;
 import com.kakao.auth.KakaoSDK;
 
 public class GlobalApplication extends Application {
@@ -38,8 +33,8 @@ public class GlobalApplication extends Application {
 
         AbxActivityHelper.initializeSdk(getApplicationContext(),"q4OrsUzivkuuFfHd7O1wyw","LZlqiZ9wzkuaLIVpeJlWsg");
         registerActivityLifecycleCallbacks(new AbxActivityLifecycleCallbacks());
-        HongController.getInstance().setHeight(getScreenHeight());
-        HongController.getInstance().setWidth(getScreenWidth());
+        JGController.getInstance().setHeight(getScreenHeight());
+        JGController.getInstance().setWidth(getScreenWidth());
 
 
 

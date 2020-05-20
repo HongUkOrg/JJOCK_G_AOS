@@ -1,14 +1,12 @@
 package com.david.user.sealseeksee;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Handler;
 import android.os.StrictMode;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
@@ -26,26 +24,18 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.david.user.sealseeksee.LetterAdapter.LetterAdapter;
-import com.david.user.sealseeksee.LetterAdapter.LetterOption;
 import com.igaworks.v2.core.AdBrixRm;
-import com.yarolegovich.lovelydialog.LovelyChoiceDialog;
-import com.yarolegovich.lovelydialog.LovelyTextInputDialog;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.HttpURLConnection;
-import java.util.ArrayList;
-import java.util.List;
 
 public class LetterSeekFragment extends Fragment implements View.OnClickListener,LetterUtils.OnBackPressedListener {
 
@@ -152,7 +142,7 @@ public class LetterSeekFragment extends Fragment implements View.OnClickListener
         });
 
         FrameLayout.LayoutParams layout = new FrameLayout.LayoutParams(
-                (int) (HongController.getInstance().getWidth() * 0.92), (int) (HongController.getInstance().getHeight() * 0.5));
+                (int) (JGController.getInstance().getWidth() * 0.92), (int) (JGController.getInstance().getHeight() * 0.5));
         layout.gravity = Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL;
         view.setLayoutParams(layout);
 

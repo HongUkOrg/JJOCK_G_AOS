@@ -78,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         }).into(main_image);
 
-        HongController.getInstance().setMyContext(getApplicationContext());
+        JGController.getInstance().setMyContext(getApplicationContext());
 
 
         callback = new SessionCallback();

@@ -1,40 +1,24 @@
 package com.david.user.sealseeksee;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Handler;
-import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.david.user.sealseeksee.LetterAdapter.LetterAdapter;
-import com.david.user.sealseeksee.LetterAdapter.LetterOption;
 import com.igaworks.v2.core.AdBrixRm;
-import com.yarolegovich.lovelydialog.LovelyChoiceDialog;
-import com.yarolegovich.lovelydialog.LovelyTextInputDialog;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.net.HttpURLConnection;
-import java.util.ArrayList;
-import java.util.List;
 
 public class SMSFindFragment extends Fragment implements View.OnClickListener,LetterUtils.OnBackPressedListener{
 
@@ -65,13 +49,13 @@ public class SMSFindFragment extends Fragment implements View.OnClickListener,Le
         smsOkBtn.setOnClickListener(this);
 
         FrameLayout.LayoutParams layout = new FrameLayout.LayoutParams(
-                (int) (HongController.getInstance().getWidth() * 0.90), (int) (HongController.getInstance().getHeight() * 0.5));
+                (int) (JGController.getInstance().getWidth() * 0.90), (int) (JGController.getInstance().getHeight() * 0.5));
         layout.gravity = Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL;
         view.setLayoutParams(layout);
 
         ViewGroup.LayoutParams param = linearLayout.getLayoutParams();
-        param.width = (int) (HongController.getInstance().getWidth() * 0.90);
-        param.height = (int) (HongController.getInstance().getHeight() * 0.45);
+        param.width = (int) (JGController.getInstance().getWidth() * 0.90);
+        param.height = (int) (JGController.getInstance().getHeight() * 0.45);
         layout.gravity = Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL;
         linearLayout.setLayoutParams(param);
 

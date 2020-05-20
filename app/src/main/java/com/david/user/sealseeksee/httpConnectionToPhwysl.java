@@ -86,7 +86,7 @@ public class httpConnectionToPhwysl extends Thread
                     Log.d(LetterConstants.TAG, "response : "+builder.toString());
                     if(ApiAddress.equals(LetterConstants.FIND_LETTER_API))
                     {
-                        HongController.getInstance().myLetterListener.onReceiveLetter(builder.toString());
+                        JGController.getInstance().myLetterListener.onReceiveLetter(builder.toString());
                     }
 
                 } catch (MalformedURLException e) {

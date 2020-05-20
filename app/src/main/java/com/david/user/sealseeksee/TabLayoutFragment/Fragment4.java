@@ -1,6 +1,5 @@
 package com.david.user.sealseeksee.TabLayoutFragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,10 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.david.user.sealseeksee.HongController;
-import com.david.user.sealseeksee.LetterMainActivity;
 import com.david.user.sealseeksee.R;
-import com.igaworks.v2.core.AdBrixRm;
 
 public class Fragment4 extends Fragment {
     public static final String ARG_OBJECT = "object";

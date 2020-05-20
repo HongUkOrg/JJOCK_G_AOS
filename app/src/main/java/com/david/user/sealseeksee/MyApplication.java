@@ -13,8 +13,8 @@ public class MyApplication extends Application
     public void onCreate() {
 
         super.onCreate();
-        HongController.getInstance().setHeight(getScreenHeight());
-        HongController.getInstance().setWidth(getScreenWidth());
+        JGController.getInstance().setHeight(getScreenHeight());
+        JGController.getInstance().setWidth(getScreenWidth());
 
     }
 

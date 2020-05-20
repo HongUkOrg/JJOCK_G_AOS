@@ -13,7 +13,6 @@ import android.os.Handler;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -97,11 +96,11 @@ public class LetterSealFragment extends Fragment implements View.OnClickListener
         timeLockButton = (ShineButton) view.findViewById(R.id.po_image2);
         phoneBook = (ImageView) view.findViewById(R.id.phone_book);
 
-        HongController.writingNow = true;
+        JGController.writingNow = true;
 
-        my_W3W = HongController.getInstance().getMy_w3w();
-        my_lati = HongController.getInstance().getMy_lati();
-        my_long = HongController.getInstance().getMy_long();
+        my_W3W = JGController.getInstance().getMy_w3w();
+        my_lati = JGController.getInstance().getMy_lati();
+        my_long = JGController.getInstance().getMy_long();
         Log.d(TAG, "my_W3W Test : " + my_W3W);
 
         ButtonOK.setOnClickListener(this);
@@ -190,8 +189,8 @@ public class LetterSealFragment extends Fragment implements View.OnClickListener
             }
         });
 
-        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams((int) (HongController.getInstance().getWidth() * 0.92),
-                (int) (HongController.getInstance().getHeight() * LetterConstants.LETTER_FRAGMENT_HEIGHT_LATIO));
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams((int) (JGController.getInstance().getWidth() * 0.92),
+                (int) (JGController.getInstance().getHeight() * LetterConstants.LETTER_FRAGMENT_HEIGHT_LATIO));
         view.setLayoutParams(params);
 
         ((LetterMainActivity)getActivity()).setOnBackPressedListener(this);
@@ -241,9 +240,9 @@ public class LetterSealFragment extends Fragment implements View.OnClickListener
         }
 
         receiver_phone_number = phone1.getText().toString() + "-" + phone2.getText().toString() + "-" + phone3.getText().toString();
-        HongController.getInstance().setSavedPhoneNumber(receiver_phone_number);
+        JGController.getInstance().setSavedPhoneNumber(receiver_phone_number);
         if (my_W3W == null || my_W3W.isEmpty()) return null;
-        HongController.getInstance().setMy_w3w(my_W3W);
+        JGController.getInstance().setMy_w3w(my_W3W);
         JSONObject myObj = new JSONObject();
         try {
 
@@ -346,7 +345,7 @@ public class LetterSealFragment extends Fragment implements View.OnClickListener
 
 
         }
-        HongController.writingNow = false;
+        JGController.writingNow = false;
         return;
     }
 

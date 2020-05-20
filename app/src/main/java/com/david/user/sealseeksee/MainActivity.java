@@ -1,19 +1,12 @@
 package com.david.user.sealseeksee;
 
 import android.content.Context;
-import android.content.Intent;
 import android.location.Location;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 
-import com.david.user.sealseeksee.TabLayoutFragment.Fragment1;
-import com.david.user.sealseeksee.TabLayoutFragment.Fragment2;
-import com.david.user.sealseeksee.TabLayoutFragment.Fragment3;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestHandle;
@@ -42,8 +35,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             @Override
             public void onLocationUpdated(Location location) {
                 Log.d("HONG", "MyApplication : refresh my location");
-                HongController.getInstance().setMy_long(location.getLongitude());
-                HongController.getInstance().setMy_lati(location.getLatitude());
+                JGController.getInstance().setMy_long(location.getLongitude());
+                JGController.getInstance().setMy_lati(location.getLatitude());
 
                 String link = "https://api.what3words.com/v2/reverse?coords=";
 //                String link = "https://api.what3words.com/v2/languages?format=json&key=KYM3G8LX";
@@ -66,7 +59,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                         Log.d(TAG, "Response Words : "+responseBody.toString());
                         if(responseBody.has("words")) {
                             try {
-                                HongController.setMy_w3w((String) responseBody.get("words"));
+                                JGController.setMy_w3w((String) responseBody.get("words"));
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }

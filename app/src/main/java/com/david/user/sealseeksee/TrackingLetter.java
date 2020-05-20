@@ -2,51 +2,31 @@ package com.david.user.sealseeksee;
 
 import android.Manifest;
 import android.animation.ValueAnimator;
-import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.app.FragmentManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.BitmapFactory;
-import android.graphics.Paint;
-import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Handler;
 import android.os.StrictMode;
-import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.SpannableString;
-import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.LocationSource;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-
-import org.w3c.dom.Text;
 
 import java.util.Date;
 
@@ -121,7 +101,7 @@ public class TrackingLetter extends AppCompatActivity implements OnMapReadyCallb
         locationRunnable = new Runnable() {
             @Override
             public void run() {
-                if(refreshMyLocation) SmartLocation.with(HongController.getInstance().getMyContext()).location().start(locationListener);
+                if(refreshMyLocation) SmartLocation.with(JGController.getInstance().getMyContext()).location().start(locationListener);
                 updateDistance();
                 updateReadButton();
             }
@@ -131,14 +111,14 @@ public class TrackingLetter extends AppCompatActivity implements OnMapReadyCallb
         trackingCangcelBtn.setOnClickListener(this);
 
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) letterContent.getLayoutParams();
-        mlp.width = (int)(HongController.getInstance().getWidth()*0.88);
-        mlp.height =(int)(HongController.getInstance().getHeight()*0.03);
-        mlp.setMargins(0,0,0,(int)(HongController.getInstance().getHeight()*0.22));
+        mlp.width = (int)(JGController.getInstance().getWidth()*0.88);
+        mlp.height =(int)(JGController.getInstance().getHeight()*0.03);
+        mlp.setMargins(0,0,0,(int)(JGController.getInstance().getHeight()*0.22));
         letterContent.setLayoutParams(mlp);
 
 
         ViewGroup.LayoutParams params1 = bottomButtons.getLayoutParams();
-        params1.height = (int)(HongController.getInstance().getHeight()*0.22);
+        params1.height = (int)(JGController.getInstance().getHeight()*0.22);
         bottomButtons.setLayoutParams(params1);
 
 
@@ -151,10 +131,10 @@ public class TrackingLetter extends AppCompatActivity implements OnMapReadyCallb
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 int val = (Integer) valueAnimator.getAnimatedValue();
                 ViewGroup.LayoutParams layoutParams = letterContent.getLayoutParams();
-                layoutParams.width = (int)(HongController.getInstance().getWidth()*0.90);
+                layoutParams.width = (int)(JGController.getInstance().getWidth()*0.90);
                 layoutParams.height = val;
-                int offset = (int)(HongController.getInstance().getWidth()*0.05);
-                int topOffset = (int)(HongController.getInstance().getWidth()*0.08);
+                int offset = (int)(JGController.getInstance().getWidth()*0.05);
+                int topOffset = (int)(JGController.getInstance().getWidth()*0.08);
 
                 letterContent.setLayoutParams(layoutParams);
                 letterContent.setPadding(offset,topOffset,offset,0);
@@ -283,7 +263,7 @@ public class TrackingLetter extends AppCompatActivity implements OnMapReadyCallb
         {
             case R.id.letter_read_btn :
                 Log.d(TAG, "onClick::letter_read_btn");
-                changeHeightOfLetterContent((int)(HongController.getInstance().getHeight()*0.48));
+                changeHeightOfLetterContent((int)(JGController.getInstance().getHeight()*0.48));
                 if(receivedContent!=null) letterContent.setText((receivedContent));
             break;
             case R.id.btn_tracking_cancel:

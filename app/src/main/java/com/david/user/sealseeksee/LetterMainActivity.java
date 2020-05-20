@@ -8,8 +8,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.os.StrictMode;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -59,7 +57,7 @@ import io.nlopez.smartlocation.SmartLocation;
 
 import static com.david.user.sealseeksee.LetterUtils.location_processing;
 
-public class LetterMainActivity extends FragmentActivity implements OnMapReadyCallback, View.OnClickListener, HongController.LetterListener {
+public class LetterMainActivity extends FragmentActivity implements OnMapReadyCallback, View.OnClickListener, JGController.LetterListener {
 
     public static final String TAG = "HONG";
     private static double my_lati;
@@ -144,8 +142,8 @@ public class LetterMainActivity extends FragmentActivity implements OnMapReadyCa
             public void onLocationUpdated(Location location) {
                 my_lati = location.getLatitude();
                 my_long = location.getLongitude();
-                HongController.getInstance().setMy_lati(my_lati);
-                HongController.getInstance().setMy_long(my_long);
+                JGController.getInstance().setMy_lati(my_lati);
+                JGController.getInstance().setMy_long(my_long);
                 if (firstTimeLocSet) {
                     Log.d(TAG, "first Time Setting : ");
                     markCurrentPosition();
@@ -167,7 +165,7 @@ public class LetterMainActivity extends FragmentActivity implements OnMapReadyCa
             }
         };
 
-        HongController.getInstance().setLetterListener(this);
+        JGController.getInstance().setLetterListener(this);
         AbxCommerce.viewHome(new AdBrixRm.AttrModel().setAttrs("main",numOfMainView++));
 
 
@@ -183,21 +181,21 @@ public class LetterMainActivity extends FragmentActivity implements OnMapReadyCa
 
     private void resizeFragment() {
         FrameLayout.LayoutParams layout = new FrameLayout.LayoutParams(
-                (int) (HongController.getInstance().getWidth() * 0.92), (int) (HongController.getInstance().getHeight() * LetterConstants.LETTER_FRAGMENT_HEIGHT_LATIO));
+                (int) (JGController.getInstance().getWidth() * 0.92), (int) (JGController.getInstance().getHeight() * LetterConstants.LETTER_FRAGMENT_HEIGHT_LATIO));
         layout.gravity = Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL;
         fragment.setLayoutParams(layout);
 
-        infoView.getLayoutParams().height = (int) (HongController.getInstance().getHeight() * 0.1);
+        infoView.getLayoutParams().height = (int) (JGController.getInstance().getHeight() * 0.1);
         infoView.requestLayout();
 
         ContentFrameLayout.LayoutParams params = new ContentFrameLayout.LayoutParams(
-                (int) (HongController.getInstance().getWidth() * 0.8), (int) (HongController.getInstance().getHeight() * 0.05));
-        params.setMargins(0, (int) (HongController.getInstance().getHeight() * 0.08), 0, 0);
+                (int) (JGController.getInstance().getWidth() * 0.8), (int) (JGController.getInstance().getHeight() * 0.05));
+        params.setMargins(0, (int) (JGController.getInstance().getHeight() * 0.08), 0, 0);
         params.gravity = Gravity.TOP | Gravity.CENTER_HORIZONTAL;
         w3w_textView.setLayoutParams(params);
 
-//        w3w_textView.getLayoutParams().height = (int)(HongController.getInstance().getHeight()*0.05);
-//        w3w_textView.getLayoutParams().width =  (int)(HongController.getInstance().getWidth()*0.8);
+//        w3w_textView.getLayoutParams().height = (int)(JGController.getInstance().getHeight()*0.05);
+//        w3w_textView.getLayoutParams().width =  (int)(JGController.getInstance().getWidth()*0.8);
 //        w3w_textView.requestLayout();
 
 
@@ -206,9 +204,9 @@ public class LetterMainActivity extends FragmentActivity implements OnMapReadyCa
     private void checkHasInfoOfLocation() {
         String my_w3w;
         double my_lati, my_long;
-        my_w3w = HongController.getInstance().getMy_w3w();
-        my_lati = HongController.getInstance().getMy_lati();
-        my_long = HongController.getInstance().getMy_long();
+        my_w3w = JGController.getInstance().getMy_w3w();
+        my_lati = JGController.getInstance().getMy_lati();
+        my_long = JGController.getInstance().getMy_long();
 
         Log.d(TAG, "checkHasInfoOfLocation: " + my_w3w + " " + my_lati + " " + my_long);
         if (my_lati != -1 && my_long != -1 && my_w3w != null) {
@@ -298,7 +296,7 @@ public class LetterMainActivity extends FragmentActivity implements OnMapReadyCa
     }
 
     public void setW3W(JSONObject response) {
-        if (HongController.writingNow) return;
+        if (JGController.writingNow) return;
         currentState_textView.setText("나의 현재 주소");
         try {
             w3w_textView.setText(getMyProcessedW3W(response.getString("words")));
@@ -324,8 +322,8 @@ public class LetterMainActivity extends FragmentActivity implements OnMapReadyCa
                 break;
             case R.id.info_question_btn:
                 if (!infoViewState)
-                    changeInfomationView((int) (HongController.getInstance().getHeight() * 0.2));
-                else changeInfomationView((int) (HongController.getInstance().getHeight() * 0.1));
+                    changeInfomationView((int) (JGController.getInstance().getHeight() * 0.2));
+                else changeInfomationView((int) (JGController.getInstance().getHeight() * 0.1));
                 break;
             default:
                 break;
@@ -440,9 +438,9 @@ public class LetterMainActivity extends FragmentActivity implements OnMapReadyCa
         Log.d(TAG, "viewSealLetterFragmment ");
         android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-        HongController.getInstance().setMy_w3w(myW3W);
-        HongController.getInstance().setMy_lati(my_lati);
-        HongController.getInstance().setMy_long(my_long);
+        JGController.getInstance().setMy_w3w(myW3W);
+        JGController.getInstance().setMy_lati(my_lati);
+        JGController.getInstance().setMy_long(my_long);
         try {
             AdBrixRm.event("save_letter",
                     new JSONObject().
